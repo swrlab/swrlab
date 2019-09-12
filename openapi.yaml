@@ -1,0 +1,950 @@
+openapi: 3.0.0
+info:
+  title: SWR audio lab - Radiohub
+  description: "This documentation is also available as [openapi.json](https://api.lab.swr.de/radiohub-docs/openapi.json)\
+    \ or [openapi.yaml](https://api.lab.swr.de/radiohub-docs/openapi.yaml).  \nAuthorization\
+    \ keys can be requested via [lab@swr.de](mailto:lab@swr.de) and shall be sent\
+    \ as base64 encoded basic auth information in the header.\nPlease report all problems\
+    \ or bugs to [lab@swr.de](mailto:lab@swr.de) and possibly include the `requestTrace`\
+    \ information from the response header or info object.\n"
+  contact:
+    name: Daniel Freytag, SWR audio lab
+    email: daniel.freytag@swr.de
+  license:
+    name: © SWR audio lab
+  version: 2.3.0
+servers:
+- url: https://api.lab.swr.de/
+  description: Radiohub production
+- url: https://api.lab.swr.de/radiohub-dev
+  description: Radiohub development (n/a atm)
+paths:
+  /radiohub/v1beta/schedule/live/{station}/:
+    get:
+      tags:
+      - v1beta / schedule
+      summary: Receive the show that's live as scheduled
+      description: Query Radiohub to get the current live show for a specific station.
+      parameters:
+      - name: station
+        in: path
+        description: Set the radio station for the schedule query
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          enum:
+          - swr1bw
+          - swr1rp
+          - swr2
+          - swr3
+          - swr4bw
+          - swr4rp
+          - swraktuell
+          - dasding
+      responses:
+        500:
+          description: Server error occured.
+        default:
+          description: If status code other than 200, an error message will be provided,
+            otherwise message is null.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/scheduleResponse'
+      deprecated: true
+  /radiohub/v2/schedule/live/{station}/:
+    get:
+      tags:
+      - v2 / schedule
+      summary: Receive the show that's live as scheduled
+      description: Query Radiohub to get the current live show for a specific station.
+      parameters:
+      - name: station
+        in: path
+        description: Set the radio station for the schedule query
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          enum:
+          - swr1bw
+          - swr1rp
+          - swr2
+          - swr3
+          - swr4bw
+          - swr4rp
+          - swraktuell
+          - dasding
+      responses:
+        403:
+          description: Unauthorized access to API.
+        500:
+          description: Server error occured.
+        default:
+          description: If status code other than 200, an error message will be provided,
+            otherwise message is null.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/scheduleResponse'
+  /radiohub/v2/schedule/purge/{station}/:
+    get:
+      tags:
+      - v2 / schedule
+      summary: Purge cache information for a station
+      description: Shall only be used in cases when meta information has been changed
+        and needs to be re-cached.
+      parameters:
+      - name: station
+        in: path
+        description: Set the radio station for the schedule query
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          enum:
+          - swr1bw
+          - swr1rp
+          - swr2
+          - swr3
+          - swr4bw
+          - swr4rp
+          - swraktuell
+          - dasding
+      responses:
+        403:
+          description: Unauthorized access to API.
+        500:
+          description: Server error occured.
+        default:
+          description: If status code other than 200, an error message will be provided,
+            otherwise message is null.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/schedulePurgeResponse'
+      security:
+      - BasicAuth: []
+  /radiohub/v2/track/live/{station}/:
+    get:
+      tags:
+      - v2 / track
+      summary: Receive the track that's playing right now.
+      description: Query Radiohub to get the current live show for a specific station.
+        Note that tracks currently means song, which may be extended in future versions.
+      parameters:
+      - name: station
+        in: path
+        description: Set the radio station for the schedule query
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          enum:
+          - swr1bw
+          - swr1rp
+          - swr2
+          - swr3
+          - swr4bw
+          - swr4rp
+          - swraktuell
+          - dasding
+      responses:
+        403:
+          description: Unauthorized access to API.
+        500:
+          description: Server error occured.
+        default:
+          description: If status code other than 200, an error message will be provided,
+            otherwise message is null.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/trackResponse'
+      security:
+      - BasicAuth: []
+  /radiohub/v2/stream/start/{station}/:
+    get:
+      tags:
+      - v2 / stream
+      summary: Start a radio stream based on station and additional parameters
+      description: |-
+        Linking service to provide the latest streamUrl with certain given parameters.
+
+        For SWR classic an additional parameter `isLive` is provided in the JSON output (see example response below).
+      parameters:
+      - name: station
+        in: path
+        description: "Set the radio station. \n\nNote that not all stations provide\
+          \ all features such as video oder skippable radio."
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          enum:
+          - swr3
+          - dasding
+          - swrclassic
+      - name: r
+        in: query
+        description: "_(returnData)_ \n\nChoose whether to redirect to streamUrl or\
+          \ receive JSON data object."
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: boolean
+      - name: f
+        in: query
+        description: "_(desiredFormat)_ \n\nSet the streaming format. Note that video\
+          \ is not available in combination with all queries. \n\nDefaults to mp3."
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          enum:
+          - mp3
+          - aac
+          - video
+      - name: q
+        in: query
+        description: "_(desiredQuality)_ \n\nSet the streaming quality. Note that\
+          \ adaptive is only available for f=video while high and low are for mp3/aac.\
+          \ \n\nDefaults to low."
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          enum:
+          - high
+          - low
+          - adaptive
+      - name: d
+        in: query
+        description: "_(deviceType)_ \n\nSet the type of device and/or aggregator.\
+          \ Example list is not complete and only serves as a reference. Names are\
+          \ provided by SWR audio lab."
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          enum:
+          - amazonAlexaSkill
+          - googleHomeAction
+          - swrClassicAppleTv
+      responses:
+        400:
+          description: Query not allowed.
+        500:
+          description: Server error occured or key not found.
+        default:
+          description: JSON object
+          content:
+            image/json:
+              schema:
+                type: object
+        x-swrclassic:
+          description: Example of a result where `station` is `swrclassic` to signalize
+            live modus.
+          content:
+            image/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    format: int64
+                    example: 200
+                  message:
+                    type: string
+                    description: Message will be provided if status is not 200, otherwise
+                      null
+                  data:
+                    type: object
+                    properties:
+                      isLive:
+                        type: boolean
+                        example: true
+                      streamUrl:
+                        type: string
+                        example: https://...m3u8
+                      streamTitle:
+                        type: string
+                        example: Live aus...
+                      updatedAt:
+                        type: integer
+                        format: int64
+                        example: 1563785270
+                      airtimeStart:
+                        type: integer
+                        format: int64
+                        example: 1563692428
+                      airtimeEnd:
+                        type: integer
+                        format: int64
+                        example: 1563859828
+                  info:
+                    $ref: '#/components/schemas/infoResponse'
+                  links:
+                    type: object
+  /radiohub/v2/stream/meta/:
+    get:
+      tags:
+      - v2 / stream
+      summary: Receive meta information about a current session
+      description: "All meta data that the system knows about a running audio session\
+        \ for the skippable radio platform. \n\n**API NOT COMPLETE AND STILL IN BETA**"
+      parameters:
+      - name: sessionId
+        in: query
+        description: Provide a running `sessionId` that was previously returned by
+          starting a skippable radio stream.
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: JSON object
+          content:
+            image/json:
+              schema:
+                type: object
+  /radiohub/v2/traffic/search/{provider}/{roadName}/:
+    get:
+      tags:
+      - v2 / traffic
+      summary: Search for traffic incidents
+      description: Query ARD Traffic (TPEG) via Radiohub to get a list of incidents.
+      parameters:
+      - name: provider
+        in: path
+        description: Set the ARD partner whose details shall be displayed. Set to
+          ard for full output.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          enum:
+          - ard
+          - br
+          - swr
+          - ndr
+          - hr
+          - wdr
+          - mdr
+          - rbb
+      - name: roadName
+        in: path
+        description: Comma, separated and url encoded list of road names, like A5
+          or B10. Capitalization does not matter, however uppercase is preferred.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: A5,A8
+      - name: includeLocation
+        in: query
+        description: 'String-formatted boolean information whether the full GPS location
+          shall be returned. Default if unset: false'
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: boolean
+          example: false
+      responses:
+        403:
+          description: Unauthorized access to API.
+        500:
+          description: Server error occured.
+        default:
+          description: If status code other than 200, an error message will be provided,
+            otherwise message is null.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/trafficResponse'
+      security:
+      - BasicAuth: []
+  /radiohub/v2/traffic/geo/{provider}/{lat}/{lon}/:
+    get:
+      tags:
+      - v2 / traffic
+      summary: Get the neareast incidents
+      description: Query ARD Traffic (TPEG) via Radiohub to get a list of incidents
+        via supplied geo coordinates.
+      parameters:
+      - name: provider
+        in: path
+        description: Set the ARD partner whose details shall be displayed. Set to
+          ard for full output.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          enum:
+          - ard
+          - br
+          - swr
+          - ndr
+          - hr
+          - wdr
+          - mdr
+          - rbb
+      - name: lat
+        in: path
+        description: Geo Latitude
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: "48.767014"
+      - name: lon
+        in: path
+        description: Geo Longitude
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: "8.224037"
+      - name: includeLocation
+        in: query
+        description: 'String-formatted boolean information whether the full GPS location
+          shall be returned. Default if unset: false.'
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: boolean
+          example: false
+      - name: customRadius
+        in: query
+        description: 'Radius in Kilometers that shall be used. Default if unset: 30.'
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        403:
+          description: Unauthorized access to API.
+        500:
+          description: Server error occured.
+        default:
+          description: If status code other than 200, an error message will be provided,
+            otherwise message is null.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/trafficResponse'
+      security:
+      - BasicAuth: []
+  /images/v1/get/{key}/img:
+    get:
+      tags:
+      - swr-images
+      summary: Load an image from image service by SWR audio lab
+      description: Load the original image or resized version. A list of all keys
+        can be seen in the SWR audio lab dashboard. Contact lab@swr.de for access.
+        Uncached images will be generated and served from storage. See response header
+        "swr-datasource" for details. Clients should also respect cache control if
+        possible.
+      parameters:
+      - name: key
+        in: path
+        description: Set key for the image that shall be displayed.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: DASDING-512
+      - name: width
+        in: query
+        description: 'Optional width in pixels that the image shall be resized to.
+          Minimum: 1, maximum 2560px'
+        required: false
+        style: form
+        explode: true
+        schema:
+          maximum: 2560
+          minimum: 2
+          type: number
+      - name: height
+        in: query
+        description: 'Optional height in pixels that the image shall be resized to.
+          Minimum: 1, maximum 2560px. If both width and height are set, then the image
+          will be cropped. Otherwise the respectively opposite dimension is set to
+          auto'
+        required: false
+        style: form
+        explode: true
+        schema:
+          maximum: 2560
+          minimum: 2
+          type: number
+      - name: fileType
+        in: query
+        description: Force the output to a specific file type. If unset, the output
+          will match the input file type.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          enum:
+          - jpg
+          - png
+          - webp
+      responses:
+        400:
+          description: Invalid query input
+        500:
+          description: Server error occured or key not found.
+        default:
+          description: Image
+          content:
+            image/jpeg:
+              schema:
+                type: string
+                format: binary
+            image/png:
+              schema:
+                type: string
+                format: binary
+            image/webp:
+              schema:
+                type: string
+                format: binary
+  /images/v1/get/{key}/json:
+    get:
+      tags:
+      - swr-images
+      summary: Receive details about a cacheable image
+      description: Similar to the image service endpoint but here only a JSON object
+        of the database entry will be served. Should only be used for debugging solutions,
+        not to download an image. Accessibility of the sourceUrl is not guaranteed
+        and will be limited in future versions.
+      parameters:
+      - name: key
+        in: path
+        description: Set key for the image that shall be displayed. A list of all
+          keys can be seen in the SWR audio lab dashboard. Contact lab@swr.de for
+          access.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: DASDING-512
+      responses:
+        403:
+          description: Unauthorized access to API.
+        500:
+          description: Server error occured or key not found.
+        default:
+          description: JSON object
+          content:
+            image/json:
+              schema:
+                type: object
+      security:
+      - BasicAuth: []
+  /swr2/images/get/{key}/{format}/{overlay}/{width}/img.jpg:
+    get:
+      tags:
+      - swr2-images
+      summary: Load an image from swr2 image service by SWR audio lab
+      description: Load the original image or resized version. A list of all keys
+        can be seen in the SWR audio lab dashboard. Contact lab@swr.de for access.
+        Uncached images will be generated and served from storage. See response header
+        "swr-datasource" for details. Clients should also respect cache control if
+        possible.
+      parameters:
+      - name: key
+        in: path
+        description: Set key for the image that shall be displayed.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: logo
+      - name: format
+        in: path
+        description: Set the aspect ratio for the image. rund is a 1x1 image which
+          is title safe for round usage.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          enum:
+          - 16x9
+          - 4x3
+          - 1x1
+          - rund
+      - name: overlay
+        in: path
+        description: Toggle whether a swr2 logo overlay shall be included. This feature
+          is end of life and you should always request the 0 version.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          enum:
+          - "0"
+          - "1"
+      - name: width
+        in: path
+        description: Width in pixels that the image shall be resized to
+        required: true
+        style: simple
+        explode: false
+        schema:
+          maximum: 2560
+          minimum: 2
+          type: number
+          example: 256
+      responses:
+        400:
+          description: Invalid query input
+        500:
+          description: Server error occured or key not found.
+        default:
+          description: Image
+          content:
+            image/jpeg:
+              schema:
+                type: string
+                format: binary
+  /swr2/images/get/{key}/json:
+    get:
+      tags:
+      - swr2-images
+      summary: Receive details about a cacheable image
+      description: Similar to the swr2 image service endpoint but here only a JSON
+        object of the database entry will be served. Should only be used for debugging
+        solutions, not to download an image. Accessibility of the sourceUrl is not
+        guaranteed and will be limited in future versions.
+      parameters:
+      - name: key
+        in: path
+        description: Set key for the image that shall be displayed. A list of all
+          keys can be seen in the SWR audio lab dashboard. Contact lab@swr.de for
+          access.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: logo
+      responses:
+        403:
+          description: Unauthorized access to API.
+        500:
+          description: Server error occured or key not found.
+        default:
+          description: JSON object
+          content:
+            image/json:
+              schema:
+                type: object
+      security:
+      - BasicAuth: []
+components:
+  schemas:
+    geoPoint:
+      maxItems: 3
+      minItems: 2
+      type: array
+      description: Defines a schedule response
+      example:
+      - 52.3782
+      - 4.8999
+      externalDocs:
+        url: http://geojson.org/geojson-spec.html#id2
+      items:
+        type: number
+        format: double
+    infoResponse:
+      type: object
+      properties:
+        station:
+          type: string
+          nullable: true
+        dataSource:
+          type: string
+        poweredBy:
+          type: string
+          example: SWR audio lab
+        hostName:
+          type: string
+          example: swr-radiohub-api-XYZ
+        requestTrace:
+          type: string
+          example: xyz
+        requestLatency:
+          type: integer
+          example: 2
+        serviceVersion:
+          type: string
+          example: v2
+      description: Defines a schedule response
+    scheduleResponse:
+      type: object
+      properties:
+        status:
+          type: integer
+          format: int64
+          example: 200
+        message:
+          type: string
+          description: Message will be provided if status is not 200, otherwise null
+        data:
+          $ref: '#/components/schemas/scheduleResponse_data'
+        info:
+          $ref: '#/components/schemas/infoResponse'
+        links:
+          $ref: '#/components/schemas/scheduleResponse_links'
+      description: Defines a schedule response
+    schedulePurgeResponse:
+      type: object
+      properties:
+        status:
+          type: integer
+          format: int64
+          example: 201
+        message:
+          type: string
+          description: Message will be provided if status is not 200, otherwise null
+        data:
+          $ref: '#/components/schemas/schedulePurgeResponse_data'
+        info:
+          $ref: '#/components/schemas/infoResponse'
+        links:
+          $ref: '#/components/schemas/scheduleResponse_links'
+      description: Defines a schedule response after purging
+    trackResponse:
+      type: object
+      properties:
+        status:
+          type: integer
+          format: int64
+          example: 200
+        message:
+          type: string
+          description: Message will be provided if status is not 200, otherwise null
+        data:
+          $ref: '#/components/schemas/trackResponse_data'
+        info:
+          $ref: '#/components/schemas/infoResponse'
+        links:
+          $ref: '#/components/schemas/trackResponse_links'
+      description: Defines a track response
+    trafficResponse:
+      type: object
+      properties:
+        status:
+          type: integer
+          format: int64
+          example: 200
+        message:
+          type: string
+          description: Message will be provided if status is not 200, otherwise null
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/trafficResponse_data'
+        info:
+          $ref: '#/components/schemas/infoResponse'
+        links:
+          $ref: '#/components/schemas/trackResponse_links'
+      description: Defines a track response
+    scheduleResponse_data_textLongform:
+      type: object
+      properties:
+        text:
+          type: string
+          example: Line 1
+        underline:
+          type: boolean
+          example: false
+        italic:
+          type: boolean
+          example: false
+        bold:
+          type: boolean
+          example: false
+    scheduleResponse_data:
+      type: object
+      properties:
+        title:
+          type: string
+          example: Nachrichten
+        subtitle:
+          type: string
+        airtimeStart:
+          type: integer
+        airtimeEnd:
+          type: integer
+        updatedAt:
+          type: integer
+        thumbUrl:
+          type: string
+        isThumbAvailable:
+          type: boolean
+          example: false
+        textLongform:
+          type: array
+          items:
+            $ref: '#/components/schemas/scheduleResponse_data_textLongform'
+    scheduleResponse_links:
+      type: object
+      properties:
+        purge:
+          type: string
+    schedulePurgeResponse_data:
+      type: object
+      properties:
+        key:
+          type: string
+        response:
+          type: string
+    trackResponse_data:
+      type: object
+      properties:
+        type:
+          type: string
+          example: MUSIC
+        station:
+          type: string
+        triggeredAtMs:
+          type: integer
+        triggerState:
+          type: string
+          description: Can be next (upcoming) or now (current) track
+        triggerReprocessed:
+          type: boolean
+          example: false
+        triggerSource:
+          type: string
+        refPlaylistId:
+          type: integer
+        refItemId:
+          type: string
+        refMdId:
+          type: string
+        displayArtist:
+          type: string
+        displayTitle:
+          type: string
+        displayPublicly:
+          type: boolean
+        displayCover:
+          type: string
+        durationPlan:
+          type: integer
+          description: Can be null if no information are available
+        offline:
+          type: boolean
+    trackResponse_links:
+      type: object
+      properties:
+        cover:
+          type: string
+    trafficResponse_locationBox:
+      type: object
+      properties:
+        a:
+          $ref: '#/components/schemas/geoPoint'
+        b:
+          $ref: '#/components/schemas/geoPoint'
+      description: Bounding box of the entire incident.
+    trafficResponse_data:
+      type: object
+      properties:
+        ticId:
+          type: string
+          description: Uniquely identifies a traffic incident.
+        urgency:
+          type: integer
+          description: Describes the level of the incident. 1 is normal, 2 is a warning.
+          example: 1
+        type:
+          type: string
+          example: construction
+          enum:
+          - warning
+          - construction
+          - congestion
+          - other
+        createdAt:
+          type: integer
+          description: UNIX timestamp when the incident was created.
+          example: 1559627077
+        text:
+          type: string
+          description: Written text about the incident.
+        provider:
+          type: string
+          description: LRA (Landesrundfunkanstalt) that submitted the information.
+          example: SWR
+        roadName:
+          type: string
+          description: Comma-separated string with all included roads. Usually just
+            one, but in rare cases, can be multiple ones. Can be null if road is not
+            well-known (city street, diversion).
+          nullable: true
+          example: A5
+        roadNameArray:
+          type: array
+          description: Array-formatted data of roadName.
+          items:
+            type: string
+            example: A5
+        locationType:
+          type: string
+          description: Describes the type of Geo information. Multi* locations include
+            a second point or string (usually the reverse route of a road).
+          example: LineString
+          enum:
+          - Point
+          - LineString
+          - MultiPoint
+          - MultiLineString
+        locationBox:
+          $ref: '#/components/schemas/trafficResponse_locationBox'
+        location:
+          minItems: 1
+          type: array
+          description: Geo information for point or line.
+          nullable: true
+          items:
+            $ref: '#/components/schemas/geoPoint'
+        distance:
+          type: number
+          description: Only supplied when querying by geo coordinates.
+          format: double
+          nullable: true
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
