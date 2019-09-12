@@ -1,0 +1,35 @@
+name: Docker radiohub-docs
+
+on:
+  push:
+    paths:
+    - 'radiohub-docs/*'
+    - 'radiohub-docs/*/*'
+    - 'radiohub-docs/*/*/*'
+    - 'radiohub-docs/*/*/*/*'
+
+jobs:
+
+  radiohub-docs:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repo 👀
+      uses: actions/checkout@v1
+
+    - name: Loading Login 🤓
+      run: echo '${{ secrets.GCP_DEPLOYMENT_KEY }}' > temp.json
+
+    - name: Login to Registry 🔑
+      run: cat temp.json | docker login -u _json_key --password-stdin https://eu.gcr.io
+
+    - name: Building docker image 🚧
+      run: docker build ./radiohub-docs/ --file ./radiohub-docs/Dockerfile -t swr-radiohub-docs
+
+    - name: Tagging docker 🏷
+      run: docker tag swr-radiohub-docs eu.gcr.io/swr-lab/swr-radiohub-docs:git-$(date +%j)-$(date +%H)$(date +%M)
+
+    - name: Pushing docker 🙇
+      run: docker push eu.gcr.io/swr-lab/swr-radiohub-docs:git-$(date +%j)-$(date +%H)$(date +%M)
+
+    - name: Logout 👋
+      run: docker logout
