@@ -1,4 +1,4 @@
-## SWR Radiohub Streaming
+## SWR Radiohub
 by **SWR audio lab**
 
 # Streaming

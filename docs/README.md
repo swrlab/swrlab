@@ -1,4 +1,4 @@
-## SWR Radiohub Docs
+## SWR Radiohub
 by **SWR audio lab**
 
 # README

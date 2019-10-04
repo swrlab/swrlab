@@ -1,4 +1,4 @@
-## SWR Radiohub Auth
+## SWR Radiohub
 by **SWR audio lab**
 
 # Token Auth
