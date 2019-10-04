@@ -18,8 +18,8 @@ The visual swagger page is available on [api.lab.swr.de/radiohub-docs](https://a
 
 ## More documents
 
-- [AUTHENTICATION](AUTHENTICATION.md) - Handling the Radiohub token auth.
-- [STREAMING](STREAMING.md) - How to handle a _Responsive Radio_ stream.
+- [AUTHENTICATION](docs/AUTHENTICATION.md) - Handling the Radiohub token auth.
+- [STREAMING](docs/STREAMING.md) - How to handle a _Responsive Radio_ stream.
 
 ## Changelog
 
