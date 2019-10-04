@@ -57,3 +57,7 @@ app.use('/radiohub-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, opti
 
 
 app.listen(7105)
+
+if(IS_GITHUB) {
+	process.exit()
+}

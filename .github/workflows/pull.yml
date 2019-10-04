@@ -1,4 +1,4 @@
-name: radiohub-docs push Docker
+name: radiohub-docs pull
 
 on:
   pull_request:
