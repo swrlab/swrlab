@@ -1,0 +1,23 @@
+name: radiohub-docs push Docker
+
+on:
+  pull_request:
+    branches:
+    - master
+
+jobs:
+
+  run-npm:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/setup-node@v1
+      with:
+        node-version: 8
+    - name: Checkout repo 👀
+      uses: actions/checkout@v1
+
+    - name: Install Dependencies
+      run: npm install
+
+    - name: Run index
+      run: npm run test

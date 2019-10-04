@@ -4,15 +4,15 @@
 	"description": "SWR hbbtv",
 	"main": "index.js",
 	"scripts": {
-		"api": "IS_DEV=true node index.js",
-		"parser": "IS_DEV=false node index-parser.js",
-		"build": "docker build -t swr-radiohub-api ."
+		"cloud": "IS_GITHUB=false IS_DEV=true IS_LOCAL=false node index.js",
+		"dev": "IS_GITHUB=false IS_DEV=true IS_LOCAL=true node index.js",
+		"test": "IS_GITHUB=true IS_DEV=true IS_LOCAL=true node index.js"
 	},
 	"author": "Daniel Freytag, SWR",
 	"license": "UNLICENSED",
 	"private": true,
 	"dependencies": {
-		"swagger-ui-express": "4.0.6",
-		"express": "4.16.3"
+		"swagger-ui-express": "4.1.1",
+		"express": "4.17.1"
 	}
 }

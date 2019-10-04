@@ -1,12 +1,9 @@
-name: Docker radiohub-docs
+name: radiohub-docs push Docker
 
 on:
   push:
-    paths:
-    - 'radiohub-docs/*'
-    - 'radiohub-docs/*/*'
-    - 'radiohub-docs/*/*/*'
-    - 'radiohub-docs/*/*/*/*'
+    branches:
+    - master
 
 jobs:
 
