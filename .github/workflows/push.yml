@@ -20,7 +20,7 @@ jobs:
       run: cat temp.json | docker login -u _json_key --password-stdin https://eu.gcr.io
 
     - name: Building docker image 🚧
-      run: docker build ./radiohub-docs/ --file ./radiohub-docs/Dockerfile -t swr-radiohub-docs
+      run: docker build ./ --file ./Dockerfile -t swr-radiohub-docs
 
     - name: Tagging docker 🏷
       run: docker tag swr-radiohub-docs eu.gcr.io/swr-lab/swr-radiohub-docs:git-$(date +%j)-$(date +%H)$(date +%M)
