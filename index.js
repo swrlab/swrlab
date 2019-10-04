@@ -42,6 +42,10 @@ app.get('/radiohub-docs/openapi.json', function(req, res, next) {
 	res.sendFile(__dirname + '/openapi.json')
 })
 
+app.get('/radiohub-docs/changelog', function(req, res, next) {
+	res.redirect('https://github.com/swrlab/swr-radiohub-docs/blob/master/CHANGELOG.md')
+})
+
 app.use('/radiohub-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options))
 
 

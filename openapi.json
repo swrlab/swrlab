@@ -4,13 +4,13 @@
     "title" : "SWR audio lab - Radiohub",
     "description" : "This documentation is also available as [openapi.json](https://api.lab.swr.de/radiohub-docs/openapi.json) or [openapi.yaml](https://api.lab.swr.de/radiohub-docs/openapi.yaml).  \nAuthorization keys can be requested via [lab@swr.de](mailto:lab@swr.de) and shall be sent as base64 encoded basic auth information in the header.\nPlease report all problems or bugs to [lab@swr.de](mailto:lab@swr.de) and possibly include the `requestTrace` information from the response header or info object.\n",
     "contact" : {
-      "name" : "Daniel Freytag, SWR audio lab",
-      "email" : "daniel.freytag@swr.de"
+      "name" : "SWR audio lab",
+      "email" : "lab@swr.de"
     },
     "license" : {
       "name" : "© SWR audio lab"
     },
-    "version" : "2.3.0"
+    "version" : "2.4.0"
   },
   "servers" : [ {
     "url" : "https://api.lab.swr.de/",
@@ -20,6 +20,72 @@
     "description" : "Radiohub development (n/a atm)"
   } ],
   "paths" : {
+    "/radiohub/v2/cover/{mdid}/" : {
+      "get" : {
+        "tags" : [ "v2 / cover" ],
+        "summary" : "Get a cover based on SWR's mdid",
+        "description" : "Query Radiohub to get a cover for a played item based on a mdid reference.",
+        "parameters" : [ {
+          "name" : "mdid",
+          "in" : "path",
+          "description" : "SWR mdid (starts with M0...)",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "M0571919.001"
+        }, {
+          "name" : "width",
+          "in" : "query",
+          "description" : "Optionally set a desired width, if no height is provided, the cover stays square-sized, otherwise it will be cropped. Default if unset is 256px, max is 1024px.",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "height",
+          "in" : "query",
+          "description" : "Optionally set a desired height, if no width is provided, the cover stays square-sized, otherwise it will be cropped",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "station",
+          "in" : "query",
+          "description" : "Apply a branding to the image. Branded covers are only available if this station has ever played that track.",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string",
+            "enum" : [ "swr1bw", "swr1rp", "swr2", "swr3", "swr4bw", "swr4rp", "dasding" ]
+          }
+        } ],
+        "responses" : {
+          "500" : {
+            "description" : "Server error occured."
+          },
+          "default" : {
+            "description" : "If status code other than 200, an error message will be provided, otherwise the cover will be returned as image.",
+            "content" : {
+              "image/*" : {
+                "schema" : {
+                  "type" : "string",
+                  "format" : "binary"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/radiohub/v1beta/schedule/live/{station}/" : {
       "get" : {
         "tags" : [ "v1beta / schedule" ],
@@ -73,7 +139,7 @@
           }
         } ],
         "responses" : {
-          "403" : {
+          "401" : {
             "description" : "Unauthorized access to API."
           },
           "500" : {
@@ -110,7 +176,7 @@
           }
         } ],
         "responses" : {
-          "403" : {
+          "401" : {
             "description" : "Unauthorized access to API."
           },
           "500" : {
@@ -132,51 +198,11 @@
         } ]
       }
     },
-    "/radiohub/v2/track/live/{station}/" : {
-      "get" : {
-        "tags" : [ "v2 / track" ],
-        "summary" : "Receive the track that's playing right now.",
-        "description" : "Query Radiohub to get the current live show for a specific station. Note that tracks currently means song, which may be extended in future versions.",
-        "parameters" : [ {
-          "name" : "station",
-          "in" : "path",
-          "description" : "Set the radio station for the schedule query",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "string",
-            "enum" : [ "swr1bw", "swr1rp", "swr2", "swr3", "swr4bw", "swr4rp", "swraktuell", "dasding" ]
-          }
-        } ],
-        "responses" : {
-          "403" : {
-            "description" : "Unauthorized access to API."
-          },
-          "500" : {
-            "description" : "Server error occured."
-          },
-          "default" : {
-            "description" : "If status code other than 200, an error message will be provided, otherwise message is null.",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/trackResponse"
-                }
-              }
-            }
-          }
-        },
-        "security" : [ {
-          "BasicAuth" : [ ]
-        } ]
-      }
-    },
     "/radiohub/v2/stream/start/{station}/" : {
       "get" : {
         "tags" : [ "v2 / stream" ],
         "summary" : "Start a radio stream based on station and additional parameters",
-        "description" : "Linking service to provide the latest streamUrl with certain given parameters.\n\nFor SWR classic an additional parameter `isLive` is provided in the JSON output (see example response below).",
+        "description" : "Linking service to provide the latest streamUrl with certain given parameters.\n\nFor SWR classic an additional parameter `isLive` is provided in the JSON output (see example response below).\n\nSome requests require an authentication (especially responsive radio triggered by the y parameter, those responses also feature a different JSON structure).",
         "parameters" : [ {
           "name" : "station",
           "in" : "path",
@@ -341,6 +367,243 @@
         }
       }
     },
+    "/radiohub/v2/stream/shift/{action}/" : {
+      "get" : {
+        "tags" : [ "v2 / stream" ],
+        "summary" : "Control the timeshift of a user's stream",
+        "description" : "For a detailed workflow of responsive radio streams, see the STREAMING.md document in this repository.",
+        "parameters" : [ {
+          "name" : "action",
+          "in" : "path",
+          "description" : "The type of action for the livestream",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "enum" : [ "jump", "live", "offset", "back", "ahead" ]
+          }
+        }, {
+          "name" : "sessionId",
+          "in" : "query",
+          "description" : "Always provide the user's sessionId for all responsive radio requests.",
+          "required" : true,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "400" : {
+            "description" : "Query not allowed."
+          },
+          "500" : {
+            "description" : "Server error occured or key not found."
+          },
+          "default" : {
+            "description" : "JSON object",
+            "content" : {
+              "image/json" : {
+                "schema" : {
+                  "type" : "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/radiohub/v2/stream/shift/{action}/{time}" : {
+      "get" : {
+        "tags" : [ "v2 / stream" ],
+        "summary" : "Control the timeshift of a user's stream with time offset",
+        "description" : "For a detailed workflow of responsive radio streams, see the STREAMING.md document in this repository.",
+        "parameters" : [ {
+          "name" : "action",
+          "in" : "path",
+          "description" : "The type of action for the livestream",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "enum" : [ "jump", "live", "offset", "back", "ahead" ]
+          }
+        }, {
+          "name" : "time",
+          "in" : "path",
+          "description" : "The time difference if required by `action`",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "sessionId",
+          "in" : "query",
+          "description" : "Always provide the user's sessionId for all responsive radio requests.",
+          "required" : true,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "400" : {
+            "description" : "Query not allowed."
+          },
+          "500" : {
+            "description" : "Server error occured or key not found."
+          },
+          "default" : {
+            "description" : "JSON object",
+            "content" : {
+              "image/json" : {
+                "schema" : {
+                  "type" : "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/radiohub/v2/stream/switch/skip" : {
+      "get" : {
+        "tags" : [ "v2 / stream" ],
+        "summary" : "Control the content of a user's stream by skipping",
+        "description" : "For a detailed workflow of responsive radio streams, see the STREAMING.md document in this repository.",
+        "parameters" : [ {
+          "name" : "sessionId",
+          "in" : "query",
+          "description" : "Always provide the user's sessionId for all responsive radio requests.",
+          "required" : true,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "400" : {
+            "description" : "Query not allowed."
+          },
+          "500" : {
+            "description" : "Server error occured or key not found."
+          },
+          "default" : {
+            "description" : "JSON object",
+            "content" : {
+              "image/json" : {
+                "schema" : {
+                  "type" : "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/radiohub/v2/stream/switch/{action}/{id}" : {
+      "get" : {
+        "tags" : [ "v2 / stream" ],
+        "summary" : "Control the content of a user's stream",
+        "description" : "For a detailed workflow of responsive radio streams, see the STREAMING.md document in this repository.",
+        "parameters" : [ {
+          "name" : "action",
+          "in" : "path",
+          "description" : "The type of action for the livestream",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "enum" : [ "channel", "podcast" ]
+          }
+        }, {
+          "name" : "id",
+          "in" : "path",
+          "description" : "The time difference if required by `action`",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "sessionId",
+          "in" : "query",
+          "description" : "Always provide the user's sessionId for all responsive radio requests.",
+          "required" : true,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "400" : {
+            "description" : "Query not allowed."
+          },
+          "500" : {
+            "description" : "Server error occured or key not found."
+          },
+          "default" : {
+            "description" : "JSON object",
+            "content" : {
+              "image/json" : {
+                "schema" : {
+                  "type" : "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/radiohub/v2/track/live/{station}/" : {
+      "get" : {
+        "tags" : [ "v2 / track" ],
+        "summary" : "Receive the track that's playing right now.",
+        "description" : "Query Radiohub to get the current live show for a specific station. Note that tracks currently means song, which may be extended in future versions.",
+        "parameters" : [ {
+          "name" : "station",
+          "in" : "path",
+          "description" : "Set the radio station for the schedule query",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "enum" : [ "swr1bw", "swr1rp", "swr2", "swr3", "swr4bw", "swr4rp", "swraktuell", "dasding" ]
+          }
+        } ],
+        "responses" : {
+          "401" : {
+            "description" : "Unauthorized access to API."
+          },
+          "500" : {
+            "description" : "Server error occured."
+          },
+          "default" : {
+            "description" : "If status code other than 200, an error message will be provided, otherwise message is null.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/trackResponse"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "BasicAuth" : [ ]
+        } ]
+      }
+    },
     "/radiohub/v2/traffic/search/{provider}/{roadName}/" : {
       "get" : {
         "tags" : [ "v2 / traffic" ],
@@ -381,7 +644,7 @@
           }
         } ],
         "responses" : {
-          "403" : {
+          "401" : {
             "description" : "Unauthorized access to API."
           },
           "500" : {
@@ -464,7 +727,7 @@
           }
         } ],
         "responses" : {
-          "403" : {
+          "401" : {
             "description" : "Unauthorized access to API."
           },
           "500" : {
@@ -476,6 +739,57 @@
               "application/json" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/trafficResponse"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "BasicAuth" : [ ]
+        } ]
+      }
+    },
+    "/radiohub/v2/weather/geo/{lat}/{lon}/" : {
+      "get" : {
+        "tags" : [ "v2 / weather" ],
+        "summary" : "Get the weather",
+        "description" : "Receive SWR's weather report for a specific geolocation.",
+        "parameters" : [ {
+          "name" : "lat",
+          "in" : "path",
+          "description" : "Geo Latitude",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "example" : "48.767014"
+          }
+        }, {
+          "name" : "lon",
+          "in" : "path",
+          "description" : "Geo Longitude",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "example" : "8.224037"
+          }
+        } ],
+        "responses" : {
+          "401" : {
+            "description" : "Unauthorized access to API."
+          },
+          "500" : {
+            "description" : "Server error occured."
+          },
+          "default" : {
+            "description" : "If status code other than 200, an error message will be provided, otherwise message is null.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object"
                 }
               }
             }
@@ -589,7 +903,7 @@
           }
         } ],
         "responses" : {
-          "403" : {
+          "401" : {
             "description" : "Unauthorized access to API."
           },
           "500" : {
@@ -702,7 +1016,7 @@
           }
         } ],
         "responses" : {
-          "403" : {
+          "401" : {
             "description" : "Unauthorized access to API."
           },
           "500" : {
