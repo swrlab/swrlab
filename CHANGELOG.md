@@ -4,6 +4,9 @@ by **SWR audio lab**
 # Changelog
 
 This changelog serves as a place for all changes around the public SWR Radiohub API service.
+- 2019-10-07 - v2.4.2
+  - Schedule now supports filtering by day
+  - Added new feedback endpoint, primarily for apps
 - 2019-10-04 - v2.4.0
   - Adding API documents for streaming and authentication.
   - Also adding `weather/` and `stream/` documentation to Open API docs.

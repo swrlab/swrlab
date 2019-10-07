@@ -12,7 +12,7 @@ info:
     email: lab@swr.de
   license:
     name: © SWR audio lab
-  version: 2.4.0
+  version: 2.4.2
 servers:
 - url: https://api.lab.swr.de/
   description: Radiohub production
@@ -83,12 +83,13 @@ paths:
               schema:
                 type: string
                 format: binary
-  /radiohub/v1beta/schedule/live/{station}/:
-    get:
+  /radiohub/v2/feedback/{station}/:
+    post:
       tags:
-      - v1beta / schedule
-      summary: Receive the show that's live as scheduled
-      description: Query Radiohub to get the current live show for a specific station.
+      - v2 / feedback
+      summary: Publish an inbound feedback message
+      description: Send a feedback message from an external device or platform to
+        SWR's feedback system.
       parameters:
       - name: station
         in: path
@@ -101,23 +102,28 @@ paths:
           enum:
           - swr1bw
           - swr1rp
-          - swr2
           - swr3
           - swr4bw
           - swr4rp
-          - swraktuell
           - dasding
+      requestBody:
+        description: |
+          When posting a feedback entry, `name`, `userId` and `source` are always required, `city` for all stations except _dasding_. Each post needs to contain either `file` or `message`. The field `file` can either be _image/jpeg_ (jpg file), _image/png_ (png image) or _audio/mpeg_ (mp3). `userId` needs to be a predefined token or id which can be used to reach back out to the user.
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/body'
+        required: true
       responses:
-        500:
-          description: Server error occured.
-        default:
+        200:
           description: If status code other than 200, an error message will be provided,
             otherwise message is null.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/scheduleResponse'
-      deprecated: true
+        401:
+          description: Unauthorized access to API.
+        500:
+          description: Server error occured.
+      security:
+      - BasicAuth: []
   /radiohub/v2/schedule/live/{station}/:
     get:
       tags:
@@ -154,6 +160,56 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/scheduleResponse'
+  /radiohub/v2/schedule/day/{station}/{day}:
+    get:
+      tags:
+      - v2 / schedule
+      summary: Receive the show that's live as scheduled
+      description: Query Radiohub to get the current live show for a specific station.
+      parameters:
+      - name: station
+        in: path
+        description: Set the radio station for the schedule query
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          enum:
+          - swr1bw
+          - swr1rp
+          - swr2
+          - swr3
+          - swr4bw
+          - swr4rp
+          - swraktuell
+          - dasding
+      - name: day
+        in: path
+        description: Specify a certain date to be checked in the format YYYYMMDD.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: "20191007"
+      responses:
+        200:
+          description: If status code other than 200, an error message will be provided,
+            otherwise message is null.
+          content:
+            application/json:
+              schema:
+                minItems: 2
+                type: array
+                items:
+                  $ref: '#/components/schemas/scheduleResponse'
+        401:
+          description: Unauthorized access to API.
+        500:
+          description: Server error occured.
+      security:
+      - BasicAuth: []
   /radiohub/v2/schedule/purge/{station}/:
     get:
       tags:
@@ -1216,6 +1272,31 @@ components:
           description: Only supplied when querying by geo coordinates.
           format: double
           nullable: true
+    body:
+      required:
+      - message
+      - name
+      - source
+      - userId
+      type: object
+      properties:
+        file:
+          type: string
+          format: binary
+        userId:
+          type: string
+        source:
+          type: string
+          enum:
+          - app
+        name:
+          type: string
+        email:
+          type: string
+        city:
+          type: string
+        message:
+          type: string
   securitySchemes:
     BasicAuth:
       type: http
