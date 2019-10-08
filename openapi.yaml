@@ -12,7 +12,7 @@ info:
     email: lab@swr.de
   license:
     name: © SWR audio lab
-  version: 2.4.2
+  version: 2.4.3
 servers:
 - url: https://api.lab.swr.de/
   description: Radiohub production
@@ -259,7 +259,7 @@ paths:
 
         For SWR classic an additional parameter `isLive` is provided in the JSON output (see example response below).
 
-        Some requests require an authentication (especially responsive radio triggered by the y parameter, those responses also feature a different JSON structure).
+        Some requests require an authentication with special permissions (`swrRadiohubStreamStart`) - Especially responsive radio triggered by the y parameter, those responses also feature a different JSON structure.
       parameters:
       - name: station
         in: path
@@ -787,7 +787,7 @@ paths:
     get:
       tags:
       - swr-images
-      summary: Load an image from image service by SWR audio lab
+      summary: Load an image from image service
       description: Load the original image or resized version. A list of all keys
         can be seen in the SWR audio lab dashboard. Contact lab@swr.de for access.
         Uncached images will be generated and served from storage. See response header
@@ -898,7 +898,7 @@ paths:
     get:
       tags:
       - swr2-images
-      summary: Load an image from swr2 image service by SWR audio lab
+      summary: Load an image from swr2 image service
       description: Load the original image or resized version. A list of all keys
         can be seen in the SWR audio lab dashboard. Contact lab@swr.de for access.
         Uncached images will be generated and served from storage. See response header

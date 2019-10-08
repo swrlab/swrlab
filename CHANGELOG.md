@@ -4,6 +4,9 @@ by **SWR audio lab**
 # Changelog
 
 This changelog serves as a place for all changes around the public SWR Radiohub API service.
+- 2019-10-08 - v2.4.3
+  - Responsive Radio streams now require special permission `swrRadiohubStreamStart`
+  - Response code for failed or missing authorizations is now `401` not `403`
 - 2019-10-07 - v2.4.2
   - Schedule now supports filtering by day
   - Added new feedback endpoint, primarily for apps

@@ -10,7 +10,7 @@
     "license" : {
       "name" : "© SWR audio lab"
     },
-    "version" : "2.4.2"
+    "version" : "2.4.3"
   },
   "servers" : [ {
     "url" : "https://api.lab.swr.de/",
@@ -266,7 +266,7 @@
       "get" : {
         "tags" : [ "v2 / stream" ],
         "summary" : "Start a radio stream based on station and additional parameters",
-        "description" : "Linking service to provide the latest streamUrl with certain given parameters.\n\nFor SWR classic an additional parameter `isLive` is provided in the JSON output (see example response below).\n\nSome requests require an authentication (especially responsive radio triggered by the y parameter, those responses also feature a different JSON structure).",
+        "description" : "Linking service to provide the latest streamUrl with certain given parameters.\n\nFor SWR classic an additional parameter `isLive` is provided in the JSON output (see example response below).\n\nSome requests require an authentication with special permissions (`swrRadiohubStreamStart`) - Especially responsive radio triggered by the y parameter, those responses also feature a different JSON structure.",
         "parameters" : [ {
           "name" : "station",
           "in" : "path",
@@ -867,7 +867,7 @@
     "/images/v1/get/{key}/img" : {
       "get" : {
         "tags" : [ "swr-images" ],
-        "summary" : "Load an image from image service by SWR audio lab",
+        "summary" : "Load an image from image service",
         "description" : "Load the original image or resized version. A list of all keys can be seen in the SWR audio lab dashboard. Contact lab@swr.de for access. Uncached images will be generated and served from storage. See response header \"swr-datasource\" for details. Clients should also respect cache control if possible.",
         "parameters" : [ {
           "name" : "key",
@@ -992,7 +992,7 @@
     "/swr2/images/get/{key}/{format}/{overlay}/{width}/img.jpg" : {
       "get" : {
         "tags" : [ "swr2-images" ],
-        "summary" : "Load an image from swr2 image service by SWR audio lab",
+        "summary" : "Load an image from swr2 image service",
         "description" : "Load the original image or resized version. A list of all keys can be seen in the SWR audio lab dashboard. Contact lab@swr.de for access. Uncached images will be generated and served from storage. See response header \"swr-datasource\" for details. Clients should also respect cache control if possible.",
         "parameters" : [ {
           "name" : "key",
