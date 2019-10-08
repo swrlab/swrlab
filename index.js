@@ -16,6 +16,7 @@ const customCss = '@import url(\'https://fonts.googleapis.com/css?family=Barlow+
 	'.swagger-ui .servers>label select { margin: 0; } ' +
 	'td { padding: 9px 22px !important; } ' +
 	'td:hover { background: inherit; } ' +
+	'tr:nth-child(even) { background: hsl(200, 0%, 96%); } ' +
 	'.swagger-ui .topbar { background: #003082; } ' +
 	'.swagger-ui .topbar img { display: none; }' +
 	'.swagger-ui .topbar .topbar-wrapper:after { content: \'SWR audio lab - Radiohub Documentation\'; padding: 15px 0; color: white; font-size: 25px; font-weight: 600; }' +
@@ -38,7 +39,8 @@ const customCss = '@import url(\'https://fonts.googleapis.com/css?family=Barlow+
 	'div.swagger-ui .dialog-ux .modal-ux { border: 0; box-shadow: none; border-radius: 0; } ' +
 	'div.swagger-ui .opblock.opblock-get .opblock-summary-method { background: #003082; } ' +
 	'div.swagger-ui .opblock.opblock-get .opblock-summary { border-color: #003082; padding: 15px; } ' +
-	'div.swagger-ui .opblock.opblock-get { border-color: #003082; background: rgba(0, 148, 230, 0.03); } '
+	'div.swagger-ui .opblock.opblock-get { border-color: #003082; background: rgba(0, 148, 230, 0.03); } ' +
+	'div.swagger-ui .opblock.opblock-post .opblock-summary { padding: 15px; } '
 
 
 
