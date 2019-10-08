@@ -12,17 +12,17 @@ info:
     email: lab@swr.de
   license:
     name: © SWR audio lab
-  version: 2.4.3
+  version: 2.5.0
 servers:
-- url: https://api.lab.swr.de/
+- url: https://api.lab.swr.de/radiohub
   description: Radiohub production
 - url: https://api.lab.swr.de/radiohub-dev
-  description: Radiohub development (n/a atm)
+  description: Radiohub development
 paths:
-  /radiohub/v2/cover/{mdid}/:
+  /v2/cover/{mdid}/:
     get:
       tags:
-      - v2 / cover
+      - cover
       summary: Get a cover based on SWR's mdid
       description: Query Radiohub to get a cover for a played item based on a mdid
         reference.
@@ -83,10 +83,10 @@ paths:
               schema:
                 type: string
                 format: binary
-  /radiohub/v2/feedback/{station}/:
+  /v2/feedback/{station}/:
     post:
       tags:
-      - v2 / feedback
+      - feedback
       summary: Publish an inbound feedback message
       description: Send a feedback message from an external device or platform to
         SWR's feedback system.
@@ -124,10 +124,10 @@ paths:
           description: Server error occured.
       security:
       - BasicAuth: []
-  /radiohub/v2/schedule/live/{station}/:
+  /v2/schedule/live/{station}/:
     get:
       tags:
-      - v2 / schedule
+      - schedule
       summary: Receive the show that's live as scheduled
       description: Query Radiohub to get the current live show for a specific station.
       parameters:
@@ -160,10 +160,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/scheduleResponse'
-  /radiohub/v2/schedule/day/{station}/{day}:
+  /v2/schedule/day/{station}/{day}:
     get:
       tags:
-      - v2 / schedule
+      - schedule
       summary: Receive the show that's live as scheduled
       description: Query Radiohub to get the current live show for a specific station.
       parameters:
@@ -210,10 +210,10 @@ paths:
           description: Server error occured.
       security:
       - BasicAuth: []
-  /radiohub/v2/schedule/purge/{station}/:
+  /v2/schedule/purge/{station}/:
     get:
       tags:
-      - v2 / schedule
+      - schedule
       summary: Purge cache information for a station
       description: Shall only be used in cases when meta information has been changed
         and needs to be re-cached.
@@ -249,10 +249,10 @@ paths:
                 $ref: '#/components/schemas/schedulePurgeResponse'
       security:
       - BasicAuth: []
-  /radiohub/v2/stream/start/{station}/:
+  /v2/stream/start/{station}/:
     get:
       tags:
-      - v2 / stream
+      - stream
       summary: Start a radio stream based on station and additional parameters
       description: |-
         Linking service to provide the latest streamUrl with certain given parameters.
@@ -379,10 +379,10 @@ paths:
                     $ref: '#/components/schemas/infoResponse'
                   links:
                     type: object
-  /radiohub/v2/stream/meta/:
+  /v2/stream/meta/:
     get:
       tags:
-      - v2 / stream
+      - stream
       summary: Receive meta information about a current session
       description: "All meta data that the system knows about a running audio session\
         \ for the skippable radio platform. \n\n**API NOT COMPLETE AND STILL IN BETA**"
@@ -403,10 +403,10 @@ paths:
             image/json:
               schema:
                 type: object
-  /radiohub/v2/stream/shift/{action}/:
+  /v2/stream/shift/{action}/:
     get:
       tags:
-      - v2 / stream
+      - stream
       summary: Control the timeshift of a user's stream
       description: For a detailed workflow of responsive radio streams, see the STREAMING.md
         document in this repository.
@@ -445,10 +445,10 @@ paths:
             image/json:
               schema:
                 type: object
-  /radiohub/v2/stream/shift/{action}/{time}:
+  /v2/stream/shift/{action}/{time}:
     get:
       tags:
-      - v2 / stream
+      - stream
       summary: Control the timeshift of a user's stream with time offset
       description: For a detailed workflow of responsive radio streams, see the STREAMING.md
         document in this repository.
@@ -495,10 +495,10 @@ paths:
             image/json:
               schema:
                 type: object
-  /radiohub/v2/stream/switch/skip:
+  /v2/stream/switch/skip:
     get:
       tags:
-      - v2 / stream
+      - stream
       summary: Control the content of a user's stream by skipping
       description: For a detailed workflow of responsive radio streams, see the STREAMING.md
         document in this repository.
@@ -523,10 +523,10 @@ paths:
             image/json:
               schema:
                 type: object
-  /radiohub/v2/stream/switch/{action}/{id}:
+  /v2/stream/switch/{action}/{id}:
     get:
       tags:
-      - v2 / stream
+      - stream
       summary: Control the content of a user's stream
       description: For a detailed workflow of responsive radio streams, see the STREAMING.md
         document in this repository.
@@ -570,10 +570,10 @@ paths:
             image/json:
               schema:
                 type: object
-  /radiohub/v2/track/live/{station}/:
+  /v2/track/live/{station}/:
     get:
       tags:
-      - v2 / track
+      - track
       summary: Receive the track that's playing right now.
       description: Query Radiohub to get the current live show for a specific station.
         Note that tracks currently means song, which may be extended in future versions.
@@ -609,10 +609,10 @@ paths:
                 $ref: '#/components/schemas/trackResponse'
       security:
       - BasicAuth: []
-  /radiohub/v2/traffic/search/{provider}/{roadName}/:
+  /v2/traffic/search/{provider}/{roadName}/:
     get:
       tags:
-      - v2 / traffic
+      - traffic
       summary: Search for traffic incidents
       description: Query ARD Traffic (TPEG) via Radiohub to get a list of incidents.
       parameters:
@@ -668,10 +668,10 @@ paths:
                 $ref: '#/components/schemas/trafficResponse'
       security:
       - BasicAuth: []
-  /radiohub/v2/traffic/geo/{provider}/{lat}/{lon}/:
+  /v2/traffic/geo/{provider}/{lat}/{lon}/:
     get:
       tags:
-      - v2 / traffic
+      - traffic
       summary: Get the neareast incidents
       description: Query ARD Traffic (TPEG) via Radiohub to get a list of incidents
         via supplied geo coordinates.
@@ -744,10 +744,10 @@ paths:
                 $ref: '#/components/schemas/trafficResponse'
       security:
       - BasicAuth: []
-  /radiohub/v2/weather/geo/{lat}/{lon}/:
+  /v2/weather/geo/{lat}/{lon}/:
     get:
       tags:
-      - v2 / weather
+      - weather
       summary: Get the weather
       description: Receive SWR's weather report for a specific geolocation.
       parameters:
@@ -860,6 +860,9 @@ paths:
               schema:
                 type: string
                 format: binary
+      servers:
+      - url: https://api.lab.swr.de/
+        description: This service is acessible through the primary path
   /images/v1/get/{key}/json:
     get:
       tags:
@@ -894,6 +897,9 @@ paths:
                 type: object
       security:
       - BasicAuth: []
+      servers:
+      - url: https://api.lab.swr.de/
+        description: This service is acessible through the primary path
   /swr2/images/get/{key}/{format}/{overlay}/{width}/img.jpg:
     get:
       tags:
@@ -963,6 +969,9 @@ paths:
               schema:
                 type: string
                 format: binary
+      servers:
+      - url: https://api.lab.swr.de/
+        description: This service is acessible through the primary path
   /swr2/images/get/{key}/json:
     get:
       tags:
@@ -997,6 +1006,9 @@ paths:
                 type: object
       security:
       - BasicAuth: []
+      servers:
+      - url: https://api.lab.swr.de/
+        description: This service is acessible through the primary path
 components:
   schemas:
     geoPoint:

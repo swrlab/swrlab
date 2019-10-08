@@ -10,19 +10,19 @@
     "license" : {
       "name" : "© SWR audio lab"
     },
-    "version" : "2.4.3"
+    "version" : "2.5.0"
   },
   "servers" : [ {
-    "url" : "https://api.lab.swr.de/",
+    "url" : "https://api.lab.swr.de/radiohub",
     "description" : "Radiohub production"
   }, {
     "url" : "https://api.lab.swr.de/radiohub-dev",
-    "description" : "Radiohub development (n/a atm)"
+    "description" : "Radiohub development"
   } ],
   "paths" : {
-    "/radiohub/v2/cover/{mdid}/" : {
+    "/v2/cover/{mdid}/" : {
       "get" : {
-        "tags" : [ "v2 / cover" ],
+        "tags" : [ "cover" ],
         "summary" : "Get a cover based on SWR's mdid",
         "description" : "Query Radiohub to get a cover for a played item based on a mdid reference.",
         "parameters" : [ {
@@ -86,9 +86,9 @@
         }
       }
     },
-    "/radiohub/v2/feedback/{station}/" : {
+    "/v2/feedback/{station}/" : {
       "post" : {
-        "tags" : [ "v2 / feedback" ],
+        "tags" : [ "feedback" ],
         "summary" : "Publish an inbound feedback message",
         "description" : "Send a feedback message from an external device or platform to SWR's feedback system.",
         "parameters" : [ {
@@ -130,9 +130,9 @@
         } ]
       }
     },
-    "/radiohub/v2/schedule/live/{station}/" : {
+    "/v2/schedule/live/{station}/" : {
       "get" : {
-        "tags" : [ "v2 / schedule" ],
+        "tags" : [ "schedule" ],
         "summary" : "Receive the show that's live as scheduled",
         "description" : "Query Radiohub to get the current live show for a specific station.",
         "parameters" : [ {
@@ -167,9 +167,9 @@
         }
       }
     },
-    "/radiohub/v2/schedule/day/{station}/{day}" : {
+    "/v2/schedule/day/{station}/{day}" : {
       "get" : {
-        "tags" : [ "v2 / schedule" ],
+        "tags" : [ "schedule" ],
         "summary" : "Receive the show that's live as scheduled",
         "description" : "Query Radiohub to get the current live show for a specific station.",
         "parameters" : [ {
@@ -222,9 +222,9 @@
         } ]
       }
     },
-    "/radiohub/v2/schedule/purge/{station}/" : {
+    "/v2/schedule/purge/{station}/" : {
       "get" : {
-        "tags" : [ "v2 / schedule" ],
+        "tags" : [ "schedule" ],
         "summary" : "Purge cache information for a station",
         "description" : "Shall only be used in cases when meta information has been changed and needs to be re-cached.",
         "parameters" : [ {
@@ -262,9 +262,9 @@
         } ]
       }
     },
-    "/radiohub/v2/stream/start/{station}/" : {
+    "/v2/stream/start/{station}/" : {
       "get" : {
-        "tags" : [ "v2 / stream" ],
+        "tags" : [ "stream" ],
         "summary" : "Start a radio stream based on station and additional parameters",
         "description" : "Linking service to provide the latest streamUrl with certain given parameters.\n\nFor SWR classic an additional parameter `isLive` is provided in the JSON output (see example response below).\n\nSome requests require an authentication with special permissions (`swrRadiohubStreamStart`) - Especially responsive radio triggered by the y parameter, those responses also feature a different JSON structure.",
         "parameters" : [ {
@@ -401,9 +401,9 @@
         }
       }
     },
-    "/radiohub/v2/stream/meta/" : {
+    "/v2/stream/meta/" : {
       "get" : {
-        "tags" : [ "v2 / stream" ],
+        "tags" : [ "stream" ],
         "summary" : "Receive meta information about a current session",
         "description" : "All meta data that the system knows about a running audio session for the skippable radio platform. \n\n**API NOT COMPLETE AND STILL IN BETA**",
         "parameters" : [ {
@@ -431,9 +431,9 @@
         }
       }
     },
-    "/radiohub/v2/stream/shift/{action}/" : {
+    "/v2/stream/shift/{action}/" : {
       "get" : {
-        "tags" : [ "v2 / stream" ],
+        "tags" : [ "stream" ],
         "summary" : "Control the timeshift of a user's stream",
         "description" : "For a detailed workflow of responsive radio streams, see the STREAMING.md document in this repository.",
         "parameters" : [ {
@@ -478,9 +478,9 @@
         }
       }
     },
-    "/radiohub/v2/stream/shift/{action}/{time}" : {
+    "/v2/stream/shift/{action}/{time}" : {
       "get" : {
-        "tags" : [ "v2 / stream" ],
+        "tags" : [ "stream" ],
         "summary" : "Control the timeshift of a user's stream with time offset",
         "description" : "For a detailed workflow of responsive radio streams, see the STREAMING.md document in this repository.",
         "parameters" : [ {
@@ -535,9 +535,9 @@
         }
       }
     },
-    "/radiohub/v2/stream/switch/skip" : {
+    "/v2/stream/switch/skip" : {
       "get" : {
-        "tags" : [ "v2 / stream" ],
+        "tags" : [ "stream" ],
         "summary" : "Control the content of a user's stream by skipping",
         "description" : "For a detailed workflow of responsive radio streams, see the STREAMING.md document in this repository.",
         "parameters" : [ {
@@ -571,9 +571,9 @@
         }
       }
     },
-    "/radiohub/v2/stream/switch/{action}/{id}" : {
+    "/v2/stream/switch/{action}/{id}" : {
       "get" : {
-        "tags" : [ "v2 / stream" ],
+        "tags" : [ "stream" ],
         "summary" : "Control the content of a user's stream",
         "description" : "For a detailed workflow of responsive radio streams, see the STREAMING.md document in this repository.",
         "parameters" : [ {
@@ -628,9 +628,9 @@
         }
       }
     },
-    "/radiohub/v2/track/live/{station}/" : {
+    "/v2/track/live/{station}/" : {
       "get" : {
-        "tags" : [ "v2 / track" ],
+        "tags" : [ "track" ],
         "summary" : "Receive the track that's playing right now.",
         "description" : "Query Radiohub to get the current live show for a specific station. Note that tracks currently means song, which may be extended in future versions.",
         "parameters" : [ {
@@ -668,9 +668,9 @@
         } ]
       }
     },
-    "/radiohub/v2/traffic/search/{provider}/{roadName}/" : {
+    "/v2/traffic/search/{provider}/{roadName}/" : {
       "get" : {
-        "tags" : [ "v2 / traffic" ],
+        "tags" : [ "traffic" ],
         "summary" : "Search for traffic incidents",
         "description" : "Query ARD Traffic (TPEG) via Radiohub to get a list of incidents.",
         "parameters" : [ {
@@ -730,9 +730,9 @@
         } ]
       }
     },
-    "/radiohub/v2/traffic/geo/{provider}/{lat}/{lon}/" : {
+    "/v2/traffic/geo/{provider}/{lat}/{lon}/" : {
       "get" : {
-        "tags" : [ "v2 / traffic" ],
+        "tags" : [ "traffic" ],
         "summary" : "Get the neareast incidents",
         "description" : "Query ARD Traffic (TPEG) via Radiohub to get a list of incidents via supplied geo coordinates.",
         "parameters" : [ {
@@ -813,9 +813,9 @@
         } ]
       }
     },
-    "/radiohub/v2/weather/geo/{lat}/{lon}/" : {
+    "/v2/weather/geo/{lat}/{lon}/" : {
       "get" : {
-        "tags" : [ "v2 / weather" ],
+        "tags" : [ "weather" ],
         "summary" : "Get the weather",
         "description" : "Receive SWR's weather report for a specific geolocation.",
         "parameters" : [ {
@@ -946,7 +946,11 @@
               }
             }
           }
-        }
+        },
+        "servers" : [ {
+          "url" : "https://api.lab.swr.de/",
+          "description" : "This service is acessible through the primary path"
+        } ]
       }
     },
     "/images/v1/get/{key}/json" : {
@@ -986,6 +990,10 @@
         },
         "security" : [ {
           "BasicAuth" : [ ]
+        } ],
+        "servers" : [ {
+          "url" : "https://api.lab.swr.de/",
+          "description" : "This service is acessible through the primary path"
         } ]
       }
     },
@@ -1059,7 +1067,11 @@
               }
             }
           }
-        }
+        },
+        "servers" : [ {
+          "url" : "https://api.lab.swr.de/",
+          "description" : "This service is acessible through the primary path"
+        } ]
       }
     },
     "/swr2/images/get/{key}/json" : {
@@ -1099,6 +1111,10 @@
         },
         "security" : [ {
           "BasicAuth" : [ ]
+        } ],
+        "servers" : [ {
+          "url" : "https://api.lab.swr.de/",
+          "description" : "This service is acessible through the primary path"
         } ]
       }
     }

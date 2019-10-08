@@ -4,6 +4,11 @@ by **SWR audio lab**
 # Changelog
 
 This changelog serves as a place for all changes around the public SWR Radiohub API service.
+- 2019-10-08 - v2.5.0
+  - 🎉 `/radiohub-dev` is now available. Existing tokens apply to both stages.
+  - Swagger docs now support both production and development stages
+    - removing /radiohub prefix
+    - overwriting the domain and path for swr-images and swr2-images
 - 2019-10-08 - v2.4.3
   - Responsive Radio streams now require special permission `swrRadiohubStreamStart`
   - Response code for failed or missing authorizations is now `401` not `403`
