@@ -10,7 +10,7 @@
     "license" : {
       "name" : "© SWR audio lab"
     },
-    "version" : "2.5.0"
+    "version" : "2.6.2"
   },
   "servers" : [ {
     "url" : "https://api.lab.swr.de/radiohub",
@@ -215,6 +215,67 @@
           },
           "500" : {
             "description" : "Server error occured."
+          }
+        },
+        "security" : [ {
+          "BasicAuth" : [ ]
+        } ]
+      }
+    },
+    "/v2/schedule/time/{station}/{format}/{time}" : {
+      "get" : {
+        "tags" : [ "schedule" ],
+        "summary" : "Receive the show that's live as scheduled",
+        "description" : "Query Radiohub based on a ms or s timestamp to get the show for a specific station.",
+        "parameters" : [ {
+          "name" : "station",
+          "in" : "path",
+          "description" : "Set the radio station for the schedule query",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "enum" : [ "swr1bw", "swr1rp", "swr2", "swr3", "swr4bw", "swr4rp", "swraktuell", "dasding" ]
+          }
+        }, {
+          "name" : "format",
+          "in" : "path",
+          "description" : "Choose whether to use a UNIX timestamp in seconds or milliseconds.",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "enum" : [ "ms", "s" ]
+          }
+        }, {
+          "name" : "time",
+          "in" : "path",
+          "description" : "Timestamp",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "401" : {
+            "description" : "Unauthorized access to API."
+          },
+          "500" : {
+            "description" : "Server error occured."
+          },
+          "default" : {
+            "description" : "If status code other than 200, an error message will be provided, otherwise message is null.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/scheduleResponse"
+                }
+              }
+            }
           }
         },
         "security" : [ {
@@ -1138,32 +1199,17 @@
       "infoResponse" : {
         "type" : "object",
         "properties" : {
-          "station" : {
-            "type" : "string",
-            "nullable" : true
-          },
-          "dataSource" : {
-            "type" : "string"
-          },
           "poweredBy" : {
             "type" : "string",
             "example" : "SWR audio lab"
           },
-          "hostName" : {
-            "type" : "string",
-            "example" : "swr-radiohub-api-XYZ"
-          },
-          "requestTrace" : {
+          "trace" : {
             "type" : "string",
             "example" : "xyz"
           },
-          "requestLatency" : {
-            "type" : "integer",
-            "example" : 2
-          },
-          "serviceVersion" : {
+          "service" : {
             "type" : "string",
-            "example" : "v2"
+            "example" : "swr-radiohub-api-dev;dev;..."
           }
         },
         "description" : "Defines a schedule response"
@@ -1192,6 +1238,89 @@
         },
         "description" : "Defines a schedule response"
       },
+      "scheduleResponse_data_textLongform" : {
+        "type" : "object",
+        "properties" : {
+          "text" : {
+            "type" : "string",
+            "example" : "Line 1"
+          },
+          "underline" : {
+            "type" : "boolean",
+            "example" : false
+          },
+          "italic" : {
+            "type" : "boolean",
+            "example" : false
+          },
+          "bold" : {
+            "type" : "boolean",
+            "example" : false
+          }
+        }
+      },
+      "scheduleResponse_data" : {
+        "type" : "object",
+        "properties" : {
+          "title" : {
+            "type" : "string",
+            "example" : "Nachrichten"
+          },
+          "subtitle" : {
+            "type" : "string"
+          },
+          "airtimeStart" : {
+            "type" : "integer"
+          },
+          "airtimeEnd" : {
+            "type" : "integer"
+          },
+          "updatedAt" : {
+            "type" : "integer"
+          },
+          "thumbUrl" : {
+            "type" : "string"
+          },
+          "isThumbAvailable" : {
+            "type" : "boolean",
+            "example" : false
+          },
+          "anchorImageUrl" : {
+            "type" : "string",
+            "nullable" : true
+          },
+          "anchorList" : {
+            "minItems" : 0,
+            "type" : "array",
+            "nullable" : true,
+            "items" : {
+              "$ref" : "#/components/schemas/scheduleResponse_data_anchorList"
+            }
+          },
+          "textLongform" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/scheduleResponse_data_textLongform"
+            }
+          },
+          "programId" : {
+            "type" : "integer",
+            "nullable" : true
+          },
+          "ref" : {
+            "type" : "integer",
+            "example" : 2906737
+          }
+        }
+      },
+      "scheduleResponse_links" : {
+        "type" : "object",
+        "properties" : {
+          "purge" : {
+            "type" : "string"
+          }
+        }
+      },
       "schedulePurgeResponse" : {
         "type" : "object",
         "properties" : {
@@ -1215,6 +1344,17 @@
           }
         },
         "description" : "Defines a schedule response after purging"
+      },
+      "schedulePurgeResponse_data" : {
+        "type" : "object",
+        "properties" : {
+          "key" : {
+            "type" : "string"
+          },
+          "response" : {
+            "type" : "string"
+          }
+        }
       },
       "trackResponse" : {
         "type" : "object",
@@ -1266,80 +1406,6 @@
           }
         },
         "description" : "Defines a track response"
-      },
-      "scheduleResponse_data_textLongform" : {
-        "type" : "object",
-        "properties" : {
-          "text" : {
-            "type" : "string",
-            "example" : "Line 1"
-          },
-          "underline" : {
-            "type" : "boolean",
-            "example" : false
-          },
-          "italic" : {
-            "type" : "boolean",
-            "example" : false
-          },
-          "bold" : {
-            "type" : "boolean",
-            "example" : false
-          }
-        }
-      },
-      "scheduleResponse_data" : {
-        "type" : "object",
-        "properties" : {
-          "title" : {
-            "type" : "string",
-            "example" : "Nachrichten"
-          },
-          "subtitle" : {
-            "type" : "string"
-          },
-          "airtimeStart" : {
-            "type" : "integer"
-          },
-          "airtimeEnd" : {
-            "type" : "integer"
-          },
-          "updatedAt" : {
-            "type" : "integer"
-          },
-          "thumbUrl" : {
-            "type" : "string"
-          },
-          "isThumbAvailable" : {
-            "type" : "boolean",
-            "example" : false
-          },
-          "textLongform" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/scheduleResponse_data_textLongform"
-            }
-          }
-        }
-      },
-      "scheduleResponse_links" : {
-        "type" : "object",
-        "properties" : {
-          "purge" : {
-            "type" : "string"
-          }
-        }
-      },
-      "schedulePurgeResponse_data" : {
-        "type" : "object",
-        "properties" : {
-          "key" : {
-            "type" : "string"
-          },
-          "response" : {
-            "type" : "string"
-          }
-        }
       },
       "trackResponse_data" : {
         "type" : "object",
@@ -1512,6 +1578,21 @@
           },
           "message" : {
             "type" : "string"
+          }
+        }
+      },
+      "scheduleResponse_data_anchorList" : {
+        "type" : "object",
+        "properties" : {
+          "name" : {
+            "type" : "string"
+          },
+          "imageUrl" : {
+            "type" : "string"
+          },
+          "webUrl" : {
+            "type" : "string",
+            "nullable" : true
           }
         }
       }
