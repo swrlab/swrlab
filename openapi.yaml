@@ -12,13 +12,99 @@ info:
     email: lab@swr.de
   license:
     name: © SWR audio lab
-  version: 2.6.2
+  version: 2.6.5
 servers:
 - url: https://api.lab.swr.de/radiohub
   description: Radiohub production
 - url: https://api.lab.swr.de/radiohub-dev
   description: Radiohub development
+- url: https://api.lab.swr.de/radiohub-stage
+  description: Radiohub staging
 paths:
+  /v2/content/collection/{ref}:
+    get:
+      tags:
+      - content
+      summary: Query an entire content collection
+      description: Receive all recent entries for a content collection by their reference.
+      parameters:
+      - name: ref
+        in: path
+        description: SWR CMS reference
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+        example: songtinder-sammler-100
+      responses:
+        "500":
+          description: Server error occured.
+        default:
+          description: If status code other than 200, an error message will be provided,
+            otherwise the cover will be returned as image.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/contentListResponse'
+      security:
+      - BasicAuth: []
+  /v2/content/id/{id}:
+    get:
+      tags:
+      - content
+      summary: Query a content object by id
+      description: Receive a content object by the content id (can be import-sensitive).
+      parameters:
+      - name: id
+        in: path
+        description: Radiohub import ID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+        example: "4539478696787968"
+      responses:
+        "500":
+          description: Server error occured.
+        default:
+          description: If status code other than 200, an error message will be provided,
+            otherwise the cover will be returned as image.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/contentResponse'
+      security:
+      - BasicAuth: []
+  /v2/content/ref/{ref}:
+    get:
+      tags:
+      - content
+      summary: Query a content object by SWR CMS Ref
+      description: Receive a content object by the SWR CMS Reference (Sophora-Ref)
+      parameters:
+      - name: ref
+        in: path
+        description: Radiohub import ID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+        example: 4539478696787968
+      responses:
+        "500":
+          description: Server error occured.
+        default:
+          description: If status code other than 200, an error message will be provided,
+            otherwise the cover will be returned as image.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/contentResponse'
+      security:
+      - BasicAuth: []
   /v2/cover/{mdid}/:
     get:
       tags:
@@ -124,6 +210,232 @@ paths:
           description: Server error occured.
       security:
       - BasicAuth: []
+  /images/v1/get/{key}/img:
+    get:
+      tags:
+      - images
+      summary: Load an image from image service
+      description: Load the original image or resized version. A list of all keys
+        can be seen in the SWR audio lab dashboard. Contact lab@swr.de for access.
+        Uncached images will be generated and served from storage. See response header
+        "swr-datasource" for details. Clients should also respect cache control if
+        possible.
+      parameters:
+      - name: key
+        in: path
+        description: Set key for the image that shall be displayed.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: DASDING-512
+      - name: width
+        in: query
+        description: 'Optional width in pixels that the image shall be resized to.
+          Minimum: 1, maximum 2560px'
+        required: false
+        style: form
+        explode: true
+        schema:
+          maximum: 2560
+          minimum: 2
+          type: number
+      - name: height
+        in: query
+        description: 'Optional height in pixels that the image shall be resized to.
+          Minimum: 1, maximum 2560px. If both width and height are set, then the image
+          will be cropped. Otherwise the respectively opposite dimension is set to
+          auto'
+        required: false
+        style: form
+        explode: true
+        schema:
+          maximum: 2560
+          minimum: 2
+          type: number
+      - name: fileType
+        in: query
+        description: Force the output to a specific file type. If unset, the output
+          will match the input file type.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          enum:
+          - jpg
+          - png
+          - webp
+      responses:
+        "400":
+          description: Invalid query input
+        "500":
+          description: Server error occured or key not found.
+        default:
+          description: Image
+          content:
+            image/jpeg:
+              schema:
+                type: string
+                format: binary
+            image/png:
+              schema:
+                type: string
+                format: binary
+            image/webp:
+              schema:
+                type: string
+                format: binary
+      servers:
+      - url: https://api.lab.swr.de/
+        description: This service is acessible through the primary path
+  /images/v1/get/{key}/json:
+    get:
+      tags:
+      - images
+      summary: Receive details about a cacheable image
+      description: Similar to the image service endpoint but here only a JSON object
+        of the database entry will be served. Should only be used for debugging solutions,
+        not to download an image. Accessibility of the sourceUrl is not guaranteed
+        and will be limited in future versions.
+      parameters:
+      - name: key
+        in: path
+        description: Set key for the image that shall be displayed. A list of all
+          keys can be seen in the SWR audio lab dashboard. Contact lab@swr.de for
+          access.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: DASDING-512
+      responses:
+        "401":
+          description: Unauthorized access to API.
+        "500":
+          description: Server error occured or key not found.
+        default:
+          description: JSON object
+          content:
+            image/json:
+              schema:
+                type: object
+      security:
+      - BasicAuth: []
+      servers:
+      - url: https://api.lab.swr.de/
+        description: This service is acessible through the primary path
+  /swr2/images/get/{key}/{format}/{overlay}/{width}/img.jpg:
+    get:
+      tags:
+      - images
+      summary: Load an image from swr2 image service
+      description: Load the original image or resized version. A list of all keys
+        can be seen in the SWR audio lab dashboard. Contact lab@swr.de for access.
+        Uncached images will be generated and served from storage. See response header
+        "swr-datasource" for details. Clients should also respect cache control if
+        possible.
+      parameters:
+      - name: key
+        in: path
+        description: Set key for the image that shall be displayed.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: logo
+      - name: format
+        in: path
+        description: Set the aspect ratio for the image. rund is a 1x1 image which
+          is title safe for round usage.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          enum:
+          - 16x9
+          - 4x3
+          - 1x1
+          - rund
+      - name: overlay
+        in: path
+        description: Toggle whether a swr2 logo overlay shall be included. This feature
+          is end of life and you should always request the 0 version.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          enum:
+          - "0"
+          - "1"
+      - name: width
+        in: path
+        description: Width in pixels that the image shall be resized to
+        required: true
+        style: simple
+        explode: false
+        schema:
+          maximum: 2560
+          minimum: 2
+          type: number
+          example: 256
+      responses:
+        "400":
+          description: Invalid query input
+        "500":
+          description: Server error occured or key not found.
+        default:
+          description: Image
+          content:
+            image/jpeg:
+              schema:
+                type: string
+                format: binary
+      servers:
+      - url: https://api.lab.swr.de/
+        description: This service is acessible through the primary path
+  /swr2/images/get/{key}/json:
+    get:
+      tags:
+      - images
+      summary: Receive details about a cacheable image
+      description: Similar to the swr2 image service endpoint but here only a JSON
+        object of the database entry will be served. Should only be used for debugging
+        solutions, not to download an image. Accessibility of the sourceUrl is not
+        guaranteed and will be limited in future versions.
+      parameters:
+      - name: key
+        in: path
+        description: Set key for the image that shall be displayed. A list of all
+          keys can be seen in the SWR audio lab dashboard. Contact lab@swr.de for
+          access.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: logo
+      responses:
+        "401":
+          description: Unauthorized access to API.
+        "500":
+          description: Server error occured or key not found.
+        default:
+          description: JSON object
+          content:
+            image/json:
+              schema:
+                type: object
+      security:
+      - BasicAuth: []
+      servers:
+      - url: https://api.lab.swr.de/
+        description: This service is acessible through the primary path
   /v2/schedule/live/{station}/:
     get:
       tags:
@@ -318,6 +630,7 @@ paths:
         For SWR classic an additional parameter `isLive` is provided in the JSON output (see example response below).
 
         Some requests require an authentication with special permissions (`swrRadiohubStreamStart`) - Especially responsive radio triggered by the y parameter, those responses also feature a different JSON structure.
+        Note Interactive radio sessions no longer use this call.
       parameters:
       - name: station
         in: path
@@ -442,25 +755,29 @@ paths:
       tags:
       - stream
       summary: Receive meta information about a current session
-      description: "All meta data that the system knows about a running audio session\
-        \ for the skippable radio platform. \n\n**API NOT COMPLETE AND STILL IN BETA**"
+      description: All live information and meta data details that the system knows
+        about a running audio session for the skippable radio platform.
       parameters:
-      - name: sessionId
+      - name: appId
         in: query
-        description: Provide a running `sessionId` that was previously returned by
-          starting a skippable radio stream.
+        description: Provide a running `appId` that was previously returned by starting
+          a skippable radio stream.
         required: true
         style: form
         explode: true
         schema:
           type: string
       responses:
+        "400":
+          description: Query not allowed or appId not provided.
+        "500":
+          description: Server error occured
         default:
           description: JSON object
           content:
             image/json:
               schema:
-                type: object
+                $ref: '#/components/schemas/streamMetaResponse'
   /v2/stream/shift/{action}/:
     get:
       tags:
@@ -483,10 +800,9 @@ paths:
           - offset
           - back
           - ahead
-      - name: sessionId
+      - name: appId
         in: query
-        description: Always provide the user's sessionId for all responsive radio
-          requests.
+        description: Always provide the user's appId for all responsive radio requests.
         required: true
         style: form
         explode: true
@@ -494,7 +810,7 @@ paths:
           type: string
       responses:
         "400":
-          description: Query not allowed.
+          description: Query not allowed or appId not provided.
         "500":
           description: Server error occured or key not found.
         default:
@@ -533,10 +849,9 @@ paths:
         explode: false
         schema:
           type: integer
-      - name: sessionId
+      - name: appId
         in: query
-        description: Always provide the user's sessionId for all responsive radio
-          requests.
+        description: Always provide the user's appId for all responsive radio requests.
         required: true
         style: form
         explode: true
@@ -544,7 +859,7 @@ paths:
           type: string
       responses:
         "400":
-          description: Query not allowed.
+          description: Query not allowed or appId not provided.
         "500":
           description: Server error occured or key not found.
         default:
@@ -561,10 +876,9 @@ paths:
       description: For a detailed workflow of responsive radio streams, see the STREAMING.md
         document in this repository.
       parameters:
-      - name: sessionId
+      - name: appId
         in: query
-        description: Always provide the user's sessionId for all responsive radio
-          requests.
+        description: Always provide the user's appId for all responsive radio requests.
         required: true
         style: form
         explode: true
@@ -572,7 +886,7 @@ paths:
           type: string
       responses:
         "400":
-          description: Query not allowed.
+          description: Query not allowed or appId not provided.
         "500":
           description: Server error occured or key not found.
         default:
@@ -608,10 +922,9 @@ paths:
         explode: false
         schema:
           type: integer
-      - name: sessionId
+      - name: appId
         in: query
-        description: Always provide the user's sessionId for all responsive radio
-          requests.
+        description: Always provide the user's appId for all responsive radio requests.
         required: true
         style: form
         explode: true
@@ -619,7 +932,7 @@ paths:
           type: string
       responses:
         "400":
-          description: Query not allowed.
+          description: Query not allowed or appId not provided
         "500":
           description: Server error occured or key not found.
         default:
@@ -802,6 +1115,39 @@ paths:
                 $ref: '#/components/schemas/trafficResponse'
       security:
       - BasicAuth: []
+  /v2/user/app/register/{station}:
+    get:
+      tags:
+      - user
+      summary: Register an user device for appId access
+      description: The `appId` is needed for all responsive radio actions. For a detailed
+        workflow of responsive radio streams, see the STREAMING.md document in this
+        repository.
+      parameters:
+      - name: station
+        in: path
+        description: The type of action for the livestream
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          enum:
+          - dasding
+          - swr3
+      responses:
+        "400":
+          description: Query not allowed
+        "500":
+          description: Server error occured
+        default:
+          description: JSON object
+          content:
+            image/json:
+              schema:
+                $ref: '#/components/schemas/userAppRegisterResponse'
+      security:
+      - BasicAuth: []
   /v2/weather/geo/{lat}/{lon}/:
     get:
       tags:
@@ -841,247 +1187,141 @@ paths:
                 type: object
       security:
       - BasicAuth: []
-  /images/v1/get/{key}/img:
-    get:
-      tags:
-      - swr-images
-      summary: Load an image from image service
-      description: Load the original image or resized version. A list of all keys
-        can be seen in the SWR audio lab dashboard. Contact lab@swr.de for access.
-        Uncached images will be generated and served from storage. See response header
-        "swr-datasource" for details. Clients should also respect cache control if
-        possible.
-      parameters:
-      - name: key
-        in: path
-        description: Set key for the image that shall be displayed.
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-          example: DASDING-512
-      - name: width
-        in: query
-        description: 'Optional width in pixels that the image shall be resized to.
-          Minimum: 1, maximum 2560px'
-        required: false
-        style: form
-        explode: true
-        schema:
-          maximum: 2560
-          minimum: 2
-          type: number
-      - name: height
-        in: query
-        description: 'Optional height in pixels that the image shall be resized to.
-          Minimum: 1, maximum 2560px. If both width and height are set, then the image
-          will be cropped. Otherwise the respectively opposite dimension is set to
-          auto'
-        required: false
-        style: form
-        explode: true
-        schema:
-          maximum: 2560
-          minimum: 2
-          type: number
-      - name: fileType
-        in: query
-        description: Force the output to a specific file type. If unset, the output
-          will match the input file type.
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: string
-          enum:
-          - jpg
-          - png
-          - webp
-      responses:
-        "400":
-          description: Invalid query input
-        "500":
-          description: Server error occured or key not found.
-        default:
-          description: Image
-          content:
-            image/jpeg:
-              schema:
-                type: string
-                format: binary
-            image/png:
-              schema:
-                type: string
-                format: binary
-            image/webp:
-              schema:
-                type: string
-                format: binary
-      servers:
-      - url: https://api.lab.swr.de/
-        description: This service is acessible through the primary path
-  /images/v1/get/{key}/json:
-    get:
-      tags:
-      - swr-images
-      summary: Receive details about a cacheable image
-      description: Similar to the image service endpoint but here only a JSON object
-        of the database entry will be served. Should only be used for debugging solutions,
-        not to download an image. Accessibility of the sourceUrl is not guaranteed
-        and will be limited in future versions.
-      parameters:
-      - name: key
-        in: path
-        description: Set key for the image that shall be displayed. A list of all
-          keys can be seen in the SWR audio lab dashboard. Contact lab@swr.de for
-          access.
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-          example: DASDING-512
-      responses:
-        "401":
-          description: Unauthorized access to API.
-        "500":
-          description: Server error occured or key not found.
-        default:
-          description: JSON object
-          content:
-            image/json:
-              schema:
-                type: object
-      security:
-      - BasicAuth: []
-      servers:
-      - url: https://api.lab.swr.de/
-        description: This service is acessible through the primary path
-  /swr2/images/get/{key}/{format}/{overlay}/{width}/img.jpg:
-    get:
-      tags:
-      - swr2-images
-      summary: Load an image from swr2 image service
-      description: Load the original image or resized version. A list of all keys
-        can be seen in the SWR audio lab dashboard. Contact lab@swr.de for access.
-        Uncached images will be generated and served from storage. See response header
-        "swr-datasource" for details. Clients should also respect cache control if
-        possible.
-      parameters:
-      - name: key
-        in: path
-        description: Set key for the image that shall be displayed.
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-          example: logo
-      - name: format
-        in: path
-        description: Set the aspect ratio for the image. rund is a 1x1 image which
-          is title safe for round usage.
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-          enum:
-          - 16x9
-          - 4x3
-          - 1x1
-          - rund
-      - name: overlay
-        in: path
-        description: Toggle whether a swr2 logo overlay shall be included. This feature
-          is end of life and you should always request the 0 version.
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-          enum:
-          - "0"
-          - "1"
-      - name: width
-        in: path
-        description: Width in pixels that the image shall be resized to
-        required: true
-        style: simple
-        explode: false
-        schema:
-          maximum: 2560
-          minimum: 2
-          type: number
-          example: 256
-      responses:
-        "400":
-          description: Invalid query input
-        "500":
-          description: Server error occured or key not found.
-        default:
-          description: Image
-          content:
-            image/jpeg:
-              schema:
-                type: string
-                format: binary
-      servers:
-      - url: https://api.lab.swr.de/
-        description: This service is acessible through the primary path
-  /swr2/images/get/{key}/json:
-    get:
-      tags:
-      - swr2-images
-      summary: Receive details about a cacheable image
-      description: Similar to the swr2 image service endpoint but here only a JSON
-        object of the database entry will be served. Should only be used for debugging
-        solutions, not to download an image. Accessibility of the sourceUrl is not
-        guaranteed and will be limited in future versions.
-      parameters:
-      - name: key
-        in: path
-        description: Set key for the image that shall be displayed. A list of all
-          keys can be seen in the SWR audio lab dashboard. Contact lab@swr.de for
-          access.
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-          example: logo
-      responses:
-        "401":
-          description: Unauthorized access to API.
-        "500":
-          description: Server error occured or key not found.
-        default:
-          description: JSON object
-          content:
-            image/json:
-              schema:
-                type: object
-      security:
-      - BasicAuth: []
-      servers:
-      - url: https://api.lab.swr.de/
-        description: This service is acessible through the primary path
 components:
   schemas:
-    geoPoint:
-      maxItems: 3
-      minItems: 2
-      type: array
-      description: Defines a schedule response
-      example:
-      - 52.3782
-      - 4.8999
-      externalDocs:
-        url: http://geojson.org/geojson-spec.html#id2
-      items:
-        type: number
-        format: double
+    contentObject:
+      type: object
+      properties:
+        title:
+          type: string
+          example: 'Bosse: Augen zu, Fynn Kliemann, Modern Talking und Taki Taki –
+            Song-Tindern'
+        subtitle:
+          type: string
+          example: Song-Tindern
+        teaser:
+          type: string
+          example: Bosse erzählt uns beim Song-Tindern, warum ihn Musik von DJ Snake
+            psychisch fertig macht und warum er einen Youtube-Kanal über „Backi Backi“
+            und „Kochi Kochi“ starten würden.
+        id:
+          type: integer
+          description: Unique identifier for this content element and import, can
+            be used for further queries.
+          example: 4539478696787968
+        metaDataId:
+          type: string
+          example: aexpresso://ORDERINFOID:1083229
+        importId:
+          type: string
+          example: rhsi-20191209-124738
+        sophoraCollectionRef:
+          type: string
+          example: songtinder-sammler-100
+        sophoraRef:
+          type: string
+          example: av-o1083229-100
+        station:
+          type: string
+          example: dasding
+          enum:
+          - swr1bw
+          - swr1rp
+          - swr2
+          - swr3
+          - swr4bw
+          - swr4rp
+          - dasding
+        isDownloadable:
+          type: boolean
+          example: true
+        isShareable:
+          type: boolean
+          example: true
+        isThumbAvailable:
+          type: boolean
+          example: true
+        availabilityStart:
+          type: integer
+          example: 1575892066227
+        availabilityEnd:
+          type: integer
+          example: 1733744866227
+        updatedAt:
+          type: integer
+          example: 1575892066226
+        durationInSeconds:
+          type: integer
+          example: 826
+        durationReadable:
+          type: string
+          example: 14 Min
+        newsDocument:
+          type: string
+        sourceDownloadUrl:
+          type: string
+          example: https://avdlswr-a.akamaihd.net/dasding/...
+        sourcePlaybackUrl:
+          type: string
+          example: https://pdodswr-a.akamaihd.net/dasding/...
+        webUrl:
+          type: string
+          example: https://www.dasding.de/export/podcast/songtindern/Bosse-beim-Song-Tindern-Augen-zu-Fynn-Kliemann-Modern-Talking-und-Taki-Taki-an,av-o1083229-100.html
+        thumbAlt:
+          type: string
+          example: Bosse
+        thumbCredit:
+          type: string
+          example: DASDING
+        thumbHqUrl:
+          type: string
+          example: https://www.dasding.de/export/podcast/songtindern/Bosse,1546253280000,av-o1083229-img-100~_logo-dasding@2dlogo@2d100_v-ARD@2d1280_-3077ab0901f09078df8ce97dddbade7baa41bc94.jpg
+        thumbLqUrl:
+          type: string
+          example: https://www.dasding.de/export/podcast/songtindern/Bosse,1546253280000,av-o1083229-img-100~_logo-dasding@2dlogo@2d100_v-ARD@2d512_-17b0334a3cf8717b5683f745c96095b731983489.jpg
+        thumbIconHqUrl:
+          type: string
+          example: https://www.dasding.de/export/podcast/songtindern/Bosse,1546253280000,av-o1083229-img-100~_logo-dasding@2dlogo@2d100_v-1x1@2dM_-1360cd6d7ffe1df80aaae64d28c89d6caab50ea9.jpg
+        thumbIconLqUrl:
+          type: string
+          example: https://www.dasding.de/export/podcast/songtindern/Bosse,1546253280000,av-o1083229-img-100~_logo-dasding@2dlogo@2d100_v-1x1@2dS_-29eb950641da74bcb57ca22770d7daf40017a949.jpg
+    contentListResponse:
+      type: object
+      properties:
+        status:
+          type: integer
+          format: int64
+          example: 200
+        message:
+          type: string
+          description: Message will be provided if status is not 200, otherwise null
+          nullable: true
+        data:
+          minItems: 0
+          type: array
+          items:
+            $ref: '#/components/schemas/contentObject'
+        info:
+          $ref: '#/components/schemas/infoResponse'
+        links:
+          type: object
+    contentResponse:
+      type: object
+      properties:
+        status:
+          type: integer
+          format: int64
+          example: 200
+        message:
+          type: string
+          description: Message will be provided if status is not 200, otherwise null
+          nullable: true
+        data:
+          $ref: '#/components/schemas/contentObject'
+        info:
+          $ref: '#/components/schemas/infoResponse'
+        links:
+          type: object
     infoResponse:
       type: object
       properties:
@@ -1194,6 +1434,23 @@ components:
           type: string
         response:
           type: string
+    streamMetaResponse:
+      type: object
+      properties:
+        status:
+          type: integer
+          format: int64
+          example: 200
+        message:
+          type: string
+          description: Message will be provided if status is not 200, otherwise null
+        data:
+          $ref: '#/components/schemas/streamMetaResponse_data'
+        info:
+          $ref: '#/components/schemas/infoResponse'
+        links:
+          type: object
+      description: Defines a radio meta response
     trackResponse:
       type: object
       properties:
@@ -1272,6 +1529,19 @@ components:
       properties:
         cover:
           type: string
+    geoPoint:
+      maxItems: 3
+      minItems: 2
+      type: array
+      description: Defines a schedule response
+      example:
+      - 52.3782
+      - 4.8999
+      externalDocs:
+        url: http://geojson.org/geojson-spec.html#id2
+      items:
+        type: number
+        format: double
     trafficResponse_locationBox:
       type: object
       properties:
@@ -1346,6 +1616,23 @@ components:
           description: Only supplied when querying by geo coordinates.
           format: double
           nullable: true
+    userAppRegisterResponse:
+      type: object
+      properties:
+        status:
+          type: integer
+          format: int64
+          example: 200
+        message:
+          type: string
+          description: Message will be provided if status is not 200, otherwise null
+        data:
+          $ref: '#/components/schemas/streamMetaResponse_data'
+        info:
+          $ref: '#/components/schemas/infoResponse'
+        links:
+          type: object
+      description: Defines a track response
     body:
       required:
       - message
@@ -1381,6 +1668,16 @@ components:
         webUrl:
           type: string
           nullable: true
+    streamMetaResponse_data:
+      type: object
+      properties:
+        id:
+          type: integer
+        station:
+          type: string
+          enum:
+          - dasding
+          - swr3
   securitySchemes:
     BasicAuth:
       type: http

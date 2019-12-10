@@ -7,6 +7,13 @@ Go to [api.lab.swr.de/radiohub-docs/](https://api.lab.swr.de/radiohub-docs/#/) f
 
 This changelog serves as a place for all changes around the public SWR Radiohub API service.
 
+- 2019-12-10 - v2.6.5
+  - Adding `appId` and /content details to docs
+  - app register endpoint now serves the id in the field `appId`, no longer in `id`
+
+- 2019-12-05 - v2.6.3
+  - content API now requires authentification 
+
 - 2019-11-25 - v2.6.2
   - JSON responses in Radiohub production will no longer include tabs for easier visual output
   - The `info` object for all responses now features fewer details
