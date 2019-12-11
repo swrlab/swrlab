@@ -2,7 +2,7 @@
   "openapi" : "3.0.0",
   "info" : {
     "title" : "SWR audio lab - Radiohub",
-    "description" : "This documentation is also available as [openapi.json](https://api.lab.swr.de/radiohub-docs/openapi.json) or [openapi.yaml](https://api.lab.swr.de/radiohub-docs/openapi.yaml).  \nAuthorization keys can be requested via [lab@swr.de](mailto:lab@swr.de) and shall be sent as base64 encoded basic auth information in the header.\nPlease report all problems or bugs to [lab@swr.de](mailto:lab@swr.de) and possibly include the `requestTrace` information from the response header or info object.\n\n\n The dev environment uses its",
+    "description" : "This documentation is also available as [openapi.json](https://api.lab.swr.de/radiohub-docs/openapi.json) or [openapi.yaml](https://api.lab.swr.de/radiohub-docs/openapi.yaml).\n\n  \nAuthorization keys can be requested via [lab@swr.de](mailto:lab@swr.de) and shall be sent as base64 encoded basic auth information in the header. Please report all problems or bugs to [lab@swr.de](mailto:lab@swr.de) or via the [Github repo](https://github.com/swrlab/swr-radiohub-docs/issues) and possibly include the `trace` information from the response header or info object.\n\n The dev environment uses data from the dev database; staging and production environments both access production data. The `appId` therefore follows the same structure. Caching is separate for each stage.",
     "contact" : {
       "name" : "SWR audio lab",
       "email" : "lab@swr.de"
@@ -10,7 +10,7 @@
     "license" : {
       "name" : "© SWR audio lab"
     },
-    "version" : "2.6.6"
+    "version" : "2.6.7"
   },
   "servers" : [ {
     "url" : "https://api.lab.swr.de/radiohub",
@@ -620,7 +620,7 @@
         }, {
           "name" : "time",
           "in" : "path",
-          "description" : "Timestamp",
+          "description" : "Timestamp in preferred format",
           "required" : true,
           "style" : "simple",
           "explode" : false,
@@ -731,7 +731,7 @@
         }, {
           "name" : "q",
           "in" : "query",
-          "description" : "_(desiredQuality)_ \n\nSet the streaming quality. Note that adaptive is only available for f=video while high and low are for mp3/aac. \n\nDefaults to low.",
+          "description" : "_(desiredQuality)_ \n\nSet the streaming quality. Note that adaptive is only available for f=video while high and low are for mp3/aac.\n\nDefaults to low.",
           "required" : false,
           "style" : "form",
           "explode" : true,
@@ -879,7 +879,7 @@
     "/v2/stream/shift/{action}/" : {
       "get" : {
         "tags" : [ "stream" ],
-        "summary" : "Control the timeshift of a user's stream",
+        "summary" : "Control the timeshift position of a user's stream",
         "description" : "For a detailed workflow of responsive radio streams, see the STREAMING.md document in this repository.",
         "parameters" : [ {
           "name" : "action",
@@ -915,7 +915,7 @@
             "content" : {
               "image/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "$ref" : "#/components/schemas/streamMetaResponse"
                 }
               }
             }
@@ -972,7 +972,7 @@
             "content" : {
               "image/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "$ref" : "#/components/schemas/streamMetaResponse"
                 }
               }
             }
@@ -1008,7 +1008,7 @@
             "content" : {
               "image/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "$ref" : "#/components/schemas/streamMetaResponse"
                 }
               }
             }
@@ -1020,7 +1020,7 @@
       "get" : {
         "tags" : [ "stream" ],
         "summary" : "Control the content of a user's stream",
-        "description" : "For a detailed workflow of responsive radio streams, see the STREAMING.md document in this repository.",
+        "description" : "For a detailed workflow of responsive radio streams, see the STREAMING.md document in this repository. When switching to a channel, provide the channel id, for podcast series, provide collection reference, for audio content, use the sophora document reference.",
         "parameters" : [ {
           "name" : "action",
           "in" : "path",
@@ -1030,7 +1030,7 @@
           "explode" : false,
           "schema" : {
             "type" : "string",
-            "enum" : [ "channel", "podcast" ]
+            "enum" : [ "channel", "podcast", "content" ]
           }
         }, {
           "name" : "id",
@@ -1065,7 +1065,7 @@
             "content" : {
               "image/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "$ref" : "#/components/schemas/streamMetaResponse"
                 }
               }
             }
