@@ -47,7 +47,7 @@ const customCss = '@import url(\'https://fonts.googleapis.com/css?family=Barlow+
 const options = {
 	explorer:		true,
 	customCss,
-	customCssUrl:		'https://storage.googleapis.com/swr-lab-static/swr-lab-static/lab-dashboard-style.css?006',
+	customCssUrl:		'https://storage.googleapis.com/swr-lab-static/swr-lab-static/lab-dashboard-style-v2.css?006',
 	customeSiteTitle:	'SWR Radiohub API Documentation',
 	customfavIcon:		'https://storage.googleapis.com/swr-lab-static/swr-lab-static/img/SWR-Icons-SWR-Lab-Rocket-512.png'
 }
