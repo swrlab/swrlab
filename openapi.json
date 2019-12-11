@@ -2,7 +2,7 @@
   "openapi" : "3.0.0",
   "info" : {
     "title" : "SWR audio lab - Radiohub",
-    "description" : "This documentation is also available as [openapi.json](https://api.lab.swr.de/radiohub-docs/openapi.json) or [openapi.yaml](https://api.lab.swr.de/radiohub-docs/openapi.yaml).  \nAuthorization keys can be requested via [lab@swr.de](mailto:lab@swr.de) and shall be sent as base64 encoded basic auth information in the header.\nPlease report all problems or bugs to [lab@swr.de](mailto:lab@swr.de) and possibly include the `requestTrace` information from the response header or info object.\n",
+    "description" : "This documentation is also available as [openapi.json](https://api.lab.swr.de/radiohub-docs/openapi.json) or [openapi.yaml](https://api.lab.swr.de/radiohub-docs/openapi.yaml).  \nAuthorization keys can be requested via [lab@swr.de](mailto:lab@swr.de) and shall be sent as base64 encoded basic auth information in the header.\nPlease report all problems or bugs to [lab@swr.de](mailto:lab@swr.de) and possibly include the `requestTrace` information from the response header or info object.\n\n\n The dev environment uses its",
     "contact" : {
       "name" : "SWR audio lab",
       "email" : "lab@swr.de"
@@ -10,7 +10,7 @@
     "license" : {
       "name" : "© SWR audio lab"
     },
-    "version" : "2.6.5"
+    "version" : "2.6.6"
   },
   "servers" : [ {
     "url" : "https://api.lab.swr.de/radiohub",
@@ -222,7 +222,7 @@
           "content" : {
             "application/x-www-form-urlencoded" : {
               "schema" : {
-                "$ref" : "#/components/schemas/body"
+                "$ref" : "#/components/schemas/feedbackBody"
               }
             }
           },
@@ -694,7 +694,7 @@
     "/v2/stream/start/{station}/" : {
       "get" : {
         "tags" : [ "stream" ],
-        "summary" : "Start a radio stream based on station and additional parameters",
+        "summary" : "Start a linear non-interactive radio stream based on station and parameters",
         "description" : "Linking service to provide the latest streamUrl with certain given parameters.\n\nFor SWR classic an additional parameter `isLive` is provided in the JSON output (see example response below).\n\nSome requests require an authentication with special permissions (`swrRadiohubStreamStart`) - Especially responsive radio triggered by the y parameter, those responses also feature a different JSON structure.\nNote Interactive radio sessions no longer use this call.",
         "parameters" : [ {
           "name" : "station",
@@ -838,8 +838,18 @@
         "parameters" : [ {
           "name" : "appId",
           "in" : "query",
-          "description" : "Provide a running `appId` that was previously returned by starting a skippable radio stream.",
+          "description" : "Provide a valid `appId`.",
           "required" : true,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "syncUrl",
+          "in" : "query",
+          "description" : "Provide the ybrid metadata Url to improve sync and buffer handling. Only provide the Url once and as quickly as possible after receiving it from ybrid.",
+          "required" : false,
           "style" : "form",
           "explode" : true,
           "schema" : {
@@ -1508,6 +1518,35 @@
           }
         }
       },
+      "feedbackBody" : {
+        "required" : [ "message", "name", "source", "userId" ],
+        "type" : "object",
+        "properties" : {
+          "file" : {
+            "type" : "string",
+            "format" : "binary"
+          },
+          "userId" : {
+            "type" : "string"
+          },
+          "source" : {
+            "type" : "string",
+            "enum" : [ "app" ]
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "email" : {
+            "type" : "string"
+          },
+          "city" : {
+            "type" : "string"
+          },
+          "message" : {
+            "type" : "string"
+          }
+        }
+      },
       "infoResponse" : {
         "type" : "object",
         "properties" : {
@@ -1568,6 +1607,21 @@
           "bold" : {
             "type" : "boolean",
             "example" : false
+          }
+        }
+      },
+      "scheduleResponse_data_anchorList" : {
+        "type" : "object",
+        "properties" : {
+          "name" : {
+            "type" : "string"
+          },
+          "imageUrl" : {
+            "type" : "string"
+          },
+          "webUrl" : {
+            "type" : "string",
+            "nullable" : true
           }
         }
       },
@@ -1692,6 +1746,53 @@
         },
         "description" : "Defines a radio meta response"
       },
+      "trackObject" : {
+        "type" : "object",
+        "properties" : {
+          "displayTitle" : {
+            "type" : "string",
+            "example" : "Post Malone"
+          },
+          "displayArtist" : {
+            "type" : "string",
+            "example" : "Sam Feldt feat. RANI"
+          },
+          "displayCover" : {
+            "type" : "string",
+            "example" : "https://api.lab.swr.de/radiohub/v2/cover/M0571440.001/img.jpg"
+          },
+          "type" : {
+            "type" : "string",
+            "example" : "MUSIC",
+            "enum" : [ "MUSIC", "ADVERTISEMENT", "JINGLE", "NEWS", "TRAFFIC", "VOICE", "WEATHER", "unrecognized" ]
+          },
+          "triggeredAtMs" : {
+            "type" : "integer",
+            "description" : "Item recorded in database (UNIX-ms)",
+            "example" : 1576081213585
+          },
+          "playedAtMs" : {
+            "type" : "integer",
+            "description" : "Item playback time (UNIX-ms)",
+            "example" : 1576081210000
+          },
+          "refPlaylistId" : {
+            "type" : "integer",
+            "description" : "Unique ID within a station to reference a played track",
+            "example" : 11112403
+          },
+          "refMdId" : {
+            "type" : "string",
+            "description" : "SWR metadata ID to reference a track",
+            "example" : "M0571440.001"
+          },
+          "durationPlan" : {
+            "type" : "integer",
+            "description" : "For how long the track is schedule to be played back on air",
+            "example" : 173
+          }
+        }
+      },
       "trackResponse" : {
         "type" : "object",
         "properties" : {
@@ -1705,7 +1806,7 @@
             "description" : "Message will be provided if status is not 200, otherwise null"
           },
           "data" : {
-            "$ref" : "#/components/schemas/trackResponse_data"
+            "$ref" : "#/components/schemas/trackObject"
           },
           "info" : {
             "$ref" : "#/components/schemas/infoResponse"
@@ -1715,6 +1816,14 @@
           }
         },
         "description" : "Defines a track response"
+      },
+      "trackResponse_links" : {
+        "type" : "object",
+        "properties" : {
+          "cover" : {
+            "type" : "string"
+          }
+        }
       },
       "trafficResponse" : {
         "type" : "object",
@@ -1743,69 +1852,7 @@
         },
         "description" : "Defines a track response"
       },
-      "trackResponse_data" : {
-        "type" : "object",
-        "properties" : {
-          "type" : {
-            "type" : "string",
-            "example" : "MUSIC"
-          },
-          "station" : {
-            "type" : "string"
-          },
-          "triggeredAtMs" : {
-            "type" : "integer"
-          },
-          "triggerState" : {
-            "type" : "string",
-            "description" : "Can be next (upcoming) or now (current) track"
-          },
-          "triggerReprocessed" : {
-            "type" : "boolean",
-            "example" : false
-          },
-          "triggerSource" : {
-            "type" : "string"
-          },
-          "refPlaylistId" : {
-            "type" : "integer"
-          },
-          "refItemId" : {
-            "type" : "string"
-          },
-          "refMdId" : {
-            "type" : "string"
-          },
-          "displayArtist" : {
-            "type" : "string"
-          },
-          "displayTitle" : {
-            "type" : "string"
-          },
-          "displayPublicly" : {
-            "type" : "boolean"
-          },
-          "displayCover" : {
-            "type" : "string"
-          },
-          "durationPlan" : {
-            "type" : "integer",
-            "description" : "Can be null if no information are available"
-          },
-          "offline" : {
-            "type" : "boolean"
-          }
-        }
-      },
-      "trackResponse_links" : {
-        "type" : "object",
-        "properties" : {
-          "cover" : {
-            "type" : "string"
-          }
-        }
-      },
-      "geoPoint" : {
+      "trafficResponse_geoPoint" : {
         "maxItems" : 3,
         "minItems" : 2,
         "type" : "array",
@@ -1823,10 +1870,10 @@
         "type" : "object",
         "properties" : {
           "a" : {
-            "$ref" : "#/components/schemas/geoPoint"
+            "$ref" : "#/components/schemas/trafficResponse_geoPoint"
           },
           "b" : {
-            "$ref" : "#/components/schemas/geoPoint"
+            "$ref" : "#/components/schemas/trafficResponse_geoPoint"
           }
         },
         "description" : "Bounding box of the entire incident."
@@ -1891,7 +1938,7 @@
             "description" : "Geo information for point or line.",
             "nullable" : true,
             "items" : {
-              "$ref" : "#/components/schemas/geoPoint"
+              "$ref" : "#/components/schemas/trafficResponse_geoPoint"
             }
           },
           "distance" : {
@@ -1915,7 +1962,7 @@
             "description" : "Message will be provided if status is not 200, otherwise null"
           },
           "data" : {
-            "$ref" : "#/components/schemas/streamMetaResponse_data"
+            "$ref" : "#/components/schemas/userAppRegisterResponse_data"
           },
           "info" : {
             "$ref" : "#/components/schemas/infoResponse"
@@ -1926,51 +1973,142 @@
         },
         "description" : "Defines a track response"
       },
-      "body" : {
-        "required" : [ "message", "name", "source", "userId" ],
+      "streamMetaResponse_data_session" : {
         "type" : "object",
         "properties" : {
-          "file" : {
-            "type" : "string",
-            "format" : "binary"
-          },
-          "userId" : {
+          "streamUrl" : {
             "type" : "string"
           },
-          "source" : {
-            "type" : "string",
-            "enum" : [ "app" ]
-          },
-          "name" : {
-            "type" : "string"
-          },
-          "email" : {
-            "type" : "string"
-          },
-          "city" : {
-            "type" : "string"
-          },
-          "message" : {
-            "type" : "string"
+          "isNew" : {
+            "type" : "boolean",
+            "description" : "Whether the streamUrl has changed since the last meta call. In that case the new Url shall be reloaded in the audio player.",
+            "example" : false
           }
         }
       },
-      "scheduleResponse_data_anchorList" : {
+      "streamMetaResponse_data_meta_channelOptions_swr3live" : {
         "type" : "object",
         "properties" : {
-          "name" : {
-            "type" : "string"
-          },
-          "imageUrl" : {
-            "type" : "string"
-          },
-          "webUrl" : {
+          "title" : {
             "type" : "string",
-            "nullable" : true
+            "example" : "SWR3 Livestream"
+          },
+          "id" : {
+            "type" : "string",
+            "example" : "swr3-live"
+          },
+          "icon" : {
+            "type" : "string",
+            "example" : "https://storage.googleapis.com/swr-lab-static/swr-lab-static/temp/SWR-Channel-SWR3-Live-round.png"
+          }
+        }
+      },
+      "streamMetaResponse_data_meta_channelOptions" : {
+        "type" : "object",
+        "properties" : {
+          "swr3-live" : {
+            "$ref" : "#/components/schemas/streamMetaResponse_data_meta_channelOptions_swr3live"
+          }
+        },
+        "description" : "One or more channels than can be played"
+      },
+      "streamMetaResponse_data_meta_scheduleNow" : {
+        "type" : "object",
+        "properties" : {
+          "title" : {
+            "type" : "string",
+            "example" : "Club"
+          },
+          "subtitle" : {
+            "type" : "string"
+          },
+          "airtimeStart" : {
+            "type" : "integer",
+            "example" : 1576083600
+          },
+          "airtimeEnd" : {
+            "type" : "integer",
+            "example" : 1576098000
+          },
+          "updatedAt" : {
+            "type" : "integer",
+            "example" : 1576038186
+          },
+          "thumbUrl" : {
+            "type" : "string",
+            "nullable" : true,
+            "example" : "true"
+          },
+          "isThumbAvailable" : {
+            "type" : "boolean",
+            "example" : false
+          },
+          "anchorImageUrl" : {
+            "type" : "string"
+          },
+          "anchorList" : {
+            "minItems" : 0,
+            "type" : "array",
+            "nullable" : true,
+            "items" : {
+              "$ref" : "#/components/schemas/scheduleResponse_data_anchorList"
+            }
+          },
+          "ref" : {
+            "type" : "integer"
+          }
+        },
+        "description" : "Schedule item which was on air at the user's playback position"
+      },
+      "streamMetaResponse_data_meta" : {
+        "type" : "object",
+        "properties" : {
+          "playerActions" : {
+            "minItems" : 0,
+            "type" : "array",
+            "example" : [ "togglePlay", "shiftOffsetBack", "shiftOffsetAhead", "shiftBack", "shiftAhead", "shiftLive" ],
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "channelActive" : {
+            "type" : "string",
+            "example" : "swr3-live"
+          },
+          "channelOptions" : {
+            "$ref" : "#/components/schemas/streamMetaResponse_data_meta_channelOptions"
+          },
+          "shiftOffset" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "trackNow" : {
+            "$ref" : "#/components/schemas/trackObject"
+          },
+          "trackList" : {
+            "type" : "array",
+            "description" : "Array of tracks that have been played over the past 4 hours. The most recent one is the first element, after that it goes back in time.",
+            "items" : {
+              "$ref" : "#/components/schemas/trackObject"
+            }
+          },
+          "scheduleNow" : {
+            "$ref" : "#/components/schemas/streamMetaResponse_data_meta_scheduleNow"
           }
         }
       },
       "streamMetaResponse_data" : {
+        "type" : "object",
+        "properties" : {
+          "session" : {
+            "$ref" : "#/components/schemas/streamMetaResponse_data_session"
+          },
+          "meta" : {
+            "$ref" : "#/components/schemas/streamMetaResponse_data_meta"
+          }
+        }
+      },
+      "userAppRegisterResponse_data" : {
         "type" : "object",
         "properties" : {
           "id" : {
