@@ -10,7 +10,7 @@
     "license" : {
       "name" : "© SWR audio lab"
     },
-    "version" : "2.6.7"
+    "version" : "2.7.1"
   },
   "servers" : [ {
     "url" : "https://api.lab.swr.de/radiohub",
@@ -980,6 +980,64 @@
         }
       }
     },
+    "/v2/stream/shift/{action}/{type}" : {
+      "get" : {
+        "tags" : [ "stream" ],
+        "summary" : "Jump to the timeshift position of a specific track type",
+        "description" : "For a detailed workflow of responsive radio streams, see the STREAMING.md document in this repository.",
+        "parameters" : [ {
+          "name" : "action",
+          "in" : "path",
+          "description" : "The type of action for the livestream",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "enum" : [ "back", "ahead" ]
+          }
+        }, {
+          "name" : "type",
+          "in" : "path",
+          "description" : "The track type",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "enum" : [ "music", "advertisement", "jingle", "news", "traffic", "voice", "weather", "unrecognized" ]
+          }
+        }, {
+          "name" : "appId",
+          "in" : "query",
+          "description" : "Always provide the user's appId for all responsive radio requests.",
+          "required" : true,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "400" : {
+            "description" : "Query not allowed or appId not provided."
+          },
+          "500" : {
+            "description" : "Server error occured or key not found."
+          },
+          "default" : {
+            "description" : "JSON object",
+            "content" : {
+              "image/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/streamMetaResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/v2/stream/switch/skip" : {
       "get" : {
         "tags" : [ "stream" ],
@@ -1298,6 +1356,79 @@
         } ]
       }
     },
+    "/v2/geo/search/" : {
+      "get" : {
+        "tags" : [ "weather" ],
+        "summary" : "Turn a location search into lat/lon",
+        "description" : "Allow users to search for a location to receive lat/lon coordinates for weather queries. Devices are encouraged to save the lat/lon response to avoid having to query this API every time.",
+        "parameters" : [ {
+          "name" : "query",
+          "in" : "query",
+          "description" : "Location query",
+          "required" : true,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string",
+            "example" : "Freiburg"
+          }
+        } ],
+        "responses" : {
+          "401" : {
+            "description" : "Unauthorized access to API."
+          },
+          "500" : {
+            "description" : "Server error occured."
+          },
+          "default" : {
+            "description" : "If status code other than 200, an error message will be provided, otherwise message is null.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/geoSearchResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "weather" ],
+        "summary" : "Turn a location search into lat/lon",
+        "description" : "Allow users to search for a location to receive lat/lon coordinates for weather queries. Devices are encouraged to save the lat/lon response to avoid having to query this API every time.",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/body"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "401" : {
+            "description" : "Unauthorized access to API."
+          },
+          "500" : {
+            "description" : "Server error occured."
+          },
+          "default" : {
+            "description" : "If status code other than 200, an error message will be provided, otherwise message is null.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/geoSearchResponse"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "BasicAuth" : [ ]
+        } ]
+      }
+    },
     "/v2/weather/geo/{lat}/{lon}/" : {
       "get" : {
         "tags" : [ "weather" ],
@@ -1547,6 +1678,35 @@
           }
         }
       },
+      "geoSearchResponse" : {
+        "type" : "object",
+        "properties" : {
+          "status" : {
+            "type" : "integer",
+            "format" : "int64",
+            "example" : 200
+          },
+          "message" : {
+            "type" : "string",
+            "description" : "Message will be provided if status is not 200, otherwise null"
+          },
+          "data" : {
+            "maxItems" : 20,
+            "minItems" : 0,
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/geoSearchResponse_data"
+            }
+          },
+          "info" : {
+            "$ref" : "#/components/schemas/infoResponse"
+          },
+          "links" : {
+            "$ref" : "#/components/schemas/scheduleResponse_links"
+          }
+        },
+        "description" : "Defines a schedule response"
+      },
       "infoResponse" : {
         "type" : "object",
         "properties" : {
@@ -1763,8 +1923,8 @@
           },
           "type" : {
             "type" : "string",
-            "example" : "MUSIC",
-            "enum" : [ "MUSIC", "ADVERTISEMENT", "JINGLE", "NEWS", "TRAFFIC", "VOICE", "WEATHER", "unrecognized" ]
+            "example" : "music",
+            "enum" : [ "music", "advertisement", "jingle", "news", "traffic", "voice", "weather", "unrecognized" ]
           },
           "triggeredAtMs" : {
             "type" : "integer",
@@ -2117,6 +2277,32 @@
           "station" : {
             "type" : "string",
             "enum" : [ "dasding", "swr3" ]
+          }
+        }
+      },
+      "body" : {
+        "type" : "object",
+        "properties" : {
+          "query" : {
+            "type" : "string",
+            "example" : "Freiburg"
+          }
+        }
+      },
+      "geoSearchResponse_data" : {
+        "type" : "object",
+        "properties" : {
+          "name" : {
+            "type" : "string",
+            "example" : "Freiburg"
+          },
+          "lat" : {
+            "type" : "number",
+            "format" : "double"
+          },
+          "lon" : {
+            "type" : "number",
+            "format" : "double"
           }
         }
       }

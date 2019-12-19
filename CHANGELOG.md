@@ -7,6 +7,12 @@ Go to [api.lab.swr.de/radiohub-docs/](https://api.lab.swr.de/radiohub-docs/#/) f
 
 This changelog serves as a place for all changes around the public SWR Radiohub API service.
 
+- 2019-12-19 - v2.7.1
+  - adding shift/{back/ahead}/{type}
+
+- 2019-12-18 - v2.6.6
+  - adding new geo endpoint (dummy)
+
 - 2019-12-10 - v2.6.5
   - Adding `appId` and /content details to docs
   - app register endpoint now serves the id in the field `appId`, no longer in `id`
