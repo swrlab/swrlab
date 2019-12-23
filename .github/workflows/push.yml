@@ -13,11 +13,15 @@ jobs:
     - name: Checkout repo 👀
       uses: actions/checkout@v1
 
-    - name: Loading Login 🤓
-      run: echo '${{ secrets.GCP_DEPLOYMENT_KEY }}' > temp.json
-
+    - name: Setup Google Cloud Auth 🔑
+      uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+      with:
+        version: '270.0.0'
+        service_account_email: ${{ secrets.GCP_IAM_LAB_EMAIL }}
+        service_account_key: ${{ secrets.GCP_IAM_LAB_KEY }}
+        
     - name: Login to Registry 🔑
-      run: cat temp.json | docker login -u _json_key --password-stdin https://eu.gcr.io
+      run: "gcloud auth configure-docker"
 
     - name: Building docker image 🚧
       run: docker build ./ --file ./Dockerfile -t swr-radiohub-docs

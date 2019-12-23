@@ -56,7 +56,7 @@ const options = {
 
 
 app.get('/', function (req, res) {
-	res.sendStatus(200);
+	res.sendStatus(200)
 })
 
 app.get('/radiohub-docs/openapi.yaml', function(req, res, next) {
