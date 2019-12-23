@@ -6,7 +6,6 @@ on:
     - master
 
 jobs:
-
   radiohub-docs:
     runs-on: ubuntu-latest
     steps:
