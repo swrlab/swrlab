@@ -7,6 +7,9 @@ Go to [api.lab.swr.de/radiohub-docs/](https://api.lab.swr.de/radiohub-docs/#/) f
 
 This changelog serves as a place for all changes around the public SWR Radiohub API service.
 
+- 2019-12-24 - v2.7.2
+  - adding track/like endpoint
+
 - 2019-12-19 - v2.7.1
   - adding shift/{back/ahead}/{type}
 

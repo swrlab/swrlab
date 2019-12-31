@@ -10,7 +10,7 @@
     "license" : {
       "name" : "© SWR audio lab"
     },
-    "version" : "2.7.1"
+    "version" : "2.7.2"
   },
   "servers" : [ {
     "url" : "https://api.lab.swr.de/radiohub",
@@ -1134,8 +1134,8 @@
     "/v2/track/live/{station}/" : {
       "get" : {
         "tags" : [ "track" ],
-        "summary" : "Receive the track that's playing right now.",
-        "description" : "Query Radiohub to get the current live show for a specific station. Note that tracks currently means song, which may be extended in future versions.",
+        "summary" : "Receive the track that's playing right now",
+        "description" : "Query Radiohub to get the current live show for a specific station.",
         "parameters" : [ {
           "name" : "station",
           "in" : "path",
@@ -1169,6 +1169,91 @@
         "security" : [ {
           "BasicAuth" : [ ]
         } ]
+      }
+    },
+    "/v2/track/list/{station}/" : {
+      "get" : {
+        "tags" : [ "track" ],
+        "summary" : "Receive all tracks from the past 4 hours",
+        "description" : "Query Radiohub to get the tracks from the past 4 hours for a specific station.",
+        "parameters" : [ {
+          "name" : "station",
+          "in" : "path",
+          "description" : "Set the radio station for the schedule query",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "enum" : [ "swr1bw", "swr1rp", "swr2", "swr3", "swr4bw", "swr4rp", "swraktuell", "dasding" ]
+          }
+        } ],
+        "responses" : {
+          "401" : {
+            "description" : "Unauthorized access to API."
+          },
+          "500" : {
+            "description" : "Server error occured."
+          },
+          "default" : {
+            "description" : "If status code other than 200, an error message will be provided, otherwise message is null.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/trackListResponse"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "BasicAuth" : [ ]
+        } ]
+      }
+    },
+    "/v2/track/like/" : {
+      "post" : {
+        "tags" : [ "track" ],
+        "summary" : "Update the like-relationship between a track and a user (appId)",
+        "description" : "Update the like or dislike status for a user. For `like` requests the `refPlaylistId` is required, for `dislike` requests `refMdId` is sufficient.",
+        "parameters" : [ {
+          "name" : "appId",
+          "in" : "query",
+          "description" : "Provide a valid `appId`.",
+          "required" : true,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/body_1"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "401" : {
+            "description" : "Unauthorized access to API."
+          },
+          "500" : {
+            "description" : "Server error occured."
+          },
+          "default" : {
+            "description" : "If status code other than 200, an error message will be provided, otherwise message is null.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_default"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/v2/traffic/search/{provider}/{roadName}/" : {
@@ -1985,6 +2070,35 @@
           }
         }
       },
+      "trackListResponse" : {
+        "type" : "object",
+        "properties" : {
+          "status" : {
+            "type" : "integer",
+            "format" : "int64",
+            "example" : 200
+          },
+          "message" : {
+            "type" : "string",
+            "description" : "Message will be provided if status is not 200, otherwise null"
+          },
+          "data" : {
+            "maxItems" : 100,
+            "minItems" : 1,
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/trackObject"
+            }
+          },
+          "info" : {
+            "$ref" : "#/components/schemas/infoResponse"
+          },
+          "links" : {
+            "type" : "object"
+          }
+        },
+        "description" : "Defines a track response"
+      },
       "trafficResponse" : {
         "type" : "object",
         "properties" : {
@@ -2303,6 +2417,45 @@
           "lon" : {
             "type" : "number",
             "format" : "double"
+          }
+        }
+      },
+      "body_1" : {
+        "required" : [ "action" ],
+        "type" : "object",
+        "properties" : {
+          "action" : {
+            "type" : "string",
+            "enum" : [ "like", "dislike" ]
+          },
+          "refPlaylistId" : {
+            "type" : "string"
+          },
+          "refMdid" : {
+            "type" : "string"
+          }
+        }
+      },
+      "inline_response_default" : {
+        "type" : "object",
+        "properties" : {
+          "status" : {
+            "type" : "integer",
+            "format" : "int64",
+            "example" : 200
+          },
+          "message" : {
+            "type" : "string",
+            "description" : "Message will be provided if status is not 200, otherwise null"
+          },
+          "data" : {
+            "type" : "object"
+          },
+          "info" : {
+            "$ref" : "#/components/schemas/infoResponse"
+          },
+          "links" : {
+            "type" : "object"
           }
         }
       }
