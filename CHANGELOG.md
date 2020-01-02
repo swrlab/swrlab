@@ -7,6 +7,11 @@ Go to [api.lab.swr.de/radiohub-docs/](https://api.lab.swr.de/radiohub-docs/#/) f
 
 This changelog serves as a place for all changes around the public SWR Radiohub API service.
 
+- 2020-01-02 - v2.8.0 🍾🥂
+  - content API no longer serves thumbnail urls, content documents include `thumbRef` which can be used to load the image from `content/thumb`
+  - `isThumbAvailable` is now called `thumbIsAvailable`
+  - new endpoint `content/latest/{id/ref}/{offset}`
+
 - 2019-12-24 - v2.7.2
   - adding track/like endpoint
 
