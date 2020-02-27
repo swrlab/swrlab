@@ -1,4 +1,12 @@
+/*
 
+	swr-radiohub-docs
+
+	AUTHOR		Daniel Freytag
+			https://github.com/FRYTG
+			https://twitter.com/FRYTG
+
+*/
 
 const IS_DEV 				= (process.env.IS_DEV != 'true') ? false : true
 const IS_GITHUB 			= (process.env.IS_GITHUB != 'true') ? false : true
@@ -8,8 +16,10 @@ console.log('hello world', { IS_DEV }, { IS_GITHUB })
 const express		= require('express')
 const app		= express()
 
+
 const swaggerUi		= require('swagger-ui-express')
 const swaggerDocument	= require('./openapi.json')
+
 
 const customCss = 'label { display: inline; padding: 0; } ' +
 	'.swagger-ui .servers>label select { margin: 0; } ' +
