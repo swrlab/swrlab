@@ -7,6 +7,30 @@ Go to [api.lab.swr.de/radiohub-docs/](https://api.lab.swr.de/radiohub-docs/#/) f
 
 This changelog serves as a place for all changes around the public SWR Radiohub API service.
 
+- 2020-02-27 - v2.9.5
+  - `wave` metadata will only be served once a session is being started (like identified by `data.session.hasChanged` bool)
+  - `wave` metadata now includes `min`, `max` and `updatedAt` information
+
+- 2020-02-23 - v2.9.4
+  - the endpoint `geo/search` now delivers actual data
+
+- 2020-02-13 - v2.9.3
+  - Header information for possible request tracing now only serves in `x-cloud-trace-context`, no longer in `swr-trace`
+
+- 2020-01-23 - v2.9.2
+  - Please note to use the parent station not a regional version for `/v2/cover/{mdid}/`
+
+- 2020-01-23 - v2.9.1
+  - content API now serves inline articles in `articleUrl` and no longer in `newsDocument`
+  - content API removed `isThumbAvailable` and `isShareable`, which were essentially just null checks `thumbRef` and `webUrl`; `metaDataId` and `importId` are also no longer served publicly
+  - content API known bug: field `teaser` may contain unwanted HTML tags
+  - content API changed URL structure, especially direct article access via `/content/{id}` has moved
+  - content API types for all items have changes, most importantly `news` is now `article`
+  - stream API no longer returns full metadata stack when calling all `stream/shift` and `stream/switch` endpoints, only status code 200 with `data=null`
+
+- 2020-01-23 - v2.9.0
+  - `/content/collection/list` has been switched off
+
 - 2020-01-02 - v2.8.0 🍾🥂
   - content API no longer serves thumbnail urls, content documents include `thumbRef` which can be used to load the image from `content/thumb`
   - `isThumbAvailable` is now called `thumbIsAvailable`
