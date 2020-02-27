@@ -1,7 +1,7 @@
 ## SWR Radiohub
-by **SWR audio lab**  
+by [**SWR audio lab**](https://lab.swr.de/)  
 
-Go to [api.lab.swr.de/radiohub-docs/](https://api.lab.swr.de/radiohub-docs/#/) for the Swagger documentation.
+Go to [api.lab.swr.de/radiohub-docs](https://api.lab.swr.de/radiohub-docs/#/) for the Swagger documentation.
 
 # Changelog
 
@@ -10,6 +10,7 @@ This changelog serves as a place for all changes around the public SWR Radiohub 
 - 2020-02-27 - v2.9.5
   - `wave` metadata will only be served once a session is being started (like identified by `data.session.hasChanged` bool)
   - `wave` metadata now includes `min`, `max` and `updatedAt` information
+  - As all content endpoints are now entering a productive state, authorization is now required
 
 - 2020-02-23 - v2.9.4
   - the endpoint `geo/search` now delivers actual data

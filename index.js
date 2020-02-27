@@ -24,7 +24,7 @@ const customCss = 'label { display: inline; padding: 0; } ' +
 	'.swagger-ui .topbar .download-url-wrapper { display: none } ' +
 	'.swagger-ui * { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji" !important; }' +
 	'div.swagger-ui { max-width: 1080px; margin: 0 auto; } ' +
-	'div.swagger-ui .wrapper { padding: 15px; background: rgba(255,255,255,0.7) }' +
+	'div.swagger-ui .wrapper { padding: 15px; background: rgba(245,245,252,0.7) }' +
 	'div.swagger-ui .info .title small pre { padding: 2px 5px; }' +
 	'div.information-container.wrapper { margin: 6% 0 6% 0; padding: 15px; }' +
 	'div.swagger-ui .scheme-container { background: none; margin: 0 0 6% 0; padding: 0; box-shadow: none; }' +

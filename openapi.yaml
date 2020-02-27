@@ -15,7 +15,7 @@ info:
     email: lab@swr.de
   license:
     name: © SWR audio lab
-  version: 2.8.0
+  version: 2.9.5
 servers:
 - url: https://api.lab.swr.de/radiohub
   description: Radiohub production
@@ -24,16 +24,120 @@ servers:
 - url: https://api.lab.swr.de/radiohub-stage
   description: Radiohub staging
 paths:
-  /v2/content/collection/{ref}:
+  /v2/content/page/{identifier}/{query}:
     get:
       tags:
       - content
-      summary: Query an entire content collection
+      summary: Get a preconfigured content index page
+      description: Receive all teaser elements for a custom page
+      parameters:
+      - name: identifier
+        in: path
+        description: Which identifier shall be used to query this content
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          enum:
+          - ref
+      - name: query
+        in: path
+        description: Page ref
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+        example: app-news
+      - name: appId
+        in: query
+        description: Provide a valid appId to create a connection to user preference
+          and station
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        "500":
+          description: Server error occured.
+        default:
+          description: If status code other than 200, an error message will be provided,
+            otherwise the cover will be returned as image.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/contentPageResponse'
+      security:
+      - BasicAuth: []
+  /v2/content/block/{identifier}/{query}:
+    get:
+      tags:
+      - content
+      summary: Get a content.block index
+      description: Receive the full content.block elements
+      parameters:
+      - name: identifier
+        in: path
+        description: Which identifier shall be used to query this content
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          enum:
+          - id
+      - name: query
+        in: path
+        description: Block ID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      - name: appId
+        in: query
+        description: Provide a valid appId to create a connection to user preference
+          and station
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        "500":
+          description: Server error occured.
+        default:
+          description: If status code other than 200, an error message will be provided,
+            otherwise the cover will be returned as image.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/contentBlockResponse'
+      security:
+      - BasicAuth: []
+  /v2/content/collection/{identifier}/{query}:
+    get:
+      tags:
+      - content
+      summary: Get an entire content.collection
       description: Receive all recent entries for a content collection by their reference.
       parameters:
-      - name: ref
+      - name: identifier
         in: path
-        description: SWR CMS reference
+        description: Which identifier shall be used to query this content
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          enum:
+          - id
+          - ref
+      - name: query
+        in: path
+        description: Collection ref or ID
         required: true
         style: simple
         explode: false
@@ -49,73 +153,28 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/contentListResponse'
+                $ref: '#/components/schemas/contentCollectionResponse'
       security:
       - BasicAuth: []
-  /v2/content/id/{id}:
+  /v2/content/collection/latest/{identifier}/{query}/{offset}:
     get:
       tags:
       - content
-      summary: Get a specific content object by id
-      description: Receive a content object by the content id (can be import-sensitive).
-      parameters:
-      - name: id
-        in: path
-        description: Radiohub import ID
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-        example: "4539478696787968"
-      responses:
-        "500":
-          description: Server error occured.
-        default:
-          description: If status code other than 200, an error message will be provided,
-            otherwise the cover will be returned as image.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/contentResponse'
-      security:
-      - BasicAuth: []
-  /v2/content/ref/{ref}:
-    get:
-      tags:
-      - content
-      summary: Get a specific content object by SWR CMS Ref
-      description: Receive a content object by the SWR CMS Reference (Sophora-Ref)
-      parameters:
-      - name: ref
-        in: path
-        description: Radiohub import ID
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-        example: 4539478696787968
-      responses:
-        "500":
-          description: Server error occured.
-        default:
-          description: If status code other than 200, an error message will be provided,
-            otherwise the cover will be returned as image.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/contentResponse'
-      security:
-      - BasicAuth: []
-  /v2/content/latest/id/{id}/{offset}:
-    get:
-      tags:
-      - content
-      summary: Get the latest object from a content collection by collection id
+      summary: Get latest content.entry from content.collection
       description: Receive a content object by the content collection id.
       parameters:
-      - name: id
+      - name: identifier
+        in: path
+        description: Which identifier shall be used to query this content
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          enum:
+          - id
+          - ref
+      - name: query
         in: path
         description: Radiohub import ID
         required: true
@@ -142,34 +201,36 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/contentLatestResponse'
+                $ref: '#/components/schemas/contentEntryResponse'
       security:
       - BasicAuth: []
-  /v2/content/latest/ref/{ref}/{offset}:
+  /v2/content/entry/{identifier}/{query}:
     get:
       tags:
       - content
-      summary: Get the latest object from a content collection by collection ref
-      description: Receive a content object by the content collection id (can be import-sensitive).
+      summary: Get a specific content.entry
+      description: Receive a content.entry by id or ref.
       parameters:
-      - name: ref
+      - name: identifier
         in: path
-        description: SWR CMS Ref
+        description: Which identifier shall be used to query this content
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          enum:
+          - id
+          - ref
+      - name: query
+        in: path
+        description: Radiohub ID or ref
         required: true
         style: simple
         explode: false
         schema:
           type: string
         example: "4539478696787968"
-      - name: offset
-        in: path
-        description: Offset to the newest item. 0 is newest, higher will be older
-          items. Max value is defined by `offsetMax` in the info response object
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: number
       responses:
         "500":
           description: Server error occured.
@@ -179,10 +240,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/contentLatestResponse'
+                $ref: '#/components/schemas/contentEntryResponse'
       security:
       - BasicAuth: []
-  /v2/content/thumb/{ref}/img.jpg:
+  /v2/content/thumb/{ref}/{format}/img.jpg:
     get:
       tags:
       - content
@@ -199,10 +260,20 @@ paths:
         explode: false
         schema:
           type: string
+      - name: format
+        in: path
+        description: Set the aspect ratio for the image
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          enum:
+          - 16x9
+          - 1x1
       - name: width
         in: query
-        description: 'Optional width in pixels that the image shall be resized to.
-          Minimum: 1, maximum 2560px'
+        description: Optional width in pixels that the image shall be resized to
         required: false
         style: form
         explode: true
@@ -212,10 +283,9 @@ paths:
           type: number
       - name: height
         in: query
-        description: 'Optional height in pixels that the image shall be resized to.
-          Minimum: 1, maximum 2560px. If both width and height are set, then the image
-          will be cropped. Otherwise the respectively opposite dimension is set to
-          auto'
+        description: Optional height in pixels that the image shall be resized to.
+          If both width and height are set, then the image will be cropped.  Otherwise
+          the respectively opposite dimension is set to auto
         required: false
         style: form
         explode: true
@@ -1538,38 +1608,28 @@ paths:
       - BasicAuth: []
 components:
   schemas:
-    contentObject:
+    contentEntry:
       type: object
       properties:
-        title:
-          type: string
-          example: 'Bosse: Augen zu, Fynn Kliemann, Modern Talking und Taki Taki –
-            Song-Tindern'
-        subtitle:
-          type: string
-          example: Song-Tindern
-        teaser:
-          type: string
-          example: Bosse erzählt uns beim Song-Tindern, warum ihn Musik von DJ Snake
-            psychisch fertig macht und warum er einen Youtube-Kanal über „Backi Backi“
-            und „Kochi Kochi“ starten würden.
         id:
           type: integer
           description: Unique identifier for this content element and import, can
             be used for further queries.
-          example: 4539478696787968
-        metaDataId:
+          example: 1234
+        type:
           type: string
-          example: aexpresso://ORDERINFOID:1083229
-        importId:
+          description: Defines the type of content entry. Can be article, audio or
+            video.
+          example: content.entry.*
+        link:
           type: string
-          example: rhsi-20191209-124738
-        sophoraCollectionRef:
-          type: string
-          example: songtinder-sammler-100
+          example: https://api.lab.swr.de/radiohub/v2/content/entry/id/1234?appId=56789
         sophoraRef:
           type: string
           example: av-o1083229-100
+        sophoraCollectionRef:
+          type: string
+          example: songtinder-sammler-100
         station:
           type: string
           example: dasding
@@ -1581,12 +1641,12 @@ components:
           - swr4bw
           - swr4rp
           - dasding
-        isDownloadable:
-          type: boolean
-          example: true
-        isShareable:
-          type: boolean
-          example: true
+        title:
+          type: string
+        subtitle:
+          type: string
+        teaser:
+          type: string
         availabilityStart:
           type: integer
           example: 1575892066227
@@ -1602,49 +1662,123 @@ components:
         durationReadable:
           type: string
           example: 14 Min
-        newsDocument:
+        articleUrl:
           type: string
+        webUrl:
+          type: string
+        isDownloadable:
+          type: boolean
+          example: true
         sourceDownloadUrl:
           type: string
           example: https://avdlswr-a.akamaihd.net/dasding/...
         sourcePlaybackUrl:
           type: string
           example: https://pdodswr-a.akamaihd.net/dasding/...
-        webUrl:
-          type: string
-          example: https://www.dasding.de/export/podcast/songtindern/Bosse-beim-Song-Tindern-Augen-zu-Fynn-Kliemann-Modern-Talking-und-Taki-Taki-an,av-o1083229-100.html
         thumbAlt:
           type: string
           example: Bosse
         thumbCredit:
           type: string
           example: DASDING
-        thumbIsAvailable:
-          type: boolean
-          example: true
         thumbRef:
           type: string
-    contentListResponse:
+    contentCollection:
       type: object
       properties:
-        status:
+        id:
           type: integer
-          format: int64
-          example: 200
-        message:
+          description: Unique identifier for this content.collection
+          example: 1234
+        type:
           type: string
-          description: Message will be provided if status is not 200, otherwise null
+          description: Defines the type of content.collection.
+          example: content.collection.*
+        link:
+          type: string
+          example: https://api.lab.swr.de/radiohub/v2/content/collection/id/1234?appId=56789
+        title:
+          type: string
+        subtitle:
+          type: string
+        data:
+          minItems: 0
+          type: array
+          items:
+            $ref: '#/components/schemas/contentEntry'
+      description: Content collections are a parent element to content.entry
+    contentBlockBreaking:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for this content block
+          example: 1234
+        type:
+          type: string
+          description: Defines the type of content block.
+          example: content.block.breaking
+        link:
+          type: string
+          example: https://api.lab.swr.de/radiohub/v2/content/block/id/1234?appId=56789
+        title:
+          type: string
+        subtitle:
+          type: string
           nullable: true
         data:
           minItems: 0
           type: array
           items:
-            $ref: '#/components/schemas/contentObject'
-        info:
-          $ref: '#/components/schemas/infoResponse'
-        links:
-          type: object
-    contentResponse:
+            $ref: '#/components/schemas/contentBlockBreaking_data'
+    contentBlockPodcast:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for this content block
+          example: 1234
+        type:
+          type: string
+          description: Defines the type of content block.
+          example: content.block.podcast
+        link:
+          type: string
+          example: https://api.lab.swr.de/radiohub/v2/content/block/id/1234?appId=56789
+        title:
+          type: string
+        subtitle:
+          type: string
+        data:
+          minItems: 0
+          type: array
+          items:
+            $ref: '#/components/schemas/contentCollection'
+    contentBlock:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for this content block
+          example: 1234
+        type:
+          type: string
+          description: Defines the type of content block. Can be article, audio or
+            video.
+          example: content.block.*
+        link:
+          type: string
+          example: https://api.lab.swr.de/radiohub/v2/content/block/id/1234?appId=56789
+        title:
+          type: string
+        subtitle:
+          type: string
+        data:
+          minItems: 0
+          type: array
+          items:
+            $ref: '#/components/schemas/contentEntry'
+    contentEntryResponse:
       type: object
       properties:
         status:
@@ -1656,12 +1790,12 @@ components:
           description: Message will be provided if status is not 200, otherwise null
           nullable: true
         data:
-          $ref: '#/components/schemas/contentObject'
+          $ref: '#/components/schemas/contentEntry'
         info:
           $ref: '#/components/schemas/infoResponse'
         links:
           type: object
-    contentLatestResponse:
+    contentCollectionResponse:
       type: object
       properties:
         status:
@@ -1673,9 +1807,51 @@ components:
           description: Message will be provided if status is not 200, otherwise null
           nullable: true
         data:
-          $ref: '#/components/schemas/contentObject'
+          $ref: '#/components/schemas/contentCollection'
         info:
-          $ref: '#/components/schemas/contentLatestResponse_info'
+          $ref: '#/components/schemas/infoResponse'
+        links:
+          type: object
+    contentBlockResponse:
+      type: object
+      properties:
+        status:
+          type: integer
+          format: int64
+          example: 200
+        message:
+          type: string
+          description: Message will be provided if status is not 200, otherwise null
+          nullable: true
+        data:
+          oneOf:
+          - $ref: '#/components/schemas/contentBlockBreaking'
+          - $ref: '#/components/schemas/contentBlockPodcast'
+          - $ref: '#/components/schemas/contentBlock'
+        info:
+          $ref: '#/components/schemas/infoResponse'
+        links:
+          type: object
+    contentPageResponse:
+      type: object
+      properties:
+        status:
+          type: integer
+          format: int64
+          example: 200
+        message:
+          type: string
+          description: Message will be provided if status is not 200, otherwise null
+          nullable: true
+        data:
+          type: array
+          items:
+            anyOf:
+            - $ref: '#/components/schemas/contentBlockBreaking'
+            - $ref: '#/components/schemas/contentBlockPodcast'
+            - $ref: '#/components/schemas/contentBlock'
+        info:
+          $ref: '#/components/schemas/infoResponse'
         links:
           type: object
     feedbackBody:
@@ -1703,6 +1879,38 @@ components:
           type: string
         message:
           type: string
+    geoSearchData:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Freiburg im Breisgau
+        city:
+          type: string
+          example: Freiburg im Breisgau
+        area:
+          type: string
+          example: Freiburg im Breisgau
+        state:
+          type: string
+          example: Baden-Württemberg
+        country:
+          type: string
+          example: Deutschland
+        countryCode:
+          type: string
+          example: DE
+        lat:
+          type: number
+          format: double
+          example: 47.99719
+        lon:
+          type: number
+          format: double
+          example: 7.85377
+        type:
+          type: string
+          example: city
     geoSearchResponse:
       type: object
       properties:
@@ -1714,11 +1922,11 @@ components:
           type: string
           description: Message will be provided if status is not 200, otherwise null
         data:
-          maxItems: 20
+          maxItems: 10
           minItems: 0
           type: array
           items:
-            $ref: '#/components/schemas/geoSearchResponse_data'
+            $ref: '#/components/schemas/geoSearchData'
         info:
           $ref: '#/components/schemas/infoResponse'
         links:
@@ -2192,18 +2400,6 @@ components:
         query:
           type: string
           example: Freiburg
-    geoSearchResponse_data:
-      type: object
-      properties:
-        name:
-          type: string
-          example: Freiburg
-        lat:
-          type: number
-          format: double
-        lon:
-          type: number
-          format: double
     body_1:
       required:
       - action
@@ -2216,7 +2412,7 @@ components:
           - dislike
         refPlaylistId:
           type: string
-        refMdid:
+        refMdId:
           type: string
     inline_response_default:
       type: object
@@ -2234,21 +2430,49 @@ components:
           $ref: '#/components/schemas/infoResponse'
         links:
           type: object
-    contentLatestResponse_info:
+    contentBlockBreaking_data:
       type: object
       properties:
-        offsetMax:
+        id:
           type: integer
-          example: 17
-        poweredBy:
+          description: Unique identifier for this content element and import, can
+            be used for further queries.
+          example: 1234
+        type:
           type: string
-          example: SWR audio lab
-        trace:
+          description: Defines the type of content entry. Can be article, audio or
+            video.
+          example: content.entry.breaking
+        title:
           type: string
-          example: xyz
-        service:
+        subtitle:
           type: string
-          example: swr-radiohub-api-dev;dev;...
+          example: Song-Tindern
+        teaser:
+          type: string
+        availabilityStart:
+          type: integer
+          example: 1575892066227
+        availabilityEnd:
+          type: integer
+          example: 1733744866227
+        articleUrl:
+          type: string
+          nullable: true
+        webUrl:
+          type: string
+          nullable: true
+        thumbAlt:
+          type: string
+          nullable: true
+          example: Bosse
+        thumbCredit:
+          type: string
+          nullable: true
+          example: DASDING
+        thumbRef:
+          type: string
+          nullable: true
   securitySchemes:
     BasicAuth:
       type: http
