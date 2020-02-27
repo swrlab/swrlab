@@ -1112,6 +1112,17 @@
           "schema" : {
             "type" : "string"
           }
+        }, {
+          "name" : "isPlaying",
+          "in" : "query",
+          "description" : "If set to false, no radio session will be opened and only the basic metadata is provided",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "boolean",
+            "default" : false
+          }
         } ],
         "responses" : {
           "400" : {
@@ -2299,7 +2310,23 @@
         },
         "description" : "Defines a schedule response"
       },
-      "scheduleResponse_data_textLongform" : {
+      "scheduleResponseImage" : {
+        "type" : "object",
+        "properties" : {
+          "type" : {
+            "type" : "string",
+            "description" : "The type of image service this image can be fetched from",
+            "example" : "images",
+            "enum" : [ "images", "content" ]
+          },
+          "ref" : {
+            "type" : "string",
+            "description" : "Image ref to be used with the image service",
+            "example" : "SWR3-mod-BarschJanitz"
+          }
+        }
+      },
+      "scheduleResponseTextLongform" : {
         "type" : "object",
         "properties" : {
           "text" : {
@@ -2320,7 +2347,7 @@
           }
         }
       },
-      "scheduleResponse_data_anchorList" : {
+      "scheduleResponseAnchorList" : {
         "type" : "object",
         "properties" : {
           "name" : {
@@ -2328,6 +2355,9 @@
           },
           "imageUrl" : {
             "type" : "string"
+          },
+          "image" : {
+            "$ref" : "#/components/schemas/scheduleResponseImage"
           },
           "webUrl" : {
             "type" : "string",
@@ -2370,13 +2400,13 @@
             "type" : "array",
             "nullable" : true,
             "items" : {
-              "$ref" : "#/components/schemas/scheduleResponse_data_anchorList"
+              "$ref" : "#/components/schemas/scheduleResponseAnchorList"
             }
           },
           "textLongform" : {
             "type" : "array",
             "items" : {
-              "$ref" : "#/components/schemas/scheduleResponse_data_textLongform"
+              "$ref" : "#/components/schemas/scheduleResponseTextLongform"
             }
           },
           "programId" : {
@@ -2432,30 +2462,6 @@
           }
         }
       },
-      "streamMetaResponse" : {
-        "type" : "object",
-        "properties" : {
-          "status" : {
-            "type" : "integer",
-            "format" : "int64",
-            "example" : 200
-          },
-          "message" : {
-            "type" : "string",
-            "description" : "Message will be provided if status is not 200, otherwise null"
-          },
-          "data" : {
-            "$ref" : "#/components/schemas/streamMetaResponse_data"
-          },
-          "info" : {
-            "$ref" : "#/components/schemas/infoResponse"
-          },
-          "links" : {
-            "type" : "object"
-          }
-        },
-        "description" : "Defines a radio meta response"
-      },
       "trackObject" : {
         "type" : "object",
         "properties" : {
@@ -2466,10 +2472,6 @@
           "displayArtist" : {
             "type" : "string",
             "example" : "Sam Feldt feat. RANI"
-          },
-          "displayCover" : {
-            "type" : "string",
-            "example" : "https://api.lab.swr.de/radiohub/v2/cover/M0571440.001/img.jpg"
           },
           "type" : {
             "type" : "string",
@@ -2712,46 +2714,96 @@
         },
         "description" : "Defines a track response"
       },
-      "streamMetaResponse_data_session" : {
+      "streamMetaSession" : {
         "type" : "object",
         "properties" : {
           "streamUrl" : {
             "type" : "string"
           },
-          "isNew" : {
+          "hasChanged" : {
             "type" : "boolean",
             "description" : "Whether the streamUrl has changed since the last meta call. In that case the new Url shall be reloaded in the audio player.",
             "example" : false
           }
         }
       },
-      "streamMetaResponse_data_meta_channelOptions_swr3live" : {
-        "type" : "object",
-        "properties" : {
-          "title" : {
-            "type" : "string",
-            "example" : "SWR3 Livestream"
-          },
-          "id" : {
-            "type" : "string",
-            "example" : "swr3-live"
-          },
-          "icon" : {
-            "type" : "string",
-            "example" : "https://storage.googleapis.com/swr-lab-static/swr-lab-static/temp/SWR-Channel-SWR3-Live-round.png"
-          }
-        }
-      },
-      "streamMetaResponse_data_meta_channelOptions" : {
+      "streamMetaMetaChannelOptions" : {
         "type" : "object",
         "properties" : {
           "swr3-live" : {
-            "$ref" : "#/components/schemas/streamMetaResponse_data_meta_channelOptions_swr3live"
+            "$ref" : "#/components/schemas/streamMetaMetaChannelOptions_swr3live"
           }
         },
         "description" : "One or more channels than can be played"
       },
-      "streamMetaResponse_data_meta_scheduleNow" : {
+      "streamMetaMetaSkip" : {
+        "type" : "object",
+        "properties" : {
+          "active" : {
+            "type" : "boolean",
+            "description" : "Is skipping currently active?",
+            "default" : false
+          },
+          "available" : {
+            "type" : "boolean",
+            "description" : "Is skipping generally available at the moment?",
+            "default" : false
+          },
+          "index" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "remaining" : {
+            "type" : "integer",
+            "example" : 3
+          }
+        },
+        "description" : "One or more channels than can be played"
+      },
+      "streamMetaMetaWave" : {
+        "type" : "object",
+        "properties" : {
+          "secondsPerSample" : {
+            "type" : "integer",
+            "description" : "How many seconds were processed for each sample",
+            "example" : 15
+          },
+          "length" : {
+            "type" : "integer",
+            "description" : "Count of all data samples",
+            "example" : 239
+          },
+          "min" : {
+            "type" : "number",
+            "description" : "Smallest sample size for scaling the waveform",
+            "format" : "double",
+            "example" : 0.00085
+          },
+          "max" : {
+            "type" : "number",
+            "description" : "Largest sample size for scaling the waveform",
+            "format" : "double",
+            "example" : 0.01744
+          },
+          "updatedAt" : {
+            "type" : "integer",
+            "description" : "Timestamp of the data generation",
+            "example" : 1582816851938
+          },
+          "data" : {
+            "type" : "array",
+            "description" : "All samples, newest ones are first",
+            "example" : 0.0025184983,
+            "items" : {
+              "type" : "number",
+              "format" : "double"
+            }
+          }
+        },
+        "description" : "Live waveform data, generated historically for the entire timeshift period",
+        "nullable" : true
+      },
+      "streamMetaMetaScheduleNow" : {
         "type" : "object",
         "properties" : {
           "title" : {
@@ -2762,35 +2814,37 @@
             "type" : "string"
           },
           "airtimeStart" : {
-            "type" : "integer",
-            "example" : 1576083600
+            "type" : "integer"
           },
           "airtimeEnd" : {
-            "type" : "integer",
-            "example" : 1576098000
+            "type" : "integer"
           },
           "updatedAt" : {
-            "type" : "integer",
-            "example" : 1576038186
+            "type" : "integer"
           },
           "thumbUrl" : {
             "type" : "string",
-            "nullable" : true,
-            "example" : "true"
+            "nullable" : true
           },
-          "isThumbAvailable" : {
-            "type" : "boolean",
-            "example" : false
+          "thumb" : {
+            "$ref" : "#/components/schemas/scheduleResponseImage"
+          },
+          "webUrl" : {
+            "type" : "string",
+            "nullable" : true
           },
           "anchorImageUrl" : {
             "type" : "string"
+          },
+          "anchorImage" : {
+            "$ref" : "#/components/schemas/scheduleResponseImage"
           },
           "anchorList" : {
             "minItems" : 0,
             "type" : "array",
             "nullable" : true,
             "items" : {
-              "$ref" : "#/components/schemas/scheduleResponse_data_anchorList"
+              "$ref" : "#/components/schemas/scheduleResponseAnchorList"
             }
           },
           "ref" : {
@@ -2799,7 +2853,7 @@
         },
         "description" : "Schedule item which was on air at the user's playback position"
       },
-      "streamMetaResponse_data_meta" : {
+      "streamMetaMeta" : {
         "type" : "object",
         "properties" : {
           "playerActions" : {
@@ -2814,15 +2868,30 @@
             "type" : "string",
             "example" : "swr3-live"
           },
+          "channelMain" : {
+            "type" : "string",
+            "example" : "swr3-live"
+          },
           "channelOptions" : {
-            "$ref" : "#/components/schemas/streamMetaResponse_data_meta_channelOptions"
+            "$ref" : "#/components/schemas/streamMetaMetaChannelOptions"
           },
           "shiftOffset" : {
             "type" : "integer",
             "example" : 0
           },
+          "skip" : {
+            "$ref" : "#/components/schemas/streamMetaMetaSkip"
+          },
           "trackNow" : {
             "$ref" : "#/components/schemas/trackObject"
+          },
+          "trackNext" : {
+            "nullable" : true,
+            "allOf" : [ {
+              "$ref" : "#/components/schemas/trackObject"
+            }, {
+              "type" : "object"
+            } ]
           },
           "trackList" : {
             "type" : "array",
@@ -2831,21 +2900,37 @@
               "$ref" : "#/components/schemas/trackObject"
             }
           },
+          "wave" : {
+            "$ref" : "#/components/schemas/streamMetaMetaWave"
+          },
           "scheduleNow" : {
-            "$ref" : "#/components/schemas/streamMetaResponse_data_meta_scheduleNow"
+            "$ref" : "#/components/schemas/streamMetaMetaScheduleNow"
           }
         }
       },
-      "streamMetaResponse_data" : {
+      "streamMetaResponse" : {
         "type" : "object",
         "properties" : {
-          "session" : {
-            "$ref" : "#/components/schemas/streamMetaResponse_data_session"
+          "status" : {
+            "type" : "integer",
+            "format" : "int64",
+            "example" : 200
           },
-          "meta" : {
-            "$ref" : "#/components/schemas/streamMetaResponse_data_meta"
+          "message" : {
+            "type" : "string",
+            "description" : "Message will be provided if status is not 200, otherwise null"
+          },
+          "data" : {
+            "$ref" : "#/components/schemas/streamMetaResponse_data"
+          },
+          "info" : {
+            "$ref" : "#/components/schemas/infoResponse"
+          },
+          "links" : {
+            "type" : "object"
           }
-        }
+        },
+        "description" : "Defines a radio meta response"
       },
       "userAppRegisterResponse_data" : {
         "type" : "object",
@@ -2959,6 +3044,34 @@
           "thumbRef" : {
             "type" : "string",
             "nullable" : true
+          }
+        }
+      },
+      "streamMetaMetaChannelOptions_swr3live" : {
+        "type" : "object",
+        "properties" : {
+          "title" : {
+            "type" : "string",
+            "example" : "SWR3 Livestream"
+          },
+          "id" : {
+            "type" : "string",
+            "example" : "swr3-live"
+          },
+          "iconRef" : {
+            "type" : "string",
+            "example" : "SWR3-channel-live-1x1"
+          }
+        }
+      },
+      "streamMetaResponse_data" : {
+        "type" : "object",
+        "properties" : {
+          "session" : {
+            "$ref" : "#/components/schemas/streamMetaSession"
+          },
+          "meta" : {
+            "$ref" : "#/components/schemas/streamMetaMeta"
           }
         }
       }
