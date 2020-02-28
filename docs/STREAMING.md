@@ -8,11 +8,11 @@ _Note: Token Auth is required for several types of requests. Contact lab@swr.de 
 ## Index
 ↓ [Basic Radio Stream](#starting-a-basic-radio-stream)  
 ↓ [Responsive Radio Stream](#using-a-responsive-radio-stream)  
-↪ [1. Acquire an `appId`](#1-acquire-an-appid)  
-↪ [2. Handle sessions](#2-handle-sessions)  
-↪ [3. Stream start](#3-stream-start)  
-↪ [4. Metadata update](#4-metadata-update)  
-↪ [5. Interaction](#5-interaction)  
+↘ [1. Acquire an `appId`](#1-acquire-an-appid)  
+↘ [2. Handle sessions](#2-handle-sessions)  
+↘ [3. Stream start](#3-stream-start)  
+↘ [4. Metadata update](#4-metadata-update)  
+↘ [5. Interaction](#5-interaction)  
 ↓ [Error cases](#error-cases)  
 
 
@@ -39,7 +39,7 @@ https://api.lab.swr.de/radiohub{-dev/-stage}/v2/user/app/register/{station}
 ```
 
 The returned object will include a unique `appId` that does not expire and can be used forever.  
-_Note: Those Ids are only valid within the queried stage level and station._
+_Note: Those Ids are only valid within the queried stage level and station. Only `swr3` and `dasding` are currently available for Responsive Radio Streams._  
 
 
 For API calls then add `appId` to the URL Query:
