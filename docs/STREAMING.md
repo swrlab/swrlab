@@ -5,6 +5,16 @@ by **SWR audio lab**
 _Note: Token Auth is required for several types of requests. Contact lab@swr.de for help or credentials._
 
 
+## Index
+↓ [Basic Radio Stream](#starting-a-basic-radio-stream)  
+↓ [Responsive Radio Stream](#using-a-responsive-radio-stream)  
+↪ [1. Acquire an `appId`](#1-acquire-an-appid)  
+↪ [2. Handle sessions](#2-handle-sessions)  
+↪ [3. Stream start](#3-stream-start)  
+↪ [4. Metadata update](#4-metadata-update)  
+↪ [5. Interaction](#5-interaction)  
+↓ [Error cases](#error-cases)  
+
 
 ## Starting a **Basic** Radio Stream
 
@@ -34,7 +44,7 @@ _Note: Those Ids are only valid within the queried stage level and station._
 
 For API calls then add `appId` to the URL Query:
 ```
-https://api.lab.swr.de/radiohub{-dev}/v2/stream/meta?appId={appId}  
+https://api.lab.swr.de/radiohub/v2/stream/meta?appId={appId}  
 ```
 
 The response from this call is the same across all three responsive radio functions: `/stream/meta`, `/stream/shift/...` and `/stream/switch/...` and includes both the `session` and `meta` object. For asynchronus calls, the `data` field will be `null`.
