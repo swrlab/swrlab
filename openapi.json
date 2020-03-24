@@ -10,7 +10,7 @@
     "license" : {
       "name" : "© SWR audio lab"
     },
-    "version" : "2.9.5"
+    "version" : "2.9.7"
   },
   "servers" : [ {
     "url" : "https://api.lab.swr.de/radiohub",
@@ -457,27 +457,26 @@
         }
       }
     },
-    "/v2/feedback/{station}/" : {
+    "/v2/feedback/station/" : {
       "post" : {
         "tags" : [ "feedback" ],
         "summary" : "Publish an inbound feedback message",
         "description" : "Send a feedback message from an external device or platform to SWR's feedback system.",
         "parameters" : [ {
-          "name" : "station",
-          "in" : "path",
-          "description" : "Set the radio station for the schedule query",
+          "name" : "appId",
+          "in" : "query",
+          "description" : "Provide a valid `appId`.",
           "required" : true,
-          "style" : "simple",
-          "explode" : false,
+          "style" : "form",
+          "explode" : true,
           "schema" : {
-            "type" : "string",
-            "enum" : [ "swr1bw", "swr1rp", "swr3", "swr4bw", "swr4rp", "dasding" ]
+            "type" : "string"
           }
         } ],
         "requestBody" : {
-          "description" : "When posting a feedback entry, `name`, `userId` and `source` are always required, `city` for all stations except _dasding_. Each post needs to contain either `file` or `message`. The field `file` can either be _image/jpeg_ (jpg file), _image/png_ (png image) or _audio/mpeg_ (mp3). `userId` needs to be a predefined token or id which can be used to reach back out to the user.\n",
+          "description" : "- When posting a feedback entry, `name` (body) and `appId` (query) are always required.\n- `city` is only optional for _dasding_, otherwise required as well.\n- Each post needs to contain either `file` or `message`.\n- The field `file` can be an image (jpg/ png), audio (aac/ mp3) orvideo (mp4/ mov) up to 50MB.\n- The station will be determined based on the user's `appId`.\n",
           "content" : {
-            "application/x-www-form-urlencoded" : {
+            "multipart/form-data" : {
               "schema" : {
                 "$ref" : "#/components/schemas/feedbackBody"
               }
@@ -489,8 +488,11 @@
           "200" : {
             "description" : "If status code other than 200, an error message will be provided, otherwise message is null."
           },
-          "401" : {
-            "description" : "Unauthorized access to API."
+          "400" : {
+            "description" : "Query not allowed or appId not provided."
+          },
+          "413" : {
+            "description" : "File too large (>50MB)."
           },
           "500" : {
             "description" : "Server error occured."
@@ -2168,24 +2170,16 @@
         }
       },
       "feedbackBody" : {
-        "required" : [ "message", "name", "source", "userId" ],
+        "required" : [ "name" ],
         "type" : "object",
         "properties" : {
-          "file" : {
-            "type" : "string",
-            "format" : "binary"
-          },
-          "userId" : {
-            "type" : "string"
-          },
-          "source" : {
-            "type" : "string",
-            "enum" : [ "app" ]
-          },
           "name" : {
             "type" : "string"
           },
           "email" : {
+            "type" : "string"
+          },
+          "phone" : {
             "type" : "string"
           },
           "city" : {
@@ -2193,6 +2187,10 @@
           },
           "message" : {
             "type" : "string"
+          },
+          "file" : {
+            "type" : "string",
+            "format" : "binary"
           }
         }
       },
