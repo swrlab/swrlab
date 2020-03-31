@@ -59,9 +59,9 @@ const customCss = 'label { display: inline; padding: 0; } ' +
 const options = {
 	explorer:		true,
 	customCss,
-	customCssUrl:		'https://storage.googleapis.com/swr-lab-static/swr-lab-static/lab-dashboard-style-v2.css?006',
+	customCssUrl:		'https://swr-lab-static.storage.googleapis.com/swr-audio-lab/swr-lab-dashboard/css/lab-dashboard-style-v2.css?024',
 	customeSiteTitle:	'SWR Radiohub API Documentation',
-	customfavIcon:		'https://storage.googleapis.com/swr-lab-static/swr-lab-static/img/SWR-Icons-SWR-Lab-Rocket-512.png'
+	customfavIcon:		'https://api.lab.swr.de/images/v1/get/swr-audio-lab-icon-black-smooth/img?width=512&d=swr-radiohub-docs'
 }
 
 
