@@ -10,7 +10,7 @@
     "license" : {
       "name" : "© SWR audio lab"
     },
-    "version" : "2.9.7"
+    "version" : "2.9.8"
   },
   "servers" : [ {
     "url" : "https://api.lab.swr.de/radiohub",
@@ -1125,6 +1125,28 @@
             "type" : "boolean",
             "default" : false
           }
+        }, {
+          "name" : "channelId",
+          "in" : "query",
+          "description" : "Start a session with a specified channel. Only applies when the user has no active session or previous call was `isPlaying=false`.",
+          "required" : false,
+          "style" : "form",
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "example" : "swr-raka12"
+          }
+        }, {
+          "name" : "shiftJump",
+          "in" : "query",
+          "description" : "Automatically start a session at a specific timestamp. Can be combined with `channelId`. Only applies when user has no active session or previous call was `isPlaying=false`.",
+          "required" : false,
+          "style" : "form",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer",
+            "example" : 1585366272000
+          }
         } ],
         "responses" : {
           "400" : {
@@ -1348,7 +1370,7 @@
       "get" : {
         "tags" : [ "stream" ],
         "summary" : "Control the content of a user's stream",
-        "description" : "For a detailed workflow of responsive radio streams, see the STREAMING.md document in this repository. When switching to a channel, provide the channel id, for podcast series, provide collection reference, for audio content, use the sophora document reference.",
+        "description" : "For a detailed workflow of responsive radio streams, see the STREAMING.md document in this repository. When switching to a channel, provide the channel id, for news provide the channel id.",
         "parameters" : [ {
           "name" : "action",
           "in" : "path",
@@ -1358,12 +1380,12 @@
           "explode" : false,
           "schema" : {
             "type" : "string",
-            "enum" : [ "channel", "podcast", "content" ]
+            "enum" : [ "channel", "news" ]
           }
         }, {
           "name" : "id",
           "in" : "path",
-          "description" : "The time difference if required by `action`",
+          "description" : "The content id required for `action`",
           "required" : true,
           "style" : "simple",
           "explode" : false,

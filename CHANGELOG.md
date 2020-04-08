@@ -7,6 +7,11 @@ Go to [api.lab.swr.de/radiohub-docs](https://api.lab.swr.de/radiohub-docs/#/) fo
 
 This changelog serves as a place for all changes around the public SWR Radiohub API service.
 
+- 2020-04-08 - v2.9.8
+  - Adding previously integrated, yet not documented variables for `stream/meta` start commands
+  - `stream/meta` now also provides appropriate `wave` data for channels, which in some cases has failed before
+  - `stream/switch/news` now requires a channel id
+
 - 2020-02-27 - v2.9.5
   - `wave` metadata will only be served once a session is being started (like identified by `data.session.hasChanged` bool)
   - `wave` metadata now includes `min`, `max` and `updatedAt` information
