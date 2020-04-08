@@ -1,9 +1,10 @@
-## SWR Radiohub
+# SWR Radiohub
+
 by [**SWR audio lab**](https://lab.swr.de/)  
 
 Go to [api.lab.swr.de/radiohub-docs](https://api.lab.swr.de/radiohub-docs/#/) for the Swagger documentation.
 
-# Changelog
+## Changelog
 
 This changelog serves as a place for all changes around the public SWR Radiohub API service.
 

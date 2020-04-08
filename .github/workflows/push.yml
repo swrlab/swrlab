@@ -15,7 +15,6 @@ jobs:
     - name: Setup Google Cloud Auth 🔑
       uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
       with:
-        version: '270.0.0'
         service_account_email: ${{ secrets.GCP_IAM_LAB_EMAIL }}
         service_account_key: ${{ secrets.GCP_IAM_LAB_KEY }}
         
@@ -26,10 +25,10 @@ jobs:
       run: docker build ./ --file ./Dockerfile -t swr-radiohub-docs
 
     - name: Tagging docker 🏷
-      run: docker tag swr-radiohub-docs eu.gcr.io/swr-lab/swr-radiohub-docs:git-$(date +%j)-$(date +%H)$(date +%M)
+      run: docker tag swr-radiohub-docs eu.gcr.io/swr-lab/swr-radiohub-docs:git-$(date +%j)-$GITHUB_SHA
 
     - name: Pushing docker 🙇
-      run: docker push eu.gcr.io/swr-lab/swr-radiohub-docs:git-$(date +%j)-$(date +%H)$(date +%M)
+      run: docker push eu.gcr.io/swr-lab/swr-radiohub-docs:git-$(date +%j)-$GITHUB_SHA
 
     - name: Logout 👋
       run: docker logout
