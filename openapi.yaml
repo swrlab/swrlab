@@ -414,7 +414,7 @@ paths:
           - When posting a feedback entry, `name` (body) and `appId` (query) are always required.
           - `city` is only optional for _dasding_, otherwise required as well.
           - Each post needs to contain either `file` or `message`.
-          - The field `file` can be an image (jpg/ png), audio (aac/ mp3) orvideo (mp4/ mov) up to 50MB.
+          - The field `file` can be an image (e.g. jpg or png), audio (e.g. aac or mp3) or video (e.g. mp4 or mov) up to 50MB.
           - The station will be determined based on the user's `appId`.
         content:
           multipart/form-data:

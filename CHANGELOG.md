@@ -8,6 +8,19 @@ Go to [api.lab.swr.de/radiohub-docs](https://api.lab.swr.de/radiohub-docs/#/) fo
 
 This changelog serves as a place for all changes around the public SWR Radiohub API service.
 
+- 2020-04-30 - v2.10.3
+  - `stream/*` calls no longer include link to docs in return object, unless an error occured.
+  - Error code when `appId` is not valid has been changed to `403`. If unset or basic auth not provided `401`.
+
+- 2020-04-28 - v2.10.2
+  - Upstream errors for `content/thumb` requests now return error code `204` with a fallback image instead of `404`. The `Cache-Control` header should be respected for this.
+
+- 2020-04-27 - v2.10.1
+  - Updated configuration for SWR3 services
+
+- 2020-04-20 - v2.9.9-16
+  - Bugfixes, Stream Log Updates
+
 - 2020-04-08 - v2.9.8
   - Adding previously integrated, yet not documented variables for `stream/meta` start commands
   - `stream/meta` now also provides appropriate `wave` data for channels, which in some cases has failed before
@@ -57,7 +70,7 @@ This changelog serves as a place for all changes around the public SWR Radiohub 
   - app register endpoint now serves the id in the field `appId`, no longer in `id`
 
 - 2019-12-05 - v2.6.3
-  - content API now requires authentification 
+  - content API now requires authentification
 
 - 2019-11-25 - v2.6.2
   - JSON responses in Radiohub production will no longer include tabs for easier visual output
@@ -96,8 +109,10 @@ This changelog serves as a place for all changes around the public SWR Radiohub 
   - First version of Open API
   - Adding traffic search and geo distance calculation
 
+### Style
 
 @ Future editors, please stick to this format ;-)
+
 - YYYY-MM-DD - v0.0.0
   - Description
   - Maybe more description.
