@@ -10,7 +10,7 @@
     "license" : {
       "name" : "© SWR audio lab"
     },
-    "version" : "2.9.8"
+    "version" : "2.10.3"
   },
   "servers" : [ {
     "url" : "https://api.lab.swr.de/radiohub",
@@ -474,7 +474,7 @@
           }
         } ],
         "requestBody" : {
-          "description" : "- When posting a feedback entry, `name` (body) and `appId` (query) are always required.\n- `city` is only optional for _dasding_, otherwise required as well.\n- Each post needs to contain either `file` or `message`.\n- The field `file` can be an image (jpg/ png), audio (aac/ mp3) orvideo (mp4/ mov) up to 50MB.\n- The station will be determined based on the user's `appId`.\n",
+          "description" : "- When posting a feedback entry, `name` (body) and `appId` (query) are always required.\n- `city` is only optional for _dasding_, otherwise required as well.\n- Each post needs to contain either `file` or `message`.\n- The field `file` can be an image (e.g. jpg or png), audio (e.g. aac or mp3) or video (e.g. mp4 or mov) up to 50MB.\n- The station will be determined based on the user's `appId`.\n",
           "content" : {
             "multipart/form-data" : {
               "schema" : {
@@ -2291,10 +2291,6 @@
       "infoResponse" : {
         "type" : "object",
         "properties" : {
-          "poweredBy" : {
-            "type" : "string",
-            "example" : "SWR audio lab"
-          },
           "trace" : {
             "type" : "string",
             "example" : "xyz"

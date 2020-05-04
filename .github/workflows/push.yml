@@ -1,12 +1,18 @@
 name: radiohub-docs push Docker
 
+
 on:
   push:
     branches:
     - master
 
+
+env:
+  IMAGE_NAME: swr-radiohub-docs
+
+
 jobs:
-  radiohub-docs:
+  deploy:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout repo 👀
@@ -22,13 +28,26 @@ jobs:
       run: "gcloud auth configure-docker"
 
     - name: Building docker image 🚧
-      run: docker build ./ --file ./Dockerfile -t swr-radiohub-docs
+      run: docker build ./ --file ./Dockerfile -t image
 
-    - name: Tagging docker 🏷
-      run: docker tag swr-radiohub-docs eu.gcr.io/swr-lab/swr-radiohub-docs:git-$(date +%j)-$GITHUB_SHA
+    - name: Set Cloud Run environment
+      run: "gcloud config set run/platform managed"
 
-    - name: Pushing docker 🙇
-      run: docker push eu.gcr.io/swr-lab/swr-radiohub-docs:git-$(date +%j)-$GITHUB_SHA
+    - name: Set Cloud Run region
+      run: "gcloud config set run/region europe-west1"
+
+    - name: Tagging & Pushing docker 🏷
+      run: |
+        # Strip git ref prefix from version
+        VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
+
+        # Strip "v" prefix from tag name
+        [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
+        
+        docker tag image eu.gcr.io/swr-lab/$IMAGE_NAME:git-$(date +%j)-$VERSION-$GITHUB_SHA
+        docker push eu.gcr.io/swr-lab/$IMAGE_NAME:git-$(date +%j)-$VERSION-$GITHUB_SHA
+  
+        gcloud run deploy $IMAGE_NAME --image eu.gcr.io/swr-lab/$IMAGE_NAME:git-$(date +%j)-$VERSION-$GITHUB_SHA --project swr-lab
 
     - name: Logout 👋
       run: docker logout
