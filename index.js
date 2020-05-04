@@ -8,17 +8,26 @@
 
 */
 
-const IS_DEV 				= (process.env.IS_DEV != 'true') ? false : true
-const IS_GITHUB 			= (process.env.IS_GITHUB != 'true') ? false : true
-console.log('hello world', { IS_DEV }, { IS_GITHUB })
+
+const yHostName 			= require('./yHostName')()
+
+const IS_DEV 				= (process.env.IS_DEV != 'true') 
+						? false 
+						: true
+const IS_GITHUB 			= (process.env.IS_GITHUB != 'true') 
+						? false 
+						: true
+const PORT				= yHostName == 'gcr' 
+						? 8080 
+						: 7105
+console.log('hello world', JSON.stringify({ IS_DEV, IS_GITHUB, PORT }))
 
 
-const express		= require('express')
-const app		= express()
+const express				= require('express')
+const app				= express()
 
-
-const swaggerUi		= require('swagger-ui-express')
-const swaggerDocument	= require('./openapi.json')
+const swaggerUi				= require('swagger-ui-express')
+const swaggerDocument			= require('./openapi.json')
 
 
 const customCss = 'label { display: inline; padding: 0; } ' +
@@ -65,9 +74,6 @@ const options = {
 }
 
 
-app.get('/', function (req, res) {
-	res.sendStatus(200)
-})
 
 app.get('/radiohub-docs/openapi.yaml', function(req, res, next) {
 	res.sendFile(__dirname + '/openapi.yaml')
@@ -81,10 +87,12 @@ app.get('/radiohub-docs/changelog', function(req, res, next) {
 	res.redirect('https://github.com/swrlab/swr-radiohub-docs/blob/master/CHANGELOG.md')
 })
 
+app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options))
 app.use('/radiohub-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options))
 
 
-app.listen(7105)
+app.listen(PORT)
+console.log('service is running @' + PORT)
 
 if(IS_GITHUB) {
 	process.exit()
