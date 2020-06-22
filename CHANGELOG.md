@@ -8,6 +8,18 @@ Go to [api.lab.swr.de/radiohub-docs](https://api.lab.swr.de/radiohub-docs/#/) fo
 
 This changelog serves as a place for all changes around the public SWR Radiohub API service.
 
+- 2020-06-22 - v2.13.0
+  - Bugfix when upstream host has been removed from the internet
+
+- 2020-06-16 - v2.12.0
+  - Adding `isLikeable` flag to the `track` object of `/v2/stream`.
+
+- 2020-06-10 - v2.11.0
+  - Enabling client-side likes of `track` objects with enforced rate and collection limits.
+
+- 2020-05-06 - v2.10.4
+  - Additional internal development stages have been added.
+
 - 2020-04-30 - v2.10.3
   - `stream/*` calls no longer include link to docs in return object, unless an error occured.
   - Error code when `appId` is not valid has been changed to `403`. If unset or basic auth not provided `401`.

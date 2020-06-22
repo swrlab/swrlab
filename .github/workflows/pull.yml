@@ -10,14 +10,26 @@ jobs:
   run-npm:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/setup-node@v1
+    - uses: actions/setup-node@v2.0.0
       with:
         node-version: 12
+
     - name: Checkout repo 👀
-      uses: actions/checkout@v1
+      uses: actions/checkout@v2.3.1
 
-    - name: Install Dependencies
-      run: npm install
+    - name: Get yarn cache directory path
+      id: yarn-cache-dir-path
+      run: echo "::set-output name=dir::$(yarn cache dir)"
 
-    - name: Run index
-      run: npm run test
+    - uses: actions/cache@v1
+      with:
+        path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+        key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
+
+    - name: 📦 Install Dependencies
+      run: yarn
+
+    - name: ❓ Run test
+      run: yarn test
