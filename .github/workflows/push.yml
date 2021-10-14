@@ -44,7 +44,10 @@ jobs:
         docker tag image eu.gcr.io/swr-lab/$IMAGE_NAME:git-$(date +%j)-$VERSION-$GITHUB_SHA
         docker push eu.gcr.io/swr-lab/$IMAGE_NAME:git-$(date +%j)-$VERSION-$GITHUB_SHA
   
-        gcloud run deploy swr-radiohub-docs --image eu.gcr.io/swr-lab/$IMAGE_NAME:git-$(date +%j)-$VERSION-$GITHUB_SHA --project swr-lab
+        gcloud run deploy swr-radiohub-docs \
+          --image eu.gcr.io/swr-lab/$IMAGE_NAME:git-$(date +%j)-$VERSION-$GITHUB_SHA \
+          --service-account "radiohub-docs@swr-lab.iam.gserviceaccount.com" \
+          --project swr-lab
 
     - name: Logout 👋
       run: docker logout
