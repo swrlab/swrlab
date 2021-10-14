@@ -1,15 +1,19 @@
-FROM node:12.16-alpine
+# Load desired node pckg
+FROM node:16.10-alpine
 
 # Create app directory
 WORKDIR /web/app
 
-# Install app dependencies
-COPY package*.json ./
-RUN npm install
-
-# Bundle app source
+# Copy app source
 COPY . .
 
-# run container
+# Install node dependencies with clean slate
+# Also download tokens
+RUN rm -rf node_modules && \
+	yarn install --production
+
+# Expose port
 EXPOSE 80
-CMD [ "npm", "run", "cloud" ]
+
+# Run app
+CMD [ "yarn", "cloud" ]

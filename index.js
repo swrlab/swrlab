@@ -2,35 +2,19 @@
 
 	swr-radiohub-docs
 
-	AUTHOR		Daniel Freytag
-			https://github.com/FRYTG
-			https://twitter.com/FRYTG
-
 */
 
+const IS_GITHUB = process.env.IS_GITHUB === 'true'
 
-const yHostName 			= require('./yHostName')()
+const express = require('express')
+const swaggerUi = require('swagger-ui-express')
 
-const IS_DEV 				= (process.env.IS_DEV != 'true') 
-						? false 
-						: true
-const IS_GITHUB 			= (process.env.IS_GITHUB != 'true') 
-						? false 
-						: true
-const PORT				= yHostName == 'gcr' 
-						? 8080 
-						: 7105
-console.log('hello world', JSON.stringify({ IS_DEV, IS_GITHUB, PORT }))
+const app = express()
 
+const swaggerDocument = require('./openapi.json')
 
-const express				= require('express')
-const app				= express()
-
-const swaggerUi				= require('swagger-ui-express')
-const swaggerDocument			= require('./openapi.json')
-
-
-const customCss = 'label { display: inline; padding: 0; } ' +
+const customCss =
+	'label { display: inline; padding: 0; } ' +
 	'.swagger-ui .servers>label select { margin: 0; } ' +
 	'span.servers-title { display: none; }' +
 	'.swagger-ui select { font-weight: 400; }' +
@@ -39,7 +23,7 @@ const customCss = 'label { display: inline; padding: 0; } ' +
 	'tr:nth-child(even) { background: hsl(200, 0%, 96%); } ' +
 	'.swagger-ui .topbar { background: #003082; } ' +
 	'.swagger-ui .topbar img { display: none; }' +
-	'.swagger-ui .topbar .topbar-wrapper:after { content: \'SWR audio lab - Radiohub Documentation\'; padding: 15px 0; color: white; font-size: 25px; font-weight: 600; }' +
+	".swagger-ui .topbar .topbar-wrapper:after { content: 'SWR audio lab - Radiohub Documentation'; padding: 15px 0; color: white; font-size: 25px; font-weight: 600; }" +
 	'.swagger-ui .topbar .download-url-wrapper { display: none } ' +
 	'.swagger-ui * { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji" !important; }' +
 	'div.swagger-ui { max-width: 1080px; margin: 0 auto; } ' +
@@ -63,37 +47,33 @@ const customCss = 'label { display: inline; padding: 0; } ' +
 	'div.swagger-ui .opblock.opblock-get { border-color: #003082; background: rgba(0, 148, 230, 0.03); } ' +
 	'div.swagger-ui .opblock.opblock-post .opblock-summary { padding: 15px; } '
 
-
-
 const options = {
-	explorer:		true,
+	explorer: true,
 	customCss,
-	customCssUrl:		'https://swr-lab-static.storage.googleapis.com/swr-audio-lab/swr-lab-dashboard/css/lab-dashboard-style-v2.css?024',
-	customeSiteTitle:	'SWR Radiohub API Documentation',
-	customfavIcon:		'https://api.lab.swr.de/images/v1/get/swr-audio-lab-icon-black-smooth/img?width=512&d=swr-radiohub-docs'
+	customCssUrl:
+		'https://swr-lab-static.storage.googleapis.com/swr-audio-lab/swr-lab-dashboard/css/lab-dashboard-style-v2.css?024',
+	customeSiteTitle: 'SWR Radiohub API Documentation',
+	customfavIcon:
+		'https://api.lab.swr.de/images/v1/get/swr-audio-lab-icon-black-smooth/img?width=512&d=swr-radiohub-docs',
 }
 
-
-
-app.get('/radiohub-docs/openapi.yaml', function(req, res, next) {
-	res.sendFile(__dirname + '/openapi.yaml')
+app.get('/radiohub-docs/openapi.yaml', (req, res) => {
+	res.sendFile(`${__dirname}/openapi.yaml`)
 })
 
-app.get('/radiohub-docs/openapi.json', function(req, res, next) {
-	res.sendFile(__dirname + '/openapi.json')
+app.get('/radiohub-docs/openapi.json', (req, res) => {
+	res.sendFile(`${__dirname}/openapi.json`)
 })
 
-app.get('/radiohub-docs/changelog', function(req, res, next) {
+app.get('/radiohub-docs/changelog', (req, res) => {
 	res.redirect('https://github.com/swrlab/swr-radiohub-docs/blob/master/CHANGELOG.md')
 })
 
 app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options))
 app.use('/radiohub-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options))
 
+app.listen(process.env.PORT || 8080)
 
-app.listen(PORT)
-console.log('service is running @' + PORT)
-
-if(IS_GITHUB) {
+if (IS_GITHUB) {
 	process.exit()
 }
