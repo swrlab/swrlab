@@ -19,7 +19,7 @@
 		"@swrlab/eslint-plugin-swr": "0.1.2",
 		"@swrlab/swr-prettier-config": "^0.1.2",
 		"eslint": "^8.0.0",
-		"nodemon": "^2.0.13",
+		"nodemon": "^2.0.14",
 		"prettier": "^2.4.1"
 	},
 	"prettier": "@swrlab/swr-prettier-config"
