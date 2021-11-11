@@ -50,8 +50,7 @@ const customCss =
 const options = {
 	explorer: true,
 	customCss,
-	customCssUrl:
-		'https://swr-lab-static.storage.googleapis.com/swr-audio-lab/swr-lab-dashboard/css/lab-dashboard-style-v2.css?024',
+	customCssUrl: 'https://dashboard.lab.swr.de/static/css/lab-dashboard-style-v2.css?024',
 	customeSiteTitle: 'SWR Radiohub API Documentation',
 	customfavIcon:
 		'https://api.lab.swr.de/images/v1/get/swr-audio-lab-icon-black-smooth/img?width=512&d=swr-radiohub-docs',
