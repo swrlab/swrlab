@@ -1,9 +1,9 @@
 openapi: 3.0.0
 info:
-  title: SWR audio lab - Radiohub
+  title: SWR Audio Lab - Radiohub
   description:
-    "This documentation is also available as [openapi.json](https://api.lab.swr.de/radiohub-docs/openapi.json)\
-    \ or [openapi.yaml](https://api.lab.swr.de/radiohub-docs/openapi.yaml).\n\n  \n\
+    "This documentation is also available as [openapi.json](https://docs.radiohub.swr.digital/openapi.json)\
+    \ or [openapi.yaml](https://docs.radiohub.swr.digital/openapi.yaml).\n\n  \n\
     Authorization keys can be requested via [lab@swr.de](mailto:lab@swr.de) and shall\
     \ be sent as base64 encoded basic auth information in the header. Please report\
     \ all problems or bugs to [lab@swr.de](mailto:lab@swr.de) or via the [Github repo](https://github.com/swrlab/swr-radiohub-docs/issues)\
@@ -12,10 +12,10 @@ info:
     \ production environments both access production data. The `appId` therefore follows\
     \ the same structure. Caching is separate for each stage."
   contact:
-    name: SWR audio lab
+    name: SWR Audio Lab
     email: lab@swr.de
   license:
-    name: © SWR audio lab
+    name: © SWR Audio Lab
   version: 2.10.3
 servers:
   - url: https://api.lab.swr.de/radiohub
@@ -459,7 +459,7 @@ paths:
       summary: Load an image from image service
       description:
         Load the original image or resized version. A list of all keys
-        can be seen in the SWR audio lab dashboard. Contact lab@swr.de for access.
+        can be seen in the SWR Audio Lab dashboard. Contact lab@swr.de for access.
         Uncached images will be generated and served from storage. See response header
         "swr-datasource" for details. Clients should also respect cache control if
         possible.
@@ -551,7 +551,7 @@ paths:
           in: path
           description:
             Set key for the image that shall be displayed. A list of all
-            keys can be seen in the SWR audio lab dashboard. Contact lab@swr.de for
+            keys can be seen in the SWR Audio Lab dashboard. Contact lab@swr.de for
             access.
           required: true
           style: simple
@@ -582,7 +582,7 @@ paths:
       summary: Load an image from swr2 image service
       description:
         Load the original image or resized version. A list of all keys
-        can be seen in the SWR audio lab dashboard. Contact lab@swr.de for access.
+        can be seen in the SWR Audio Lab dashboard. Contact lab@swr.de for access.
         Uncached images will be generated and served from storage. See response header
         "swr-datasource" for details. Clients should also respect cache control if
         possible.
@@ -665,7 +665,7 @@ paths:
           in: path
           description:
             Set key for the image that shall be displayed. A list of all
-            keys can be seen in the SWR audio lab dashboard. Contact lab@swr.de for
+            keys can be seen in the SWR Audio Lab dashboard. Contact lab@swr.de for
             access.
           required: true
           style: simple
@@ -949,7 +949,7 @@ paths:
           description:
             "_(deviceType)_ \n\nSet the type of device and/or aggregator.\
             \ Example list is not complete and only serves as a reference. Names are\
-            \ provided by SWR audio lab."
+            \ provided by SWR Audio Lab."
           required: false
           style: form
           explode: true

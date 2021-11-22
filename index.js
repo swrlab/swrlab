@@ -23,14 +23,14 @@ const customCss =
 	'tr:nth-child(even) { background: hsl(200, 0%, 96%); } ' +
 	'.swagger-ui .topbar { background: #003082; } ' +
 	'.swagger-ui .topbar img { display: none; }' +
-	".swagger-ui .topbar .topbar-wrapper:after { content: 'SWR audio lab - Radiohub Documentation'; padding: 15px 0; color: white; font-size: 25px; font-weight: 600; }" +
+	".swagger-ui .topbar .topbar-wrapper:after { content: 'SWR Audio Lab - Radiohub Documentation'; padding: 15px 0; color: white; font-size: 25px; font-weight: 600; }" +
 	'.swagger-ui .topbar .download-url-wrapper { display: none } ' +
 	'.swagger-ui * { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji" !important; }' +
 	'div.swagger-ui { max-width: 1080px; margin: 0 auto; } ' +
-	'div.swagger-ui .wrapper { padding: 15px; background: rgba(245,245,252,0.7) }' +
+	'div.swagger-ui .wrapper { padding: 15px; background: white; height: auto; }' +
 	'div.swagger-ui .info .title small pre { padding: 2px 5px; }' +
-	'div.information-container.wrapper { margin: 6% 0 6% 0; padding: 15px; }' +
-	'div.swagger-ui .scheme-container { background: none; margin: 0 0 6% 0; padding: 0; box-shadow: none; }' +
+	'div.information-container.wrapper { margin: 20px 0; padding: 15px; }' +
+	'div.swagger-ui .scheme-container { background: none; margin: 0 0 20px 0; padding: 0; box-shadow: none; }' +
 	'div.swagger-ui .scheme-container .schemes { margin: 0; padding: 15px; }' +
 	'section.swagger-ui section.models { border: 0; }' +
 	'div.swagger-ui section.models .model-container { background: rgba(255,255,255,0.6) !important; } ' +
@@ -50,10 +50,15 @@ const customCss =
 const options = {
 	explorer: true,
 	customCss,
-	customCssUrl: 'https://dashboard.lab.swr.de/static/css/lab-dashboard-style-v2.css?024',
+	customCssUrl: 'https://dashboard.lab.swr.de/static/dist/dashboard.min.css?v=swr-radiohub-docs-v1',
 	customeSiteTitle: 'SWR Radiohub API Documentation',
-	customfavIcon:
-		'https://api.lab.swr.de/images/v1/get/swr-audio-lab-icon-black-smooth/img?width=512&d=swr-radiohub-docs',
+	customfavIcon: 'https://cdn-static.lab.swr.de/images/v1/get/swr-audio-lab-a-white/img?width=512',
+	swaggerOptions: {
+		defaultModelExpandDepth: -1,
+		defaultModelRendering: -1,
+		tryItOutEnabled: false,
+		docExpansion: 'none'
+	},
 }
 
 app.get('/radiohub-docs/openapi.yaml', (req, res) => {
@@ -69,7 +74,6 @@ app.get('/radiohub-docs/changelog', (req, res) => {
 })
 
 app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options))
-app.use('/radiohub-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options))
 
 app.listen(process.env.PORT || 8080)
 

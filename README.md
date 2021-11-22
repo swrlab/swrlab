@@ -12,11 +12,11 @@ For questions or problems, please [open an issue](https://github.com/swrlab/swr-
 The OpenAPI (version 3.0.0) documentation is available through this repo or hosted online.
 
 - [openapi.json](openapi.json)
-- [web link for openapi.json](https://api.lab.swr.de/radiohub-docs/openapi.json)
+- [web link for openapi.json](https://docs.radiohub.swr.digital/openapi.json)
 - [openapi.yaml](openapi.yaml)
-- [web link for openapi.yaml](https://api.lab.swr.de/radiohub-docs/openapi.yaml)
+- [web link for openapi.yaml](https://docs.radiohub.swr.digital/openapi.yaml)
 
-The visual swagger page is available on [api.lab.swr.de/radiohub-docs](https://api.lab.swr.de/radiohub-docs/).
+The visual swagger page is available on [api.lab.swr.de/radiohub-docs](https://docs.radiohub.swr.digital/).
 
 ## More documents
 

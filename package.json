@@ -5,7 +5,7 @@
 	"main": "index.js",
 	"scripts": {
 		"cloud": "IS_GITHUB=false IS_DEV=true IS_LOCAL=false node index.js",
-		"dev": "IS_GITHUB=false IS_DEV=true IS_LOCAL=true node index.js",
+		"local": "IS_GITHUB=false IS_DEV=true IS_LOCAL=true nodemon index.js",
 		"test": "IS_GITHUB=true IS_DEV=true IS_LOCAL=true node index.js"
 	},
 	"author": "Daniel Freytag, SWR",
@@ -18,8 +18,8 @@
 	"devDependencies": {
 		"@swrlab/eslint-plugin-swr": "0.1.2",
 		"@swrlab/swr-prettier-config": "^0.1.2",
-		"eslint": "^8.0.0",
-		"nodemon": "^2.0.13",
+		"eslint": "^8.3.0",
+		"nodemon": "^2.0.15",
 		"prettier": "^2.4.1"
 	},
 	"prettier": "@swrlab/swr-prettier-config"

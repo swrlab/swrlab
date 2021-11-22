@@ -2,7 +2,7 @@
 
 by [**SWR audio lab**](https://lab.swr.de/)  
 
-Go to [api.lab.swr.de/radiohub-docs](https://api.lab.swr.de/radiohub-docs/#/) for the Swagger documentation.
+Go to [api.lab.swr.de/radiohub-docs](https://docs.radiohub.swr.digital/#/) for the Swagger documentation.
 
 ## Changelog
 
