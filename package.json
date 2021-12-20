@@ -13,7 +13,7 @@
 	"private": true,
 	"dependencies": {
 		"swagger-ui-express": "4.1.6",
-		"express": "4.17.1"
+		"express": "4.17.2"
 	},
 	"devDependencies": {
 		"@swrlab/eslint-plugin-swr": "0.1.2",
