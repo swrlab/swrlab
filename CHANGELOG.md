@@ -8,6 +8,25 @@ Go to [api.lab.swr.de/radiohub-docs](https://docs.radiohub.swr.digital/#/) for t
 
 This changelog serves as a place for all changes around the public SWR Radiohub API service.
 
+- 2022-03-15 - v2.14.0
+  - security: fix `CWE-918`
+  - update: actions/checkout to `v3`
+  - update: docker/node to `16.14`
+
+- 2022-02-04 - v2.13.4
+  - add: account linking workflows
+
+- 2021-11-11 - v2.13.3
+  - fix: remove reference to old storage bucket
+
+- 2021-10-14 - v2.13.2
+  - update: dependencies and deployment
+  - update: dependabot
+  - update: service account
+
+- 2020-07-02 - v2.13.1
+  - Adding CodeQL
+
 - 2020-06-22 - v2.13.0
   - Bugfix when upstream host has been removed from the internet
 

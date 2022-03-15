@@ -16,7 +16,7 @@ info:
     email: lab@swr.de
   license:
     name: © SWR Audio Lab
-  version: 2.10.3
+  version: 2.14.0
 servers:
   - url: https://api.lab.swr.de/radiohub
     description: Radiohub production
