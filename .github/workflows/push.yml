@@ -18,7 +18,7 @@ jobs:
       VERSION: ${{ steps.push.outputs.VERSION }}
     steps:
     - name: Checkout repo 👀
-      uses: actions/checkout@v2.4.0
+      uses: actions/checkout@v3
 
     - name: 🔑 Setup Google Cloud Auth swr-lab
       uses: "google-github-actions/auth@v0"

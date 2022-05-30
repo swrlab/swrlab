@@ -1,6 +1,6 @@
 {
 	"name": "swr-radiohub-docs",
-	"version": "2.10.0",
+	"version": "2.14.0",
 	"description": "Documentation for SWR Radiohub",
 	"main": "index.js",
 	"scripts": {
@@ -12,15 +12,15 @@
 	"license": "UNLICENSED",
 	"private": true,
 	"dependencies": {
-		"swagger-ui-express": "4.1.6",
-		"express": "4.17.1"
+		"swagger-ui-express": "4.3.0",
+		"express": "4.17.3"
 	},
 	"devDependencies": {
 		"@swrlab/eslint-plugin-swr": "0.1.2",
 		"@swrlab/swr-prettier-config": "^0.1.2",
-		"eslint": "^8.3.0",
+		"eslint": "^8.11.0",
 		"nodemon": "^2.0.15",
-		"prettier": "^2.4.1"
+		"prettier": "^2.5.1"
 	},
 	"prettier": "@swrlab/swr-prettier-config"
 }
