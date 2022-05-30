@@ -20,11 +20,13 @@ jobs:
     - name: Checkout repo 👀
       uses: actions/checkout@v2.4.0
 
-    - name: Setup Google Cloud Auth 🔑
-      uses: google-github-actions/setup-gcloud@master
+    - name: 🔑 Setup Google Cloud Auth swr-lab
+      uses: "google-github-actions/auth@v0"
       with:
-        service_account_key: ${{ secrets.GCP_IAM_ORG_LAB_KEY }}
-        export_default_credentials: true
+        credentials_json: ${{ secrets.GCP_IAM_ORG_LAB_KEY }}
+
+    - name: 🏗 Set up Cloud SDK
+      uses: "google-github-actions/setup-gcloud@v0"
         
     - name: Login to Registry 🔑
       run: "gcloud auth configure-docker $GCP_REGISTRY_DOMAIN"
