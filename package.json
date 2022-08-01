@@ -16,7 +16,7 @@
 		"express": "4.17.3"
 	},
 	"devDependencies": {
-		"@swrlab/eslint-plugin-swr": "0.1.2",
+		"@swrlab/eslint-plugin-swr": "0.2.0",
 		"@swrlab/swr-prettier-config": "^0.1.2",
 		"eslint": "^8.11.0",
 		"nodemon": "^2.0.15",
