@@ -34,12 +34,6 @@ jobs:
     - name: Build docker image 🚧
       run: docker build ./ --file ./Dockerfile -t image
 
-    - name: Set Cloud Run environment
-      run: "gcloud config set run/platform managed"
-
-    - name: Set Cloud Run region
-      run: "gcloud config set run/region europe-west1"
-
     - name: Tagging & Pushing docker 🏷
       id: push
       run: |
@@ -63,13 +57,6 @@ jobs:
         # Print vars
         echo "::notice title=docker-BRANCH::$BRANCH"
         echo "::notice title=docker-VERSION::$VERSION"
-
-    - name: Update Cloud Run
-      run: |
-        gcloud run deploy swr-radiohub-docs \
-          --image $GCP_REGISTRY_DOMAIN/$GCP_PROJECT_ID/$IMAGE_NAME:${{ steps.push.outputs.version }} \
-          --service-account "radiohub-docs@swr-lab.iam.gserviceaccount.com" \
-          --project swr-lab
 
     - name: Logout 👋
       run: docker logout
