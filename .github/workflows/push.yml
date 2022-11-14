@@ -26,7 +26,7 @@ jobs:
         credentials_json: ${{ secrets.GCP_IAM_ORG_LAB_KEY }}
 
     - name: 🏗 Set up Cloud SDK
-      uses: "google-github-actions/setup-gcloud@v0"
+      uses: "google-github-actions/setup-gcloud@v1"
         
     - name: Login to Registry 🔑
       run: "gcloud auth configure-docker $GCP_REGISTRY_DOMAIN"
