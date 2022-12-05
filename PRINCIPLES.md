@@ -134,7 +134,7 @@ Automated monitors and alerts help detect issues and support our manual observat
 
 We schedule our on-call calender around our small teams' availability. Personal life and commitments always have priority.
 
-Alerting has pre-defined warning and alerting levels as well as escalation policies. Most of which are managed by IaC.
+Alerting has predefined warning and alerting levels as well as escalation policies. Most of which are managed by IaC.
 
 Only acknowledge incidents that you have the ability and capacity to investigate and resolve. Otherwise escalate it to a fellow team member. Communicate large-scale problems to other internal and external stakeholders to keep them in the loop.
 
@@ -151,7 +151,7 @@ Only acknowledge incidents that you have the ability and capacity to investigate
 - **Docker** - Containerized deployment platform [aws.amazon.com/docker](https://aws.amazon.com/docker/) / [ibm.com/cloud/learn/docker](https://www.ibm.com/cloud/learn/docker)
 - **DRP** - Disaster Recovery Plan [ibm.com/.../disaster-recovery-plan](https://www.ibm.com/uk-en/services/business-continuity/disaster-recovery-plan) / [kyndryl.com/.../disaster-recovery-plan](https://www.kyndryl.com/us/en/learn/disaster-recovery-plan)
 - **EBU** - European Broadcasting Union [ebu.ch](https://www.ebu.ch)
-- **ESLint** - Javascript Linter [eslint.org](https://eslint.org)
+- **ESLint** - JavaScript Linter [eslint.org](https://eslint.org)
 - **FaaS** - Function as a service (e.g. GCP Cloud Functions, AWS Lambda) [redhat.com/.../what-is-faas](https://www.redhat.com/en/topics/cloud-native-apps/what-is-faas)
 - **FIDO** - Fast IDentity Online [yubico.com/.../fido-2](https://www.yubico.com/resources/glossary/fido-2/)
 - **GCP** - Google Cloud Platform [cloud.google.com](https://cloud.google.com)
@@ -194,7 +194,7 @@ Only acknowledge incidents that you have the ability and capacity to investigate
 - Conway’s Law about organizational structures and their output [thoughtworks.com/.../demystifying-conways-law](https://www.thoughtworks.com/insights/articles/demystifying-conways-law)
 - Incident Management Handbook from Atlassian [atlassian.com/incident-management](https://www.atlassian.com/incident-management/get-the-handbook)
 - Gartner Hype Cycle [gartner.com/.../methodologies/gartner-hype-cycle](https://www.gartner.com/en/research/methodologies/gartner-hype-cycle) / [robertvaneekhout.nl/.../gartner-hype-cycle-...](https://robertvaneekhout.nl/2018/04/gartner-hype-cycle-welke-technologie-blijft-plakken-en-welke-gaat-nodeloos)
-- User-Centered Development Process [medien.ifi.lmu.de/lehre/ws0607/mmi1/mmi4.pdf](https://www.medien.ifi.lmu.de/lehre/ws0607/mmi1/mmi4.pdf)
+- User-Centered Development Process [medien.ifi.lmu.de/lehre/ws0607/mmi1/mmi4](https://www.medien.ifi.lmu.de/lehre/ws0607/mmi1/mmi4.pdf)
 - Radio in the Connected Car [tech.ebu.ch/publications/radio-in-the-connected-car](https://tech.ebu.ch/publications/radio-in-the-connected-car)
 
 ### DevOp Structures & Reports
