@@ -1,3 +1,4 @@
+# yamllint disable rule:line-length
 openapi: 3.0.0
 info:
   title: SWR Audio Lab - Radiohub
