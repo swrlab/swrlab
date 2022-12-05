@@ -25,10 +25,3 @@ They can all be found in [/docs](./docs/).
 ## Public Key
 
 You can find our public key for `lab [at] swr.de` on [keys.openpgp.org](https://keys.openpgp.org/search?q=lab%40swr.de).
-
-## Authors
-
-- Daniel Freytag - [GitHub @FRYTG](https://github.com/FRYTG) / [Twitter @FRYTG](https://twitter.com/FRYTG)
-- Christian Hufnagel - [GitHub @chhufnagel](https://github.com/chhufnagel) / [Twitter @hufnagel](https://twitter.com/hufnagel)
-- Rafael Mäuer - [GitHub @rafaelmaeuer](https://github.com/rafaelmaeuer)
-- Pascal Weiland - [GitHub @weiland](https://github.com/weiland) / [Twitter @pascalweiland](https://twitter.com/pascalweiland)

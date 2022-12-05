@@ -35,9 +35,9 @@ We’re involved in several working groups in the ARD and EBU to improve exchang
 
 For Connected Cars and Devices we developed a set of four principles to guide our work:
 
-1. First, radio must remain easy to use. It should start with the push (or touch) of a button. Audiences love radio precisely because it is so easy and because they don’t need to choose.
-2. Secondly, radio should not just be easy to find, it should be impossible to miss. Just like the physical radio button used to be, it should exist on that first level and not disappear in the jungle of apps.
-3. Thirdly, radio in the car should be focused and personalized. We should make smart suggestions based on prior listening but be transparent with the data we collect.
+1. Radio must remain easy to use. It should start with the push (or touch) of a button. Audiences love radio precisely because it is so easy and because they don’t need to choose.
+2. Radio should not just be easy to find, it should be impossible to miss. Just like the physical radio button used to be, it should exist on that first level and not disappear in the jungle of apps.
+3. Radio in the car should be focused and personalized. We should make smart suggestions based on prior listening but be transparent with the data we collect.
 4. And lastly, radio comes as a package. It includes public and private stations, as well as local, national and international broadcasters. All radio stations should be found in the same place.
 
 ## Project Management & Communication
@@ -145,7 +145,7 @@ We schedule our on-call calendar around our small teams' availability. Personal 
 
 Alerting has predefined warn and error levels as well as escalation policies. Most of which are managed by IaC.
 
-Everyone on-call should only acknowledge incidents that they have the ability and capacity to investigate and resolve. Otherwise, escalate it to a fellow team member. Proactively communicate large-scale problems to other internal and external stakeholders to keep them in the loop.
+Everyone on-call should only acknowledge incidents that they have the ability and capacity to investigate and resolve. Otherwise, incidents should be escalated to a fellow team member. Large-scale problems must proactively be communicated to other internal and external stakeholders to keep them in the loop.
 
 ## Definitions
 
@@ -225,7 +225,7 @@ Everyone on-call should only acknowledge incidents that they have the ability an
 ### Technical Guides & Tools
 
 - GPG for Mac [gpgtools.org](https://gpgtools.org)
-- Setting up GPG and Commit Signatures for GitHub [docs.github.com/en/authentication/](https://docs.github.com/en/authentication/managing-commit-signature-verification/telling-git-about-your-signing-key)
+- Setting up GPG and Commit Signatures for GitHub [docs.github.com/en/authentication](https://docs.github.com/en/authentication/managing-commit-signature-verification/telling-git-about-your-signing-key)
 - npm Best Practices Guide [github.com/ossf/package-manager-best-practices](https://github.com/ossf/package-manager-best-practices/blob/main/published/npm.md)
 - NodeJS Release Schedule [github.com/nodejs/release](https://github.com/nodejs/release#release-schedule)
 - SPDX License List [spdx.org/licenses](https://spdx.org/licenses/)
@@ -239,6 +239,13 @@ You can find our public key for `lab [at] swr.de` on [keys.openpgp.org](https://
 ## Disclaimer
 
 Tools, products, links, and services mentioned in this document should not be considered endorsements or recommendations and are purely informational.
+
+## Authors
+
+- Daniel Freytag - [GitHub @FRYTG](https://github.com/FRYTG) / [Twitter @FRYTG](https://twitter.com/FRYTG)
+- Christian Hufnagel - [GitHub @chhufnagel](https://github.com/chhufnagel) / [Twitter @hufnagel](https://twitter.com/hufnagel)
+- Rafael Mäuer - [GitHub @rafaelmaeuer](https://github.com/rafaelmaeuer) / [Twitter @rafaelmaeuer](https://twitter.com/rafaelmaeuer)
+- Pascal Weiland - [GitHub @weiland](https://github.com/weiland) / [Twitter @pascalweiland](https://twitter.com/pascalweiland)
 
 ## License
 
