@@ -8,7 +8,7 @@ by **SWR Audio Lab**
 
 ## Token Auth
 
-The Radiohub API requires authentication for several queries, as defined in the Open API documents.  
+The Radiohub API requires authentication for several queries, as defined in the Open API documents.
 
 Authentication works via HTTP Basic Authorization using a base64 encoded username and password combination: [developer.mozilla.org/.../Headers/Authorization](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Authorization)
 

@@ -55,7 +55,7 @@ This changelog serves as a place for all changes around the public SWR Radiohub 
 - 2020-04-08 - v2.9.8
   - Adding previously integrated, yet not documented variables for `stream/meta` start commands
   - `stream/meta` now also provides appropriate `wave` data for channels, which in some cases has failed before
-  - `stream/switch/news` now requires a channel id
+  - `stream/switch/news` now requires a channel ID
 
 - 2020-02-27 - v2.9.5
   - `wave` metadata will only be served once a session is being started (like identified by `data.session.hasChanged` bool)
@@ -83,7 +83,7 @@ This changelog serves as a place for all changes around the public SWR Radiohub 
   - `/content/collection/list` has been switched off
 
 - 2020-01-02 - v2.8.0 🍾🥂
-  - content API no longer serves thumbnail urls, content documents include `thumbRef` which can be used to load the image from `content/thumb`
+  - content API no longer serves thumbnail URLs, content documents include `thumbRef` which can be used to load the image from `content/thumb`
   - `isThumbAvailable` is now called `thumbIsAvailable`
   - new endpoint `content/latest/{id/ref}/{offset}`
 
@@ -98,7 +98,7 @@ This changelog serves as a place for all changes around the public SWR Radiohub 
 
 - 2019-12-10 - v2.6.5
   - Adding `appId` and /content details to docs
-  - app register endpoint now serves the id in the field `appId`, no longer in `id`
+  - app register endpoint now serves the ID in the field `appId`, no longer in `id`
 
 - 2019-12-05 - v2.6.3
   - content API now requires authentification

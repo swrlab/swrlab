@@ -1,32 +1,34 @@
-# SWR Radiohub
+# SWR Audio Lab
 
-by **SWR audio lab**
+## Principles
 
-## hello world
+Learn about our Engineering and Project Principles in [PRINCIPLES.md](PRINCIPLES.md).
 
-SWR Radiohub is the core API service by SWR audio lab to provide metadata to internal and external services. This repository includes the dynamic web rendering of the openapi files.
-For questions or problems, please [open an issue](https://github.com/swrlab/swr-radiohub-docs/issues/new) or contact lab@swr.de.
+## OpenAPI Documentation
 
-## OpenAPI configurations
+You can find the OpenAPI documentation in [/openapi](./openapi/).
 
-The OpenAPI (version 3.0.0) documentation is available through this repo or hosted online.
+## More from the Audio Lab
 
-- [openapi.json](openapi.json)
-- [web link for openapi.json](https://docs.radiohub.swr.digital/openapi.json)
-- [openapi.yaml](openapi.yaml)
-- [web link for openapi.yaml](https://docs.radiohub.swr.digital/openapi.yaml)
+- Our NodeJS tools: [`@swrlab/node-utils`](https://github.com/swrlab/node-utils) / on [npm `@swrlab/utils`](https://www.npmjs.com/package/@swrlab/utils)
+- Public repositories on GitHub: [swrlab/repositories](https://github.com/orgs/swrlab/repositories?q=&type=public&language=&sort=name)
+- Public packages on npm: [npmjs.com/org/swrlab](https://www.npmjs.com/org/swrlab)
 
-The visual swagger page is available on [api.lab.swr.de/radiohub-docs](https://docs.radiohub.swr.digital/).
+## More Documents
 
-## More documents
+They can all be found in [/docs](./docs/).
 
-- [AUTHENTICATION](docs/AUTHENTICATION.md) - Handling the Radiohub token auth.
-- [STREAMING](docs/STREAMING.md) - How to handle radio stream requests and interaction.
+- [ACCOUNT LINKING](docs/ACCOUNT-LINKING.md) - Handling account linking for ARD login
+- [AUTHENTICATION](docs/AUTHENTICATION.md) - Handling the Radiohub token auth
+- [STREAMING](docs/STREAMING.md) - How to handle radio stream requests and interaction
 
-## Changelog
+## Public Key
 
-A separate Changelog is available in [CHANGELOG.md](CHANGELOG.md)
+You can find our public key for `lab [at] swr.de` on [keys.openpgp.org](https://keys.openpgp.org/search?q=lab%40swr.de).
 
-## AUTHOR
+## Authors
 
-- **Daniel Freytag** - [Github](https://github.com/FRYTG) / [Twitter](https://twitter.com/FRYTG)
+- Daniel Freytag - [GitHub @FRYTG](https://github.com/FRYTG) / [Twitter @FRYTG](https://twitter.com/FRYTG)
+- Christian Hufnagel - [GitHub @chhufnagel](https://github.com/chhufnagel) / [Twitter @hufnagel](https://twitter.com/hufnagel)
+- Rafael Mäuer - [GitHub @rafaelmaeuer](https://github.com/rafaelmaeuer)
+- Pascal Weiland - [GitHub @weiland](https://github.com/weiland) / [Twitter @pascalweiland](https://twitter.com/pascalweiland)

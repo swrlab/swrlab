@@ -1,9 +1,13 @@
-name: radiohub-docs push
+name: OpenAPI Build
 
 on:
   push:
     branches:
-    - main
+      - feature/*
+      - dev/*
+      - main
+    paths:
+      - openapi/**
 
 env:
   IMAGE_NAME: deploy-radiohub-prod/docs
@@ -11,52 +15,52 @@ env:
   GCP_REGISTRY_DOMAIN: europe-west1-docker.pkg.dev
 
 jobs:
-  deploy:
+  docker:
     runs-on: ubuntu-latest
     outputs:
-      BRANCH: ${{ steps.push.outputs.BRANCH }}
       VERSION: ${{ steps.push.outputs.VERSION }}
     steps:
-    - name: Checkout repo 👀
-      uses: actions/checkout@v3
+      - name: Checkout repo 👀
+        uses: actions/checkout@v3
 
-    - name: 🔑 Setup Google Cloud Auth swr-lab
-      uses: "google-github-actions/auth@v0"
-      with:
-        credentials_json: ${{ secrets.GCP_IAM_ORG_LAB_KEY }}
+      - name: 🔑 Setup Google Cloud Auth
+        uses: 'google-github-actions/auth@v1'
+        with:
+          credentials_json: ${{ secrets.GCP_IAM_ORG_LAB_KEY }}
 
-    - name: 🏗 Set up Cloud SDK
-      uses: "google-github-actions/setup-gcloud@v0"
-        
-    - name: Login to Registry 🔑
-      run: "gcloud auth configure-docker $GCP_REGISTRY_DOMAIN"
+      - name: 🏗 Set up Cloud SDK
+        uses: 'google-github-actions/setup-gcloud@v1'
 
-    - name: Build docker image 🚧
-      run: docker build ./ --file ./Dockerfile -t image
+      - name: 🔑 Login to Registry
+        run: 'gcloud auth configure-docker $GCP_REGISTRY_DOMAIN'
 
-    - name: Tagging & Pushing docker 🏷
-      id: push
-      run: |
-        # Strip git ref prefix from version
-        BRANCH=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')  
+      - name: 🚧 Build docker image
+        run: docker build ./openapi --file ./openapi/Dockerfile -t image
 
-        # Strip "v" prefix from tag name
-        [[ "${{ github.ref }}" == "refs/tags/"* ]] && BRANCH=$(echo $BRANCH | sed -e 's/^v//')
-        
-        # Add custom wrapper syntax
-        VERSION=git-run${{ github.run_number }}-day$(date +%j)-$BRANCH-${{ github.actor }}-$GITHUB_SHA
+      - name: 🏷 Tagging & Pushing docker
+        id: push
+        run: |
+          # Strip git ref prefix from version
+          BRANCH=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')  
 
-        # Push image to registry
-        docker tag image $GCP_REGISTRY_DOMAIN/$GCP_PROJECT_ID/$IMAGE_NAME:$VERSION
-        docker push $GCP_REGISTRY_DOMAIN/$GCP_PROJECT_ID/$IMAGE_NAME:$VERSION
+          # Strip "v" prefix from tag name
+          [[ "${{ github.ref }}" == "refs/tags/"* ]] && BRANCH=$(echo $BRANCH | sed -e 's/^v//')
 
-        # Update var
-        echo "::set-output name=BRANCH::$BRANCH"
-        echo "::set-output name=VERSION::$VERSION"
+          # Add custom wrapper syntax
+          VERSION=git-run${{ github.run_number }}-day$(date +%j)-$BRANCH-${{ github.actor }}-$GITHUB_SHA
 
-        # Print vars
-        echo "::notice title=docker-BRANCH::$BRANCH"
-        echo "::notice title=docker-VERSION::$VERSION"
+          # Push image to registry
+          docker tag image $GCP_REGISTRY_DOMAIN/$GCP_PROJECT_ID/$IMAGE_NAME:$VERSION
+          docker push $GCP_REGISTRY_DOMAIN/$GCP_PROJECT_ID/$IMAGE_NAME:$VERSION
 
-    - name: Logout 👋
-      run: docker logout
+          # Update var
+          echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
+
+          # Print vars
+          echo "## Docker Version Tag" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          echo "$VERSION" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+
+      - name: 👋 Logout
+        run: docker logout

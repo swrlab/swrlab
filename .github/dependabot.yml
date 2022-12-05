@@ -1,14 +1,14 @@
 version: 2
 updates:
-- package-ecosystem: npm
-  directory: "/"
-  open-pull-requests-limit: 20
-  schedule:
-    interval: "weekly"
-    day: "monday"
-- package-ecosystem: "github-actions"
-  directory: "/"
-  open-pull-requests-limit: 20
-  schedule:
-    interval: "weekly"
-    day: "monday"
+  - package-ecosystem: npm
+    directory: "/openapi"
+    open-pull-requests-limit: 20
+    schedule:
+      interval: "weekly"
+      day: "sunday"
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    open-pull-requests-limit: 20
+    schedule:
+      interval: "weekly"
+      day: "sunday"

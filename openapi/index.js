@@ -4,7 +4,7 @@
 
 */
 
-const IS_GITHUB = process.env.IS_GITHUB === 'true'
+const IS_TEST = process.env.IS_TEST === 'true'
 
 const express = require('express')
 const swaggerUi = require('swagger-ui-express')
@@ -50,14 +50,13 @@ const customCss =
 const options = {
 	explorer: true,
 	customCss,
-	customCssUrl: 'https://dashboard.lab.swr.de/static/dist/dashboard.min.css?v=swr-radiohub-docs-v1',
 	customeSiteTitle: 'SWR Radiohub API Documentation',
 	customfavIcon: 'https://cdn-static.lab.swr.de/images/v1/get/swr-audio-lab-a-white/img?width=512',
 	swaggerOptions: {
 		defaultModelExpandDepth: -1,
 		defaultModelRendering: -1,
 		tryItOutEnabled: false,
-		docExpansion: 'none'
+		docExpansion: 'none',
 	},
 }
 
@@ -77,6 +76,4 @@ app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options))
 
 app.listen(process.env.PORT || 8080)
 
-if (IS_GITHUB) {
-	process.exit()
-}
+if (IS_TEST) process.exit()

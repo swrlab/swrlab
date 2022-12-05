@@ -1,26 +1,33 @@
 {
-	"name": "swr-radiohub-docs",
-	"version": "2.14.0",
-	"description": "Documentation for SWR Radiohub",
-	"main": "index.js",
-	"scripts": {
-		"cloud": "IS_GITHUB=false IS_DEV=true IS_LOCAL=false node index.js",
-		"local": "IS_GITHUB=false IS_DEV=true IS_LOCAL=true nodemon index.js",
-		"test": "IS_GITHUB=true IS_DEV=true IS_LOCAL=true node index.js"
+	"name": "swrlab",
+	"version": "0.0.2",
+	"description": "Lint Setup",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/swrlab/swrlab.git"
 	},
-	"author": "Daniel Freytag, SWR",
+	"homepage": "https://github.com/swrlab/swrlab",
+	"engines": {
+		"npm": ">=7",
+		"node": ">=16"
+	},
+	"browserslist": [
+		"last 2 versions"
+	],
+	"scripts": {
+		"lint": "eslint .",
+		"reinstall": "rm -rf node_modules && rm yarn.lock && yarn",
+		"install:all": "yarn && cd openapi && yarn && cd ../"
+	},
+	"author": "SWR Audio Lab <lab@swr.de>",
 	"license": "UNLICENSED",
 	"private": true,
-	"dependencies": {
-		"swagger-ui-express": "4.3.0",
-		"express": "4.17.3"
-	},
 	"devDependencies": {
-		"@swrlab/eslint-plugin-swr": "0.1.2",
-		"@swrlab/swr-prettier-config": "^0.1.2",
-		"eslint": "^8.11.0",
-		"nodemon": "^2.0.15",
-		"prettier": "^2.5.1"
+		"@swrlab/eslint-plugin-swr": "^0.2.0",
+		"@swrlab/swr-prettier-config": "^0.2.0",
+		"eslint": "^8.28.0",
+		"prettier": "^2.8.0",
+		"stylelint": "^14.15.0"
 	},
 	"prettier": "@swrlab/swr-prettier-config"
 }

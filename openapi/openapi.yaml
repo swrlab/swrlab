@@ -1,8 +1,8 @@
+# yamllint disable rule:line-length
 openapi: 3.0.0
 info:
   title: SWR Audio Lab - Radiohub
-  description:
-    "This documentation is also available as [openapi.json](https://docs.radiohub.swr.digital/openapi.json)\
+  description: "This documentation is also available as [openapi.json](https://docs.radiohub.swr.digital/openapi.json)\
     \ or [openapi.yaml](https://docs.radiohub.swr.digital/openapi.yaml).\n\n  \n\
     Authorization keys can be requested via [lab@swr.de](mailto:lab@swr.de) and shall\
     \ be sent as base64 encoded basic auth information in the header. Please report\
@@ -53,8 +53,7 @@ paths:
           example: app-news
         - name: appId
           in: query
-          description:
-            Provide a valid appId to create a connection to user preference
+          description: Provide a valid appId to create a connection to user preference
             and station
           required: true
           style: form
@@ -62,16 +61,15 @@ paths:
           schema:
             type: string
       responses:
-        "500":
+        '500':
           description: Server error occured.
         default:
-          description:
-            If status code other than 200, an error message will be provided,
+          description: If status code other than 200, an error message will be provided,
             otherwise the cover will be returned as image.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/contentPageResponse"
+                $ref: '#/components/schemas/contentPageResponse'
       security:
         - BasicAuth: []
   /v2/content/block/{identifier}/{query}:
@@ -101,8 +99,7 @@ paths:
             type: integer
         - name: appId
           in: query
-          description:
-            Provide a valid appId to create a connection to user preference
+          description: Provide a valid appId to create a connection to user preference
             and station
           required: true
           style: form
@@ -110,16 +107,15 @@ paths:
           schema:
             type: string
       responses:
-        "500":
+        '500':
           description: Server error occured.
         default:
-          description:
-            If status code other than 200, an error message will be provided,
+          description: If status code other than 200, an error message will be provided,
             otherwise the cover will be returned as image.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/contentBlockResponse"
+                $ref: '#/components/schemas/contentBlockResponse'
       security:
         - BasicAuth: []
   /v2/content/collection/{identifier}/{query}:
@@ -150,16 +146,15 @@ paths:
             type: string
           example: songtinder-sammler-100
       responses:
-        "500":
+        '500':
           description: Server error occured.
         default:
-          description:
-            If status code other than 200, an error message will be provided,
+          description: If status code other than 200, an error message will be provided,
             otherwise the cover will be returned as image.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/contentCollectionResponse"
+                $ref: '#/components/schemas/contentCollectionResponse'
       security:
         - BasicAuth: []
   /v2/content/collection/latest/{identifier}/{query}/{offset}:
@@ -188,11 +183,10 @@ paths:
           explode: false
           schema:
             type: string
-          example: "4539478696787968"
+          example: '4539478696787968'
         - name: offset
           in: path
-          description:
-            Offset to the newest item. 0 is newest, higher will be older
+          description: Offset to the newest item. 0 is newest, higher will be older
             items. Max value is defined by `offsetMax` in the info response object
           required: true
           style: simple
@@ -200,16 +194,15 @@ paths:
           schema:
             type: number
       responses:
-        "500":
+        '500':
           description: Server error occured.
         default:
-          description:
-            If status code other than 200, an error message will be provided,
+          description: If status code other than 200, an error message will be provided,
             otherwise the cover will be returned as image.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/contentEntryResponse"
+                $ref: '#/components/schemas/contentEntryResponse'
       security:
         - BasicAuth: []
   /v2/content/entry/{identifier}/{query}:
@@ -238,18 +231,17 @@ paths:
           explode: false
           schema:
             type: string
-          example: "4539478696787968"
+          example: '4539478696787968'
       responses:
-        "500":
+        '500':
           description: Server error occured.
         default:
-          description:
-            If status code other than 200, an error message will be provided,
+          description: If status code other than 200, an error message will be provided,
             otherwise the cover will be returned as image.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/contentEntryResponse"
+                $ref: '#/components/schemas/contentEntryResponse'
       security:
         - BasicAuth: []
   /v2/content/thumb/{ref}/{format}/img.jpg:
@@ -258,8 +250,7 @@ paths:
         - content
         - images
       summary: Load a prefetched image from SWR CMS
-      description:
-        Load the original image or resized version. Uncached images will
+      description: Load the original image or resized version. Uncached images will
         be generated and served from storage.
       parameters:
         - name: ref
@@ -293,8 +284,7 @@ paths:
             type: number
         - name: height
           in: query
-          description:
-            Optional height in pixels that the image shall be resized to.
+          description: Optional height in pixels that the image shall be resized to.
             If both width and height are set, then the image will be cropped.  Otherwise
             the respectively opposite dimension is set to auto
           required: false
@@ -306,8 +296,7 @@ paths:
             type: number
         - name: fileType
           in: query
-          description:
-            Force the output to a specific file type. If unset, the output
+          description: Force the output to a specific file type. If unset, the output
             will be jpg.
           required: false
           style: form
@@ -319,9 +308,9 @@ paths:
               - png
               - webp
       responses:
-        "400":
+        '400':
           description: Invalid query input
-        "500":
+        '500':
           description: Server error occured or key not found.
         default:
           description: Image
@@ -346,8 +335,7 @@ paths:
       tags:
         - cover
       summary: Get a cover based on SWR's mdid
-      description:
-        Query Radiohub to get a cover for a played item based on a mdid
+      description: Query Radiohub to get a cover for a played item based on a mdid
         reference.
       parameters:
         - name: mdid
@@ -361,8 +349,7 @@ paths:
           example: M0571919.001
         - name: width
           in: query
-          description:
-            Optionally set a desired width, if no height is provided, the
+          description: Optionally set a desired width, if no height is provided, the
             cover stays square-sized, otherwise it will be cropped. Default if unset
             is 256px, max is 1024px.
           required: false
@@ -372,8 +359,7 @@ paths:
             type: integer
         - name: height
           in: query
-          description:
-            Optionally set a desired height, if no width is provided, the
+          description: Optionally set a desired height, if no width is provided, the
             cover stays square-sized, otherwise it will be cropped
           required: false
           style: form
@@ -382,8 +368,7 @@ paths:
             type: integer
         - name: station
           in: query
-          description:
-            Apply a branding to the image. Branded covers are only available
+          description: Apply a branding to the image. Branded covers are only available
             if this station has ever played that track.
           required: false
           style: form
@@ -399,11 +384,10 @@ paths:
               - swr4rp
               - dasding
       responses:
-        "500":
+        '500':
           description: Server error occured.
         default:
-          description:
-            If status code other than 200, an error message will be provided,
+          description: If status code other than 200, an error message will be provided,
             otherwise the cover will be returned as image.
           content:
             image/*:
@@ -415,8 +399,7 @@ paths:
       tags:
         - feedback
       summary: Publish an inbound feedback message
-      description:
-        Send a feedback message from an external device or platform to
+      description: Send a feedback message from an external device or platform to
         SWR's feedback system.
       parameters:
         - name: appId
@@ -437,18 +420,17 @@ paths:
         content:
           multipart/form-data:
             schema:
-              $ref: "#/components/schemas/feedbackBody"
+              $ref: '#/components/schemas/feedbackBody'
         required: true
       responses:
-        "200":
-          description:
-            If status code other than 200, an error message will be provided,
+        '200':
+          description: If status code other than 200, an error message will be provided,
             otherwise message is null.
-        "400":
+        '400':
           description: Query not allowed or appId not provided.
-        "413":
+        '413':
           description: File too large (>50MB).
-        "500":
+        '500':
           description: Server error occured.
       security:
         - BasicAuth: []
@@ -457,8 +439,7 @@ paths:
       tags:
         - images
       summary: Load an image from image service
-      description:
-        Load the original image or resized version. A list of all keys
+      description: Load the original image or resized version. A list of all keys
         can be seen in the SWR Audio Lab dashboard. Contact lab@swr.de for access.
         Uncached images will be generated and served from storage. See response header
         "swr-datasource" for details. Clients should also respect cache control if
@@ -475,9 +456,8 @@ paths:
             example: DASDING-512
         - name: width
           in: query
-          description:
-            "Optional width in pixels that the image shall be resized to.
-            Minimum: 1, maximum 2560px"
+          description: 'Optional width in pixels that the image shall be resized to.
+            Minimum: 1, maximum 2560px'
           required: false
           style: form
           explode: true
@@ -487,11 +467,10 @@ paths:
             type: number
         - name: height
           in: query
-          description:
-            "Optional height in pixels that the image shall be resized to.
+          description: 'Optional height in pixels that the image shall be resized to.
             Minimum: 1, maximum 2560px. If both width and height are set, then the image
             will be cropped. Otherwise the respectively opposite dimension is set to
-            auto"
+            auto'
           required: false
           style: form
           explode: true
@@ -501,8 +480,7 @@ paths:
             type: number
         - name: fileType
           in: query
-          description:
-            Force the output to a specific file type. If unset, the output
+          description: Force the output to a specific file type. If unset, the output
             will match the input file type.
           required: false
           style: form
@@ -514,9 +492,9 @@ paths:
               - png
               - webp
       responses:
-        "400":
+        '400':
           description: Invalid query input
-        "500":
+        '500':
           description: Server error occured or key not found.
         default:
           description: Image
@@ -541,16 +519,14 @@ paths:
       tags:
         - images
       summary: Receive details about a cacheable image
-      description:
-        Similar to the image service endpoint but here only a JSON object
+      description: Similar to the image service endpoint but here only a JSON object
         of the database entry will be served. Should only be used for debugging solutions,
         not to download an image. Accessibility of the sourceUrl is not guaranteed
         and will be limited in future versions.
       parameters:
         - name: key
           in: path
-          description:
-            Set key for the image that shall be displayed. A list of all
+          description: Set key for the image that shall be displayed. A list of all
             keys can be seen in the SWR Audio Lab dashboard. Contact lab@swr.de for
             access.
           required: true
@@ -560,9 +536,9 @@ paths:
             type: string
             example: DASDING-512
       responses:
-        "401":
+        '401':
           description: Unauthorized access to API.
-        "500":
+        '500':
           description: Server error occured or key not found.
         default:
           description: JSON object
@@ -580,8 +556,7 @@ paths:
       tags:
         - images
       summary: Load an image from swr2 image service
-      description:
-        Load the original image or resized version. A list of all keys
+      description: Load the original image or resized version. A list of all keys
         can be seen in the SWR Audio Lab dashboard. Contact lab@swr.de for access.
         Uncached images will be generated and served from storage. See response header
         "swr-datasource" for details. Clients should also respect cache control if
@@ -598,8 +573,7 @@ paths:
             example: logo
         - name: format
           in: path
-          description:
-            Set the aspect ratio for the image. rund is a 1x1 image which
+          description: Set the aspect ratio for the image. rund is a 1x1 image which
             is title safe for round usage.
           required: true
           style: simple
@@ -613,8 +587,7 @@ paths:
               - rund
         - name: overlay
           in: path
-          description:
-            Toggle whether a swr2 logo overlay shall be included. This feature
+          description: Toggle whether a swr2 logo overlay shall be included. This feature
             is end of life and you should always request the 0 version.
           required: true
           style: simple
@@ -622,8 +595,8 @@ paths:
           schema:
             type: string
             enum:
-              - "0"
-              - "1"
+              - '0'
+              - '1'
         - name: width
           in: path
           description: Width in pixels that the image shall be resized to
@@ -636,9 +609,9 @@ paths:
             type: number
             example: 256
       responses:
-        "400":
+        '400':
           description: Invalid query input
-        "500":
+        '500':
           description: Server error occured or key not found.
         default:
           description: Image
@@ -655,16 +628,14 @@ paths:
       tags:
         - images
       summary: Receive details about a cacheable image
-      description:
-        Similar to the swr2 image service endpoint but here only a JSON
+      description: Similar to the swr2 image service endpoint but here only a JSON
         object of the database entry will be served. Should only be used for debugging
         solutions, not to download an image. Accessibility of the sourceUrl is not
         guaranteed and will be limited in future versions.
       parameters:
         - name: key
           in: path
-          description:
-            Set key for the image that shall be displayed. A list of all
+          description: Set key for the image that shall be displayed. A list of all
             keys can be seen in the SWR Audio Lab dashboard. Contact lab@swr.de for
             access.
           required: true
@@ -674,9 +645,9 @@ paths:
             type: string
             example: logo
       responses:
-        "401":
+        '401':
           description: Unauthorized access to API.
-        "500":
+        '500':
           description: Server error occured or key not found.
         default:
           description: JSON object
@@ -714,18 +685,17 @@ paths:
               - swraktuell
               - dasding
       responses:
-        "401":
+        '401':
           description: Unauthorized access to API.
-        "500":
+        '500':
           description: Server error occured.
         default:
-          description:
-            If status code other than 200, an error message will be provided,
+          description: If status code other than 200, an error message will be provided,
             otherwise message is null.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/scheduleResponse"
+                $ref: '#/components/schemas/scheduleResponse'
   /v2/schedule/day/{station}/{day}:
     get:
       tags:
@@ -758,11 +728,10 @@ paths:
           explode: false
           schema:
             type: string
-            example: "20191007"
+            example: '20191007'
       responses:
-        "200":
-          description:
-            If status code other than 200, an error message will be provided,
+        '200':
+          description: If status code other than 200, an error message will be provided,
             otherwise message is null.
           content:
             application/json:
@@ -770,10 +739,10 @@ paths:
                 minItems: 2
                 type: array
                 items:
-                  $ref: "#/components/schemas/scheduleResponse"
-        "401":
+                  $ref: '#/components/schemas/scheduleResponse'
+        '401':
           description: Unauthorized access to API.
-        "500":
+        '500':
           description: Server error occured.
       security:
         - BasicAuth: []
@@ -782,8 +751,7 @@ paths:
       tags:
         - schedule
       summary: Receive the show that's live as scheduled
-      description:
-        Query Radiohub based on a ms or s timestamp to get the show for
+      description: Query Radiohub based on a ms or s timestamp to get the show for
         a specific station.
       parameters:
         - name: station
@@ -823,18 +791,17 @@ paths:
           schema:
             type: integer
       responses:
-        "401":
+        '401':
           description: Unauthorized access to API.
-        "500":
+        '500':
           description: Server error occured.
         default:
-          description:
-            If status code other than 200, an error message will be provided,
+          description: If status code other than 200, an error message will be provided,
             otherwise message is null.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/scheduleResponse"
+                $ref: '#/components/schemas/scheduleResponse'
       security:
         - BasicAuth: []
   /v2/schedule/purge/{station}/:
@@ -842,8 +809,7 @@ paths:
       tags:
         - schedule
       summary: Purge cache information for a station
-      description:
-        Shall only be used in cases when meta information has been changed
+      description: Shall only be used in cases when meta information has been changed
         and needs to be re-cached.
       parameters:
         - name: station
@@ -864,18 +830,17 @@ paths:
               - swraktuell
               - dasding
       responses:
-        "401":
+        '401':
           description: Unauthorized access to API.
-        "500":
+        '500':
           description: Server error occured.
         default:
-          description:
-            If status code other than 200, an error message will be provided,
+          description: If status code other than 200, an error message will be provided,
             otherwise message is null.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/schedulePurgeResponse"
+                $ref: '#/components/schemas/schedulePurgeResponse'
       security:
         - BasicAuth: []
   /v2/stream/start/{station}/:
@@ -893,8 +858,7 @@ paths:
       parameters:
         - name: station
           in: path
-          description:
-            "Set the radio station. \n\nNote that not all stations provide\
+          description: "Set the radio station. \n\nNote that not all stations provide\
             \ all features such as video oder skippable radio."
           required: true
           style: simple
@@ -907,8 +871,7 @@ paths:
               - swrclassic
         - name: r
           in: query
-          description:
-            "_(returnData)_ \n\nChoose whether to redirect to streamUrl or\
+          description: "_(returnData)_ \n\nChoose whether to redirect to streamUrl or\
             \ receive JSON data object."
           required: false
           style: form
@@ -917,8 +880,7 @@ paths:
             type: boolean
         - name: f
           in: query
-          description:
-            "_(desiredFormat)_ \n\nSet the streaming format. Note that video\
+          description: "_(desiredFormat)_ \n\nSet the streaming format. Note that video\
             \ is not available in combination with all queries. \n\nDefaults to mp3."
           required: false
           style: form
@@ -931,8 +893,7 @@ paths:
               - video
         - name: q
           in: query
-          description:
-            "_(desiredQuality)_ \n\nSet the streaming quality. Note that\
+          description: "_(desiredQuality)_ \n\nSet the streaming quality. Note that\
             \ adaptive is only available for f=video while high and low are for mp3/aac.\n\
             \nDefaults to low."
           required: false
@@ -946,8 +907,7 @@ paths:
               - adaptive
         - name: d
           in: query
-          description:
-            "_(deviceType)_ \n\nSet the type of device and/or aggregator.\
+          description: "_(deviceType)_ \n\nSet the type of device and/or aggregator.\
             \ Example list is not complete and only serves as a reference. Names are\
             \ provided by SWR Audio Lab."
           required: false
@@ -960,9 +920,9 @@ paths:
               - googleHomeAction
               - swrClassicAppleTv
       responses:
-        "400":
+        '400':
           description: Query not allowed.
-        "500":
+        '500':
           description: Server error occured or key not found.
         default:
           description: JSON object
@@ -971,8 +931,7 @@ paths:
               schema:
                 type: object
         x-swrclassic:
-          description:
-            Example of a result where `station` is `swrclassic` to signalize
+          description: Example of a result where `station` is `swrclassic` to signalize
             live modus.
           content:
             image/json:
@@ -985,8 +944,7 @@ paths:
                     example: 200
                   message:
                     type: string
-                    description:
-                      Message will be provided if status is not 200, otherwise
+                    description: Message will be provided if status is not 200, otherwise
                       null
                   data:
                     type: object
@@ -1013,7 +971,7 @@ paths:
                         format: int64
                         example: 1563859828
                   info:
-                    $ref: "#/components/schemas/infoResponse"
+                    $ref: '#/components/schemas/infoResponse'
                   links:
                     type: object
   /v2/stream/meta/:
@@ -1021,8 +979,7 @@ paths:
       tags:
         - stream
       summary: Receive meta information about a current session
-      description:
-        All live information and meta data details that the system knows
+      description: All live information and meta data details that the system knows
         about a running audio session for the skippable radio platform.
       parameters:
         - name: appId
@@ -1035,8 +992,7 @@ paths:
             type: string
         - name: syncUrl
           in: query
-          description:
-            Provide the ybrid metadata Url to improve sync and buffer handling.
+          description: Provide the ybrid metadata Url to improve sync and buffer handling.
             Only provide the Url once and as quickly as possible after receiving it
             from ybrid.
           required: false
@@ -1046,8 +1002,7 @@ paths:
             type: string
         - name: isPlaying
           in: query
-          description:
-            If set to false, no radio session will be opened and only the
+          description: If set to false, no radio session will be opened and only the
             basic metadata is provided
           required: false
           style: form
@@ -1057,8 +1012,7 @@ paths:
             default: false
         - name: channelId
           in: query
-          description:
-            Start a session with a specified channel. Only applies when the
+          description: Start a session with a specified channel. Only applies when the
             user has no active session or previous call was `isPlaying=false`.
           required: false
           style: form
@@ -1068,8 +1022,7 @@ paths:
             example: swr-raka12
         - name: shiftJump
           in: query
-          description:
-            Automatically start a session at a specific timestamp. Can be
+          description: Automatically start a session at a specific timestamp. Can be
             combined with `channelId`. Only applies when user has no active session
             or previous call was `isPlaying=false`.
           required: false
@@ -1079,23 +1032,22 @@ paths:
             type: integer
             example: 1585366272000
       responses:
-        "400":
+        '400':
           description: Query not allowed or appId not provided.
-        "500":
+        '500':
           description: Server error occured
         default:
           description: JSON object
           content:
             image/json:
               schema:
-                $ref: "#/components/schemas/streamMetaResponse"
+                $ref: '#/components/schemas/streamMetaResponse'
   /v2/stream/shift/{action}/:
     get:
       tags:
         - stream
       summary: Control the timeshift position of a user's stream
-      description:
-        For a detailed workflow of responsive radio streams, see the STREAMING.md
+      description: For a detailed workflow of responsive radio streams, see the STREAMING.md
         document in this repository.
       parameters:
         - name: action
@@ -1121,23 +1073,22 @@ paths:
           schema:
             type: string
       responses:
-        "400":
+        '400':
           description: Query not allowed or appId not provided.
-        "500":
+        '500':
           description: Server error occured or key not found.
         default:
           description: JSON object
           content:
             image/json:
               schema:
-                $ref: "#/components/schemas/streamMetaResponse"
+                $ref: '#/components/schemas/streamMetaResponse'
   /v2/stream/shift/{action}/{time}:
     get:
       tags:
         - stream
       summary: Control the timeshift of a user's stream with time offset
-      description:
-        For a detailed workflow of responsive radio streams, see the STREAMING.md
+      description: For a detailed workflow of responsive radio streams, see the STREAMING.md
         document in this repository.
       parameters:
         - name: action
@@ -1171,23 +1122,22 @@ paths:
           schema:
             type: string
       responses:
-        "400":
+        '400':
           description: Query not allowed or appId not provided.
-        "500":
+        '500':
           description: Server error occured or key not found.
         default:
           description: JSON object
           content:
             image/json:
               schema:
-                $ref: "#/components/schemas/streamMetaResponse"
+                $ref: '#/components/schemas/streamMetaResponse'
   /v2/stream/shift/{action}/{type}:
     get:
       tags:
         - stream
       summary: Jump to the timeshift position of a specific track type
-      description:
-        For a detailed workflow of responsive radio streams, see the STREAMING.md
+      description: For a detailed workflow of responsive radio streams, see the STREAMING.md
         document in this repository.
       parameters:
         - name: action
@@ -1227,23 +1177,22 @@ paths:
           schema:
             type: string
       responses:
-        "400":
+        '400':
           description: Query not allowed or appId not provided.
-        "500":
+        '500':
           description: Server error occured or key not found.
         default:
           description: JSON object
           content:
             image/json:
               schema:
-                $ref: "#/components/schemas/streamMetaResponse"
+                $ref: '#/components/schemas/streamMetaResponse'
   /v2/stream/switch/skip:
     get:
       tags:
         - stream
       summary: Control the content of a user's stream by skipping
-      description:
-        For a detailed workflow of responsive radio streams, see the STREAMING.md
+      description: For a detailed workflow of responsive radio streams, see the STREAMING.md
         document in this repository.
       parameters:
         - name: appId
@@ -1255,23 +1204,22 @@ paths:
           schema:
             type: string
       responses:
-        "400":
+        '400':
           description: Query not allowed or appId not provided.
-        "500":
+        '500':
           description: Server error occured or key not found.
         default:
           description: JSON object
           content:
             image/json:
               schema:
-                $ref: "#/components/schemas/streamMetaResponse"
+                $ref: '#/components/schemas/streamMetaResponse'
   /v2/stream/switch/{action}/{id}:
     get:
       tags:
         - stream
       summary: Control the content of a user's stream
-      description:
-        For a detailed workflow of responsive radio streams, see the STREAMING.md
+      description: For a detailed workflow of responsive radio streams, see the STREAMING.md
         document in this repository. When switching to a channel, provide the channel
         id, for news provide the channel id.
       parameters:
@@ -1303,16 +1251,16 @@ paths:
           schema:
             type: string
       responses:
-        "400":
+        '400':
           description: Query not allowed or appId not provided
-        "500":
+        '500':
           description: Server error occured or key not found.
         default:
           description: JSON object
           content:
             image/json:
               schema:
-                $ref: "#/components/schemas/streamMetaResponse"
+                $ref: '#/components/schemas/streamMetaResponse'
   /v2/track/live/{station}/:
     get:
       tags:
@@ -1338,18 +1286,17 @@ paths:
               - swraktuell
               - dasding
       responses:
-        "401":
+        '401':
           description: Unauthorized access to API.
-        "500":
+        '500':
           description: Server error occured.
         default:
-          description:
-            If status code other than 200, an error message will be provided,
+          description: If status code other than 200, an error message will be provided,
             otherwise message is null.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/trackResponse"
+                $ref: '#/components/schemas/trackResponse'
       security:
         - BasicAuth: []
   /v2/track/list/{station}/:
@@ -1357,8 +1304,7 @@ paths:
       tags:
         - track
       summary: Receive all tracks from the past 4 hours
-      description:
-        Query Radiohub to get the tracks from the past 4 hours for a specific
+      description: Query Radiohub to get the tracks from the past 4 hours for a specific
         station.
       parameters:
         - name: station
@@ -1379,18 +1325,17 @@ paths:
               - swraktuell
               - dasding
       responses:
-        "401":
+        '401':
           description: Unauthorized access to API.
-        "500":
+        '500':
           description: Server error occured.
         default:
-          description:
-            If status code other than 200, an error message will be provided,
+          description: If status code other than 200, an error message will be provided,
             otherwise message is null.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/trackListResponse"
+                $ref: '#/components/schemas/trackListResponse'
       security:
         - BasicAuth: []
   /v2/track/like/:
@@ -1398,8 +1343,7 @@ paths:
       tags:
         - track
       summary: Update the like-relationship between a track and a user (appId)
-      description:
-        Update the like or dislike status for a user. For `like` requests
+      description: Update the like or dislike status for a user. For `like` requests
         the `refPlaylistId` is required, for `dislike` requests `refMdId` is sufficient.
       parameters:
         - name: appId
@@ -1414,20 +1358,19 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/body_1"
+              $ref: '#/components/schemas/body_1'
       responses:
-        "401":
+        '401':
           description: Unauthorized access to API.
-        "500":
+        '500':
           description: Server error occured.
         default:
-          description:
-            If status code other than 200, an error message will be provided,
+          description: If status code other than 200, an error message will be provided,
             otherwise message is null.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/inline_response_default"
+                $ref: '#/components/schemas/inline_response_default'
   /v2/traffic/search/{provider}/{roadName}/:
     get:
       tags:
@@ -1437,8 +1380,7 @@ paths:
       parameters:
         - name: provider
           in: path
-          description:
-            Set the ARD partner whose details shall be displayed. Set to
+          description: Set the ARD partner whose details shall be displayed. Set to
             ard for full output.
           required: true
           style: simple
@@ -1456,8 +1398,7 @@ paths:
               - rbb
         - name: roadName
           in: path
-          description:
-            Comma, separated and url encoded list of road names, like A5
+          description: Comma, separated and url encoded list of road names, like A5
             or B10. Capitalization does not matter, however uppercase is preferred.
           required: true
           style: simple
@@ -1467,9 +1408,8 @@ paths:
             example: A5,A8
         - name: includeLocation
           in: query
-          description:
-            "String-formatted boolean information whether the full GPS location
-            shall be returned. Default if unset: false"
+          description: 'String-formatted boolean information whether the full GPS location
+            shall be returned. Default if unset: false'
           required: false
           style: form
           explode: true
@@ -1477,18 +1417,17 @@ paths:
             type: boolean
             example: false
       responses:
-        "401":
+        '401':
           description: Unauthorized access to API.
-        "500":
+        '500':
           description: Server error occured.
         default:
-          description:
-            If status code other than 200, an error message will be provided,
+          description: If status code other than 200, an error message will be provided,
             otherwise message is null.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/trafficResponse"
+                $ref: '#/components/schemas/trafficResponse'
       security:
         - BasicAuth: []
   /v2/traffic/geo/{provider}/{lat}/{lon}/:
@@ -1496,14 +1435,12 @@ paths:
       tags:
         - traffic
       summary: Get the neareast incidents
-      description:
-        Query ARD Traffic (TPEG) via Radiohub to get a list of incidents
+      description: Query ARD Traffic (TPEG) via Radiohub to get a list of incidents
         via supplied geo coordinates.
       parameters:
         - name: provider
           in: path
-          description:
-            Set the ARD partner whose details shall be displayed. Set to
+          description: Set the ARD partner whose details shall be displayed. Set to
             ard for full output.
           required: true
           style: simple
@@ -1527,7 +1464,7 @@ paths:
           explode: false
           schema:
             type: string
-            example: "48.767014"
+            example: '48.767014'
         - name: lon
           in: path
           description: Geo Longitude
@@ -1536,12 +1473,11 @@ paths:
           explode: false
           schema:
             type: string
-            example: "8.224037"
+            example: '8.224037'
         - name: includeLocation
           in: query
-          description:
-            "String-formatted boolean information whether the full GPS location
-            shall be returned. Default if unset: false."
+          description: 'String-formatted boolean information whether the full GPS location
+            shall be returned. Default if unset: false.'
           required: false
           style: form
           explode: true
@@ -1550,25 +1486,24 @@ paths:
             example: false
         - name: customRadius
           in: query
-          description: "Radius in Kilometers that shall be used. Default if unset: 30."
+          description: 'Radius in Kilometers that shall be used. Default if unset: 30.'
           required: false
           style: form
           explode: true
           schema:
             type: string
       responses:
-        "401":
+        '401':
           description: Unauthorized access to API.
-        "500":
+        '500':
           description: Server error occured.
         default:
-          description:
-            If status code other than 200, an error message will be provided,
+          description: If status code other than 200, an error message will be provided,
             otherwise message is null.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/trafficResponse"
+                $ref: '#/components/schemas/trafficResponse'
       security:
         - BasicAuth: []
   /v2/user/app/register/{station}:
@@ -1576,8 +1511,7 @@ paths:
       tags:
         - user
       summary: Register an user device for appId access
-      description:
-        The `appId` is needed for all responsive radio actions. For a detailed
+      description: The `appId` is needed for all responsive radio actions. For a detailed
         workflow of responsive radio streams, see the STREAMING.md document in this
         repository.
       parameters:
@@ -1593,16 +1527,16 @@ paths:
               - dasding
               - swr3
       responses:
-        "400":
+        '400':
           description: Query not allowed
-        "500":
+        '500':
           description: Server error occured
         default:
           description: JSON object
           content:
             image/json:
               schema:
-                $ref: "#/components/schemas/userAppRegisterResponse"
+                $ref: '#/components/schemas/userAppRegisterResponse'
       security:
         - BasicAuth: []
   /v2/geo/search/:
@@ -1610,8 +1544,7 @@ paths:
       tags:
         - weather
       summary: Turn a location search into lat/lon
-      description:
-        Allow users to search for a location to receive lat/lon coordinates
+      description: Allow users to search for a location to receive lat/lon coordinates
         for weather queries. Devices are encouraged to save the lat/lon response to
         avoid having to query this API every time.
       parameters:
@@ -1625,45 +1558,42 @@ paths:
             type: string
             example: Freiburg
       responses:
-        "401":
+        '401':
           description: Unauthorized access to API.
-        "500":
+        '500':
           description: Server error occured.
         default:
-          description:
-            If status code other than 200, an error message will be provided,
+          description: If status code other than 200, an error message will be provided,
             otherwise message is null.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/geoSearchResponse"
+                $ref: '#/components/schemas/geoSearchResponse'
     post:
       tags:
         - weather
       summary: Turn a location search into lat/lon
-      description:
-        Allow users to search for a location to receive lat/lon coordinates
+      description: Allow users to search for a location to receive lat/lon coordinates
         for weather queries. Devices are encouraged to save the lat/lon response to
         avoid having to query this API every time.
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/body"
+              $ref: '#/components/schemas/body'
         required: true
       responses:
-        "401":
+        '401':
           description: Unauthorized access to API.
-        "500":
+        '500':
           description: Server error occured.
         default:
-          description:
-            If status code other than 200, an error message will be provided,
+          description: If status code other than 200, an error message will be provided,
             otherwise message is null.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/geoSearchResponse"
+                $ref: '#/components/schemas/geoSearchResponse'
       security:
         - BasicAuth: []
   /v2/weather/geo/{lat}/{lon}/:
@@ -1681,7 +1611,7 @@ paths:
           explode: false
           schema:
             type: string
-            example: "48.767014"
+            example: '48.767014'
         - name: lon
           in: path
           description: Geo Longitude
@@ -1690,15 +1620,14 @@ paths:
           explode: false
           schema:
             type: string
-            example: "8.224037"
+            example: '8.224037'
       responses:
-        "401":
+        '401':
           description: Unauthorized access to API.
-        "500":
+        '500':
           description: Server error occured.
         default:
-          description:
-            If status code other than 200, an error message will be provided,
+          description: If status code other than 200, an error message will be provided,
             otherwise message is null.
           content:
             application/json:
@@ -1713,14 +1642,12 @@ components:
       properties:
         id:
           type: integer
-          description:
-            Unique identifier for this content element and import, can
+          description: Unique identifier for this content element and import, can
             be used for further queries.
           example: 1234
         type:
           type: string
-          description:
-            Defines the type of content entry. Can be article, audio or
+          description: Defines the type of content entry. Can be article, audio or
             video.
           example: content.entry.*
         link:
@@ -1807,7 +1734,7 @@ components:
           minItems: 0
           type: array
           items:
-            $ref: "#/components/schemas/contentEntry"
+            $ref: '#/components/schemas/contentEntry'
       description: Content collections are a parent element to content.entry
     contentBlockBreaking:
       type: object
@@ -1832,7 +1759,7 @@ components:
           minItems: 0
           type: array
           items:
-            $ref: "#/components/schemas/contentBlockBreaking_data"
+            $ref: '#/components/schemas/contentBlockBreaking_data'
     contentBlockPodcast:
       type: object
       properties:
@@ -1855,7 +1782,7 @@ components:
           minItems: 0
           type: array
           items:
-            $ref: "#/components/schemas/contentCollection"
+            $ref: '#/components/schemas/contentCollection'
     contentBlock:
       type: object
       properties:
@@ -1865,8 +1792,7 @@ components:
           example: 1234
         type:
           type: string
-          description:
-            Defines the type of content block. Can be article, audio or
+          description: Defines the type of content block. Can be article, audio or
             video.
           example: content.block.*
         link:
@@ -1880,7 +1806,7 @@ components:
           minItems: 0
           type: array
           items:
-            $ref: "#/components/schemas/contentEntry"
+            $ref: '#/components/schemas/contentEntry'
     contentEntryResponse:
       type: object
       properties:
@@ -1893,9 +1819,9 @@ components:
           description: Message will be provided if status is not 200, otherwise null
           nullable: true
         data:
-          $ref: "#/components/schemas/contentEntry"
+          $ref: '#/components/schemas/contentEntry'
         info:
-          $ref: "#/components/schemas/infoResponse"
+          $ref: '#/components/schemas/infoResponse'
         links:
           type: object
     contentCollectionResponse:
@@ -1910,9 +1836,9 @@ components:
           description: Message will be provided if status is not 200, otherwise null
           nullable: true
         data:
-          $ref: "#/components/schemas/contentCollection"
+          $ref: '#/components/schemas/contentCollection'
         info:
-          $ref: "#/components/schemas/infoResponse"
+          $ref: '#/components/schemas/infoResponse'
         links:
           type: object
     contentBlockResponse:
@@ -1928,11 +1854,11 @@ components:
           nullable: true
         data:
           oneOf:
-            - $ref: "#/components/schemas/contentBlockBreaking"
-            - $ref: "#/components/schemas/contentBlockPodcast"
-            - $ref: "#/components/schemas/contentBlock"
+            - $ref: '#/components/schemas/contentBlockBreaking'
+            - $ref: '#/components/schemas/contentBlockPodcast'
+            - $ref: '#/components/schemas/contentBlock'
         info:
-          $ref: "#/components/schemas/infoResponse"
+          $ref: '#/components/schemas/infoResponse'
         links:
           type: object
     contentPageResponse:
@@ -1950,11 +1876,11 @@ components:
           type: array
           items:
             anyOf:
-              - $ref: "#/components/schemas/contentBlockBreaking"
-              - $ref: "#/components/schemas/contentBlockPodcast"
-              - $ref: "#/components/schemas/contentBlock"
+              - $ref: '#/components/schemas/contentBlockBreaking'
+              - $ref: '#/components/schemas/contentBlockPodcast'
+              - $ref: '#/components/schemas/contentBlock'
         info:
-          $ref: "#/components/schemas/infoResponse"
+          $ref: '#/components/schemas/infoResponse'
         links:
           type: object
     feedbackBody:
@@ -2022,11 +1948,11 @@ components:
           minItems: 0
           type: array
           items:
-            $ref: "#/components/schemas/geoSearchData"
+            $ref: '#/components/schemas/geoSearchData'
         info:
-          $ref: "#/components/schemas/infoResponse"
+          $ref: '#/components/schemas/infoResponse'
         links:
-          $ref: "#/components/schemas/scheduleResponse_links"
+          $ref: '#/components/schemas/scheduleResponse_links'
       description: Defines a schedule response
     infoResponse:
       type: object
@@ -2049,11 +1975,11 @@ components:
           type: string
           description: Message will be provided if status is not 200, otherwise null
         data:
-          $ref: "#/components/schemas/scheduleResponse_data"
+          $ref: '#/components/schemas/scheduleResponse_data'
         info:
-          $ref: "#/components/schemas/infoResponse"
+          $ref: '#/components/schemas/infoResponse'
         links:
-          $ref: "#/components/schemas/scheduleResponse_links"
+          $ref: '#/components/schemas/scheduleResponse_links'
       description: Defines a schedule response
     scheduleResponseImage:
       type: object
@@ -2092,7 +2018,7 @@ components:
         imageUrl:
           type: string
         image:
-          $ref: "#/components/schemas/scheduleResponseImage"
+          $ref: '#/components/schemas/scheduleResponseImage'
         webUrl:
           type: string
           nullable: true
@@ -2123,11 +2049,11 @@ components:
           type: array
           nullable: true
           items:
-            $ref: "#/components/schemas/scheduleResponseAnchorList"
+            $ref: '#/components/schemas/scheduleResponseAnchorList'
         textLongform:
           type: array
           items:
-            $ref: "#/components/schemas/scheduleResponseTextLongform"
+            $ref: '#/components/schemas/scheduleResponseTextLongform'
         programId:
           type: integer
           nullable: true
@@ -2150,11 +2076,11 @@ components:
           type: string
           description: Message will be provided if status is not 200, otherwise null
         data:
-          $ref: "#/components/schemas/schedulePurgeResponse_data"
+          $ref: '#/components/schemas/schedulePurgeResponse_data'
         info:
-          $ref: "#/components/schemas/infoResponse"
+          $ref: '#/components/schemas/infoResponse'
         links:
-          $ref: "#/components/schemas/scheduleResponse_links"
+          $ref: '#/components/schemas/scheduleResponse_links'
       description: Defines a schedule response after purging
     schedulePurgeResponse_data:
       type: object
@@ -2215,11 +2141,11 @@ components:
           type: string
           description: Message will be provided if status is not 200, otherwise null
         data:
-          $ref: "#/components/schemas/trackObject"
+          $ref: '#/components/schemas/trackObject'
         info:
-          $ref: "#/components/schemas/infoResponse"
+          $ref: '#/components/schemas/infoResponse'
         links:
-          $ref: "#/components/schemas/trackResponse_links"
+          $ref: '#/components/schemas/trackResponse_links'
       description: Defines a track response
     trackResponse_links:
       type: object
@@ -2241,9 +2167,9 @@ components:
           minItems: 1
           type: array
           items:
-            $ref: "#/components/schemas/trackObject"
+            $ref: '#/components/schemas/trackObject'
         info:
-          $ref: "#/components/schemas/infoResponse"
+          $ref: '#/components/schemas/infoResponse'
         links:
           type: object
       description: Defines a track response
@@ -2260,11 +2186,11 @@ components:
         data:
           type: array
           items:
-            $ref: "#/components/schemas/trafficResponse_data"
+            $ref: '#/components/schemas/trafficResponse_data'
         info:
-          $ref: "#/components/schemas/infoResponse"
+          $ref: '#/components/schemas/infoResponse'
         links:
-          $ref: "#/components/schemas/trackResponse_links"
+          $ref: '#/components/schemas/trackResponse_links'
       description: Defines a track response
     trafficResponse_geoPoint:
       maxItems: 3
@@ -2283,9 +2209,9 @@ components:
       type: object
       properties:
         a:
-          $ref: "#/components/schemas/trafficResponse_geoPoint"
+          $ref: '#/components/schemas/trafficResponse_geoPoint'
         b:
-          $ref: "#/components/schemas/trafficResponse_geoPoint"
+          $ref: '#/components/schemas/trafficResponse_geoPoint'
       description: Bounding box of the entire incident.
     trafficResponse_data:
       type: object
@@ -2318,8 +2244,7 @@ components:
           example: SWR
         roadName:
           type: string
-          description:
-            Comma-separated string with all included roads. Usually just
+          description: Comma-separated string with all included roads. Usually just
             one, but in rare cases, can be multiple ones. Can be null if road is not
             well-known (city street, diversion).
           nullable: true
@@ -2332,8 +2257,7 @@ components:
             example: A5
         locationType:
           type: string
-          description:
-            Describes the type of Geo information. Multi* locations include
+          description: Describes the type of Geo information. Multi* locations include
             a second point or string (usually the reverse route of a road).
           example: LineString
           enum:
@@ -2342,14 +2266,14 @@ components:
             - MultiPoint
             - MultiLineString
         locationBox:
-          $ref: "#/components/schemas/trafficResponse_locationBox"
+          $ref: '#/components/schemas/trafficResponse_locationBox'
         location:
           minItems: 1
           type: array
           description: Geo information for point or line.
           nullable: true
           items:
-            $ref: "#/components/schemas/trafficResponse_geoPoint"
+            $ref: '#/components/schemas/trafficResponse_geoPoint'
         distance:
           type: number
           description: Only supplied when querying by geo coordinates.
@@ -2366,9 +2290,9 @@ components:
           type: string
           description: Message will be provided if status is not 200, otherwise null
         data:
-          $ref: "#/components/schemas/userAppRegisterResponse_data"
+          $ref: '#/components/schemas/userAppRegisterResponse_data'
         info:
-          $ref: "#/components/schemas/infoResponse"
+          $ref: '#/components/schemas/infoResponse'
         links:
           type: object
       description: Defines a track response
@@ -2379,15 +2303,14 @@ components:
           type: string
         hasChanged:
           type: boolean
-          description:
-            Whether the streamUrl has changed since the last meta call.
+          description: Whether the streamUrl has changed since the last meta call.
             In that case the new Url shall be reloaded in the audio player.
           example: false
     streamMetaMetaChannelOptions:
       type: object
       properties:
         swr3-live:
-          $ref: "#/components/schemas/streamMetaMetaChannelOptions_swr3live"
+          $ref: '#/components/schemas/streamMetaMetaChannelOptions_swr3live'
       description: One or more channels than can be played
     streamMetaMetaSkip:
       type: object
@@ -2439,8 +2362,7 @@ components:
           items:
             type: number
             format: double
-      description:
-        Live waveform data, generated historically for the entire timeshift
+      description: Live waveform data, generated historically for the entire timeshift
         period
       nullable: true
     streamMetaMetaScheduleNow:
@@ -2461,20 +2383,20 @@ components:
           type: string
           nullable: true
         thumb:
-          $ref: "#/components/schemas/scheduleResponseImage"
+          $ref: '#/components/schemas/scheduleResponseImage'
         webUrl:
           type: string
           nullable: true
         anchorImageUrl:
           type: string
         anchorImage:
-          $ref: "#/components/schemas/scheduleResponseImage"
+          $ref: '#/components/schemas/scheduleResponseImage'
         anchorList:
           minItems: 0
           type: array
           nullable: true
           items:
-            $ref: "#/components/schemas/scheduleResponseAnchorList"
+            $ref: '#/components/schemas/scheduleResponseAnchorList'
         ref:
           type: integer
       description: Schedule item which was on air at the user's playback position
@@ -2500,30 +2422,29 @@ components:
           type: string
           example: swr3-live
         channelOptions:
-          $ref: "#/components/schemas/streamMetaMetaChannelOptions"
+          $ref: '#/components/schemas/streamMetaMetaChannelOptions'
         shiftOffset:
           type: integer
           example: 0
         skip:
-          $ref: "#/components/schemas/streamMetaMetaSkip"
+          $ref: '#/components/schemas/streamMetaMetaSkip'
         trackNow:
-          $ref: "#/components/schemas/trackObject"
+          $ref: '#/components/schemas/trackObject'
         trackNext:
           nullable: true
           allOf:
-            - $ref: "#/components/schemas/trackObject"
+            - $ref: '#/components/schemas/trackObject'
             - type: object
         trackList:
           type: array
-          description:
-            Array of tracks that have been played over the past 4 hours.
+          description: Array of tracks that have been played over the past 4 hours.
             The most recent one is the first element, after that it goes back in time.
           items:
-            $ref: "#/components/schemas/trackObject"
+            $ref: '#/components/schemas/trackObject'
         wave:
-          $ref: "#/components/schemas/streamMetaMetaWave"
+          $ref: '#/components/schemas/streamMetaMetaWave'
         scheduleNow:
-          $ref: "#/components/schemas/streamMetaMetaScheduleNow"
+          $ref: '#/components/schemas/streamMetaMetaScheduleNow'
     streamMetaResponse:
       type: object
       properties:
@@ -2535,9 +2456,9 @@ components:
           type: string
           description: Message will be provided if status is not 200, otherwise null
         data:
-          $ref: "#/components/schemas/streamMetaResponse_data"
+          $ref: '#/components/schemas/streamMetaResponse_data'
         info:
-          $ref: "#/components/schemas/infoResponse"
+          $ref: '#/components/schemas/infoResponse'
         links:
           type: object
       description: Defines a radio meta response
@@ -2584,7 +2505,7 @@ components:
         data:
           type: object
         info:
-          $ref: "#/components/schemas/infoResponse"
+          $ref: '#/components/schemas/infoResponse'
         links:
           type: object
     contentBlockBreaking_data:
@@ -2592,14 +2513,12 @@ components:
       properties:
         id:
           type: integer
-          description:
-            Unique identifier for this content element and import, can
+          description: Unique identifier for this content element and import, can
             be used for further queries.
           example: 1234
         type:
           type: string
-          description:
-            Defines the type of content entry. Can be article, audio or
+          description: Defines the type of content entry. Can be article, audio or
             video.
           example: content.entry.breaking
         title:
@@ -2648,9 +2567,9 @@ components:
       type: object
       properties:
         session:
-          $ref: "#/components/schemas/streamMetaSession"
+          $ref: '#/components/schemas/streamMetaSession'
         meta:
-          $ref: "#/components/schemas/streamMetaMeta"
+          $ref: '#/components/schemas/streamMetaMeta'
   securitySchemes:
     BasicAuth:
       type: http
