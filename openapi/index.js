@@ -4,7 +4,7 @@
 
 */
 
-const IS_GITHUB = process.env.IS_GITHUB === 'true'
+const IS_TEST = process.env.IS_TEST === 'true'
 
 const express = require('express')
 const swaggerUi = require('swagger-ui-express')
@@ -57,7 +57,7 @@ const options = {
 		defaultModelExpandDepth: -1,
 		defaultModelRendering: -1,
 		tryItOutEnabled: false,
-		docExpansion: 'none'
+		docExpansion: 'none',
 	},
 }
 
@@ -77,6 +77,4 @@ app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options))
 
 app.listen(process.env.PORT || 8080)
 
-if (IS_GITHUB) {
-	process.exit()
-}
+if (IS_TEST) process.exit()
