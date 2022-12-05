@@ -16,13 +16,19 @@ You can find the OpenAPI documentation in [/openapi](./openapi/).
 
 ## More Documents
 
+They can all be found in [/docs](./docs/).
+
 - [ACCOUNT LINKING](docs/ACCOUNT-LINKING.md) - Handling account linking for ARD login
 - [AUTHENTICATION](docs/AUTHENTICATION.md) - Handling the Radiohub token auth
 - [STREAMING](docs/STREAMING.md) - How to handle radio stream requests and interaction
 
+## Public Key
+
+You can find our public key for `lab [at] swr.de` on [keys.openpgp.org](https://keys.openpgp.org/search?q=lab%40swr.de).
+
 ## Authors
 
 - Daniel Freytag - [GitHub @FRYTG](https://github.com/FRYTG) / [Twitter @FRYTG](https://twitter.com/FRYTG)
-- Christian Hufnagel - [GitHub @weiland](https://github.com/chhufnagel) / [Twitter @hufnagel](https://twitter.com/hufnagel)
+- Christian Hufnagel - [GitHub @chhufnagel](https://github.com/chhufnagel) / [Twitter @hufnagel](https://twitter.com/hufnagel)
 - Rafael Mäuer - [GitHub @rafaelmaeuer](https://github.com/rafaelmaeuer)
 - Pascal Weiland - [GitHub @weiland](https://github.com/weiland) / [Twitter @pascalweiland](https://twitter.com/pascalweiland)

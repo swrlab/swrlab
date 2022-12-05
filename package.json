@@ -2,7 +2,6 @@
 	"name": "swrlab",
 	"version": "0.0.2",
 	"description": "Lint Setup",
-	"main": "index.js",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/swrlab/swrlab.git"
@@ -26,7 +25,6 @@
 	"devDependencies": {
 		"@swrlab/eslint-plugin-swr": "^0.2.0",
 		"@swrlab/swr-prettier-config": "^0.2.0",
-		"ejs-lint": "2.0.0",
 		"eslint": "^8.28.0",
 		"prettier": "^2.8.0",
 		"stylelint": "^14.15.0"
