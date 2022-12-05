@@ -1,6 +1,6 @@
-# Engineering Principles
+# SWR Audio Lab - Engineering Principles
 
-- [Engineering Principles](#engineering-principles)
+- [SWR Audio Lab - Engineering Principles](#swr-audio-lab---engineering-principles)
   - [Principles](#principles)
   - [Project Management \& Communication](#project-management--communication)
   - [Services](#services)
@@ -29,7 +29,7 @@ The SWR Audio Lab is here to facilitate even better public service media offerin
 
 We aim to serve our users from our own platforms instead of third-party aggregators or apps to improve the overall user journey and reduce data transfer to third-parties.
 
-Our goal is to create an ambient media experience - meaning to be where our users are to accompany them during their day across multiple devices, applications and platforms.
+Our goal is to create a seamless ambient media experience - meaning to be where our users are to accompany them during their day across multiple devices, applications and platforms.
 
 We’re involved in several working groups in the ARD and EBU to improve exchange, standardization and prominence of our products and services.
 
@@ -215,6 +215,7 @@ Only acknowledge incidents that you have the ability and capacity to investigate
 - GPG for Mac [gpgtools.org](https://gpgtools.org)
 - Setting up GPG and Commit Signatures for GitHub [docs.github.com/en/authentication/](https://docs.github.com/en/authentication/managing-commit-signature-verification/telling-git-about-your-signing-key)
 - npm Best Practices Guide [github.com/ossf/package-manager-best-practices](https://github.com/ossf/package-manager-best-practices/blob/main/published/npm.md)
+- NodeJS Release Schedule [github.com/nodejs/release](https://github.com/nodejs/release#release-schedule)
 
 ## Public Key
 

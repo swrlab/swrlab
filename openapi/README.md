@@ -1,6 +1,6 @@
 # SWR Radiohub
 
-by **SWR audio lab**
+by **SWR Audio Lab**
 
 ## hello world
 
@@ -17,11 +17,6 @@ The OpenAPI (version 3.0.0) documentation is available through this repo or host
 - [web link for openapi.yaml](https://docs.radiohub.swr.digital/openapi.yaml)
 
 The visual swagger page is available on [api.lab.swr.de/radiohub-docs](https://docs.radiohub.swr.digital/).
-
-## More documents
-
-- [AUTHENTICATION](docs/AUTHENTICATION.md) - Handling the Radiohub token auth.
-- [STREAMING](docs/STREAMING.md) - How to handle radio stream requests and interaction.
 
 ## Changelog
 
