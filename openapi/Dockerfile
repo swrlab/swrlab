@@ -1,5 +1,5 @@
 # Load desired node pckg
-FROM node:16.14-alpine
+FROM node:18-bullseye-slim
 
 # Create app directory
 WORKDIR /web/app

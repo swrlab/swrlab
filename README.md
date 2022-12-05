@@ -1,32 +1,9 @@
-# SWR Radiohub
+# SWR Audio Lab
 
-by **SWR audio lab**
+## Principles
 
-## hello world
+Learn about our Engineering and Project Principles in [PRINCIPLES.md](PRINCIPLES.md).
 
-SWR Radiohub is the core API service by SWR audio lab to provide metadata to internal and external services. This repository includes the dynamic web rendering of the openapi files.
-For questions or problems, please [open an issue](https://github.com/swrlab/swr-radiohub-docs/issues/new) or contact lab@swr.de.
+## License
 
-## OpenAPI configurations
-
-The OpenAPI (version 3.0.0) documentation is available through this repo or hosted online.
-
-- [openapi.json](openapi.json)
-- [web link for openapi.json](https://docs.radiohub.swr.digital/openapi.json)
-- [openapi.yaml](openapi.yaml)
-- [web link for openapi.yaml](https://docs.radiohub.swr.digital/openapi.yaml)
-
-The visual swagger page is available on [api.lab.swr.de/radiohub-docs](https://docs.radiohub.swr.digital/).
-
-## More documents
-
-- [AUTHENTICATION](docs/AUTHENTICATION.md) - Handling the Radiohub token auth.
-- [STREAMING](docs/STREAMING.md) - How to handle radio stream requests and interaction.
-
-## Changelog
-
-A separate Changelog is available in [CHANGELOG.md](CHANGELOG.md)
-
-## AUTHOR
-
-- **Daniel Freytag** - [Github](https://github.com/FRYTG) / [Twitter](https://twitter.com/FRYTG)
+tbd
