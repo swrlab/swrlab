@@ -29,7 +29,7 @@ The SWR Audio Lab is here to facilitate even better public service media offerin
 
 We aim to serve our users from our own platforms instead of third-party aggregators or apps to improve the overall user journey and reduce data transfer to third-parties.
 
-Our goal is to create an ambient media experience - meaning to be where our users are to accompany them during their day across multiple devices, applications and platforms.
+Our goal is to create a seamless ambient media experience - meaning to be where our users are to accompany them during their day across multiple devices, applications and platforms.
 
 We’re involved in several working groups in the ARD and EBU to improve exchange, standardization and prominence of our products and services.
 
