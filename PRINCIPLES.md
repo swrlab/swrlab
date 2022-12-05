@@ -244,7 +244,7 @@ Tools, products, links, and services mentioned in this document should not be co
 
 - Daniel Freytag - [GitHub @FRYTG](https://github.com/FRYTG) / [Twitter @FRYTG](https://twitter.com/FRYTG)
 - Christian Hufnagel - [GitHub @chhufnagel](https://github.com/chhufnagel) / [Twitter @hufnagel](https://twitter.com/hufnagel)
-- Rafael Mäuer - [GitHub @rafaelmaeuer](https://github.com/rafaelmaeuer)
+- Rafael Mäuer - [GitHub @rafaelmaeuer](https://github.com/rafaelmaeuer) / [Twitter @rafaelmaeuer](https://twitter.com/rafaelmaeuer)
 - Pascal Weiland - [GitHub @weiland](https://github.com/weiland) / [Twitter @pascalweiland](https://twitter.com/pascalweiland)
 
 ## License
