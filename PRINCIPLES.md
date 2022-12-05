@@ -185,7 +185,9 @@ Only acknowledge incidents that you have the ability and capacity to investigate
 ### More from the Audio Lab
 
 - About us: [lab.swr.de](https://lab.swr.de)
-- Out NodeJS tools: [`@swrlab/node-utils`](https://github.com/swrlab/node-utils)
+- Our NodeJS tools: [`@swrlab/node-utils`](https://github.com/swrlab/node-utils)
+- Public repositories on GitHub: [`@swrlab/repositories`](https://github.com/orgs/swrlab/repositories?q=&type=public&language=&sort=name)
+- Public packages on npm: [npmjs.com/org/swrlab](https://www.npmjs.com/org/swrlab)
 
 ### Standards
 
@@ -209,6 +211,7 @@ Only acknowledge incidents that you have the ability and capacity to investigate
 - Inclusive Terminology from W3C [w3c.github.io/manual-of-style](https://w3c.github.io/manual-of-style/#inclusive)
 - The Fight Over Offensive Terms in Computing [nytimes.com/.../racist-computer-engineering-terms-ietf](https://www.nytimes.com/2021/04/13/technology/racist-computer-engineering-terms-ietf.html)
 - Code of Ethics and Professional Conduct from W3C [w3.org/Consortium/cepc](https://www.w3.org/Consortium/cepc/)
+- Color Checker for Accessibility [whocanuse.com](https://www.whocanuse.com)
 
 ### Technical Guides & Tools
 
@@ -216,6 +219,7 @@ Only acknowledge incidents that you have the ability and capacity to investigate
 - Setting up GPG and Commit Signatures for GitHub [docs.github.com/en/authentication/](https://docs.github.com/en/authentication/managing-commit-signature-verification/telling-git-about-your-signing-key)
 - npm Best Practices Guide [github.com/ossf/package-manager-best-practices](https://github.com/ossf/package-manager-best-practices/blob/main/published/npm.md)
 - NodeJS Release Schedule [github.com/nodejs/release](https://github.com/nodejs/release#release-schedule)
+- SPDX License List [spdx.org/licenses](https://spdx.org/licenses/)
 
 ## Public Key
 
@@ -227,4 +231,4 @@ Tools, products, links, and services mentioned in this document should not be co
 
 ## License
 
-TODO: This document is licensed under...
+This document is licensed under [EUROPEAN UNION PUBLIC LICENCE v. 1.2](https://joinup.ec.europa.eu/sites/default/files/custom-page/attachment/2020-03/EUPL-1.2%20EN.txt).
