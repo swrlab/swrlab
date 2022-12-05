@@ -42,15 +42,24 @@ For Connected Cars and Devices we developed a set of four principles to guide ou
 
 ## Project Management & Communication
 
-We make use of agile and user-centered design principles, but apply them carefully. It is more important to us to use something that works for us instead of soley following .
+We make use of agile and user-centered design principles but apply them carefully. It is more important to use something that works for us instead of solely following a paper.
 
-GitHub is our primary tool for version control of issues, code and documentation.
+GitHub is our primary tool for version control of issues, code, and documentation.
 
-Issues are our home for bugs, features, and project planning. They should have a short and clear title with enough description for everyone to understand the scope and tasks involved. All issues must be added to the GitHub board, where they make their way through the steps _Backlog_, _To Do_, _Week_, _Today_, _In Progress Internal_, _Ready_, _In Progress External/ Stuck_, _Done_.
+Issues are our home for bugs, features, and project planning. They should have a short and clear title with enough description for everyone to understand the scope and tasks involved. All issues must be added to the GitHub board, where they make their way through these steps:
+
+- Backlog
+- To Do
+- Week
+- Today
+- In Progress Internal
+- Ready
+- In Progress External/ Stuck (optional)
+- Done
 
 Progress should be tracked and commented on in issues, even when already discussed in separate chat groups, to enable research and follow-ups in the future (searchability).
 
-Communication is key for all projects. We don’t rely on historical structures (“This is how things are done around here.”) and instead support constructive feedback, trust, new ideas, and input from others (operational over organizational communication).
+Communication is key for all projects. We don’t rely on historical structures (*“This is how things are done around here.*”) and instead support constructive feedback, trust, new ideas, and input from others (operational over organizational communication).
 
 We share our tools and knowledge with others supporting our values. Technical tools that don’t contain sensitive information should be open-sourced.
 
@@ -62,11 +71,11 @@ We use Infrastructure as Code (IaC) instead of manual configurations to track ch
 
 We use automation to back up mission-critical data and have tested restoring it (DRP).
 
-We provide limited support (as our time allows) for our services to internal and external users. However, a person needing support is also the result of a misleading UX, unclear self-help guides, or an incomplete feature that should be assessed and evaluated afterwards.
+We provide limited support (as our time allows) for our services to internal and external users. However, a person needing support is also the result of a misleading UX, unclear self-help guides, or an incomplete feature that should be assessed and evaluated afterward.
 
 ## Delivery Performance
 
-Delivery Performance is the combination of the ability and agility to make changes, to deploy, and to recover services. To us security and reliability are more important than pure delivery performance.
+Delivery Performance is the combination of the ability and agility to make changes, deploy, and recover services. To us, security and reliability are more important than pure delivery performance.
 
 All of our projects and services are actively maintained (dependency and platform updates; security and CVE fixes) or reevaluated and eventually phased out and turned off.
 
@@ -76,11 +85,11 @@ We aim to avoid quick hacks that build technical debt in the future.
 
 We aspire our products and services to be accessible and usable by everyone.
 
-We only use neutral and inclusive names for our services and in our code. We advocate and educate others, whenever we come across old or new occurances of avoidable terms.
+We only use neutral and inclusive names for our services and in our code and documentation. We advocate and educate others, whenever we come across occurrences of avoidable terms.
 
 ## Code Structure & Testing
 
-Code should be readable, understandable and clean. It should include inline comments for documentation about specific steps. Overall documentation should be included in seperate Markdown files.
+Code should be readable, understandable, and clean. It should include inline comments for documentation about specific steps. Overall documentation should be written in separate Markdown files.
 
 Modules and artifacts used in multiple projects should be managed in a central place to avoid redundancy and to benefit from adaptability (e.g. `@swrlab/node-utils`).
 
@@ -106,7 +115,7 @@ Only the main branch can be deployed to production (trunk-based development).
 
 ## Cloud-Native & Portability
 
-Cloud-native developments often bring along vendor lock-in to certain features and services. We pay close attention to those byeffects and use open-source tools wherever possible and applicable. However, being a small team, managed services often reduce the operational overhead for us and allow us to iterate faster.
+Cloud-native developments often bring along vendor lock-in to certain features and services. We pay close attention to those effects and use open-source tools wherever possible and applicable. However, being a small team, managed services often reduce the operational overhead for us and allow us to iterate faster.
 
 We encourage and use multi-cloud or multi-region deployments and storage solutions, to avoid issues with single vendors or physical cloud locations.
 
@@ -114,7 +123,7 @@ Our main tool to containerize and virtualize services is Docker. We use those co
 
 ## Sustainability
 
-We pay attention to the ecological footprint our applications create. It is essential to us to use carbon neutral cloud providers, cleaner regions and use efficient shared hosting solutions like serverless to optimize our consumption.
+We pay attention to the ecological footprint our applications create. It is essential for us to use carbon-neutral cloud providers, cleaner regions, and use efficient shared hosting solutions like serverless to optimize our consumption.
 
 ## Security & Privacy
 
@@ -122,7 +131,7 @@ Secrets are encrypted using a GPG workflow and stored in version control.
 
 Commits should follow the Conventional Commits structure and should be GPG-signed.
 
-All web services, platforms, and tools we use must be protected by MFA. We prefer using SSO through our organization with its linked MFA protection, if possible. For all other cases we prefer physical keys (FIDO) over basic OTP.
+All web services, platforms, and tools we use must be protected by MFA. We prefer using SSO through our organization with its linked MFA protection, if possible. For all other cases, we prefer physical keys (FIDO) over basic OTP.
 
 We aim to store as little data as possible, meaning that we only store what’s needed to monitor, analyze and improve our services. We always actively engage with our internal data protection officers about changes and our overall services.
 
@@ -130,13 +139,13 @@ We aim to store as little data as possible, meaning that we only store what’s 
 
 Internal dashboards and monitoring support the observability and discoverability of our services, data flows, systems, and partners.
 
-Automated monitors and alerts help detect issues and support our manual observations. We aim to discover problems ourselves before our colleagues, partners or especially users do.
+Automated monitors and alerts help detect issues and support our manual observations. We aim to discover problems ourselves before our colleagues, partners, or especially users do.
 
-We schedule our on-call calender around our small teams' availability. Personal life and commitments always have priority.
+We schedule our on-call calendar around our small teams' availability. Personal life and commitments always have priority.
 
-Alerting has predefined warning and alerting levels as well as escalation policies. Most of which are managed by IaC.
+Alerting has predefined warn and error levels as well as escalation policies. Most of which are managed by IaC.
 
-Only acknowledge incidents that you have the ability and capacity to investigate and resolve. Otherwise escalate it to a fellow team member. Communicate large-scale problems to other internal and external stakeholders to keep them in the loop.
+Only acknowledge incidents that you have the ability and capacity to investigate and resolve. Otherwise, escalate it to a fellow team member. Proactively communicate large-scale problems to other internal and external stakeholders to keep them in the loop.
 
 ## Definitions
 
@@ -220,6 +229,7 @@ Only acknowledge incidents that you have the ability and capacity to investigate
 - npm Best Practices Guide [github.com/ossf/package-manager-best-practices](https://github.com/ossf/package-manager-best-practices/blob/main/published/npm.md)
 - NodeJS Release Schedule [github.com/nodejs/release](https://github.com/nodejs/release#release-schedule)
 - SPDX License List [spdx.org/licenses](https://spdx.org/licenses/)
+- Super Linter [github/super-linter](https://github.com/github/super-linter)
 
 ## Public Key
 
