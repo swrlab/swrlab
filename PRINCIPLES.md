@@ -42,7 +42,7 @@ For Connected Cars and Devices we developed a set of four principles to guide ou
 
 ## Project Management & Communication
 
-We make use of agile and user-centered design principles but apply them carefully. It is more important to use something that works for us instead of solely following a paper.
+We make use of agile and user-centered design principles but apply them carefully. For us it is more important to use something that works instead of solely following a paper.
 
 GitHub is our primary tool for version control of issues, code, and documentation.
 
@@ -145,7 +145,7 @@ We schedule our on-call calendar around our small teams' availability. Personal 
 
 Alerting has predefined warn and error levels as well as escalation policies. Most of which are managed by IaC.
 
-Only acknowledge incidents that you have the ability and capacity to investigate and resolve. Otherwise, escalate it to a fellow team member. Proactively communicate large-scale problems to other internal and external stakeholders to keep them in the loop.
+Everyone on-call should only acknowledge incidents that they have the ability and capacity to investigate and resolve. Otherwise, escalate it to a fellow team member. Proactively communicate large-scale problems to other internal and external stakeholders to keep them in the loop.
 
 ## Definitions
 
@@ -154,28 +154,28 @@ Only acknowledge incidents that you have the ability and capacity to investigate
 - **CD** - Continuous Delivery [atlassian.com/continuous-delivery](https://www.atlassian.com/continuous-delivery/principles/pipeline)
 - **CDN** - Content Delivery Network [cloudflare.com/.../what-is-a-cdn](https://www.cloudflare.com/en-gb/learning/cdn/what-is-a-cdn/)
 - **CI** - Continuous Integration [atlassian.com/.../continuous-integration](https://www.atlassian.com/continuous-delivery/continuous-integration)
-- **Conventional Commits** [conventionalcommits.org](https://www.conventionalcommits.org/en/v1.0.0/)
+- **Conventional Commits** - [conventionalcommits.org](https://www.conventionalcommits.org/en/v1.0.0/)
 - **DevEx, DX** - Developer Experience [getclockwise.com/blog/what-is-developer-experience](https://www.getclockwise.com/blog/what-is-developer-experience)
 - **DevOps** - Development and Operations [azure.microsoft.com/.../what-is-devops](https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary/what-is-devops/)
-- **Docker** - Containerized deployment platform [aws.amazon.com/docker](https://aws.amazon.com/docker/) / [ibm.com/cloud/learn/docker](https://www.ibm.com/cloud/learn/docker)
-- **DRP** - Disaster Recovery Plan [ibm.com/.../disaster-recovery-plan](https://www.ibm.com/uk-en/services/business-continuity/disaster-recovery-plan) / [kyndryl.com/.../disaster-recovery-plan](https://www.kyndryl.com/us/en/learn/disaster-recovery-plan)
+- **Docker** - Containerized deployment platform [aws.amazon.com/docker](https://aws.amazon.com/docker/) or [ibm.com/cloud/learn/docker](https://www.ibm.com/cloud/learn/docker)
+- **DRP** - Disaster Recovery Plan [ibm.com/.../disaster-recovery-plan](https://www.ibm.com/uk-en/services/business-continuity/disaster-recovery-plan) or [kyndryl.com/.../disaster-recovery-plan](https://www.kyndryl.com/us/en/learn/disaster-recovery-plan)
 - **EBU** - European Broadcasting Union [ebu.ch](https://www.ebu.ch)
 - **ESLint** - JavaScript Linter [eslint.org](https://eslint.org)
 - **FaaS** - Function as a service (e.g. GCP Cloud Functions, AWS Lambda) [redhat.com/.../what-is-faas](https://www.redhat.com/en/topics/cloud-native-apps/what-is-faas)
 - **FIDO** - Fast IDentity Online [yubico.com/.../fido-2](https://www.yubico.com/resources/glossary/fido-2/)
 - **GCP** - Google Cloud Platform [cloud.google.com](https://cloud.google.com)
-- **GitHub Actions** [docs.github.com/en/actions](https://docs.github.com/en/actions)
+- **GitHub Actions** - [docs.github.com/en/actions](https://docs.github.com/en/actions)
 - **GPG** - GNU Privacy Guard [gnupg.org](https://gnupg.org)
 - **IaC** - Infrastructure as Code [developer.hashicorp.com/.../infrastructure-as-code](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/infrastructure-as-code)
 - **IDP** - Internal Developer Platform [platformengineering.org/blog/what-is-platform-engineering](https://platformengineering.org/blog/what-is-platform-engineering)
 - **KPI** - Key Performance Indicators [qlik.com/us/kpi](https://www.qlik.com/us/kpi)
 - **Kubernetes, K8s** - Scaleable container orchestration [cloud.google.com/learn/what-is-kubernetes](https://cloud.google.com/learn/what-is-kubernetes)
 - **Linter** - [sourcelevel.io/blog/what-is-a-linter-and-why-your-team-should-use-it](https://sourcelevel.io/blog/what-is-a-linter-and-why-your-team-should-use-it)
-- **Markdown** - [docs.github.com/.../writing-on-github](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax) / [github.com/.../Markdown-Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
+- **Markdown** - [docs.github.com/.../writing-on-github](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax) or [github.com/.../Markdown-Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
 - **MFA** - Multi Factor Authentication [yubico.com/.../what-is-multi-factor-authentication](https://www.yubico.com/resources/what-is-multi-factor-authentication/)
 - **MTTR** - Mean time to repair [atlassian.com/incident-management/kpis/common-metrics](https://www.atlassian.com/incident-management/kpis/common-metrics)
 - **On-Call** - [response.pagerduty.com/oncall](https://response.pagerduty.com/oncall/being_oncall/)
-- **OPT** - One-Time Password [cm.com/glossary/what-is-one-time-password](https://www.cm.com/glossary/what-is-one-time-password/)
+- **OTP** - One-Time Password [cm.com/glossary/what-is-one-time-password](https://www.cm.com/glossary/what-is-one-time-password/)
 - **PaaS** - Platform as a service (e.g. GCP App Engine)
 - **PR** - Pull Request [docs.github.com/en/pull-requests](https://docs.github.com/en/pull-requests/)
 - **Prettier** - Code Formatter [prettier.io](https://prettier.io)
@@ -200,11 +200,11 @@ Only acknowledge incidents that you have the ability and capacity to investigate
 
 ### Standards
 
-- Public Service Standards [gov.uk/service-manual/service-standard](https://www.gov.uk/service-manual/service-standard)
+- Public Service Standards from gov.uk [gov.uk/service-manual/service-standard](https://www.gov.uk/service-manual/service-standard)
 - Technical and Data Standards from gov.uk [gov.uk/guidance/gds-api-technical-and-data-standards](https://www.gov.uk/guidance/gds-api-technical-and-data-standards)
 - Conway’s Law about organizational structures and their output [thoughtworks.com/.../demystifying-conways-law](https://www.thoughtworks.com/insights/articles/demystifying-conways-law)
 - Incident Management Handbook from Atlassian [atlassian.com/incident-management](https://www.atlassian.com/incident-management/get-the-handbook)
-- Gartner Hype Cycle [gartner.com/.../methodologies/gartner-hype-cycle](https://www.gartner.com/en/research/methodologies/gartner-hype-cycle) / [robertvaneekhout.nl/.../gartner-hype-cycle-...](https://robertvaneekhout.nl/2018/04/gartner-hype-cycle-welke-technologie-blijft-plakken-en-welke-gaat-nodeloos)
+- Gartner Hype Cycle [gartner.com/.../methodologies/gartner-hype-cycle](https://www.gartner.com/en/research/methodologies/gartner-hype-cycle) or [robertvaneekhout.nl/.../gartner-hype-cycle-...](https://robertvaneekhout.nl/2018/04/gartner-hype-cycle-welke-technologie-blijft-plakken-en-welke-gaat-nodeloos)
 - User-Centered Development Process [medien.ifi.lmu.de/lehre/ws0607/mmi1/mmi4](https://www.medien.ifi.lmu.de/lehre/ws0607/mmi1/mmi4.pdf)
 - Radio in the Connected Car [tech.ebu.ch/publications/radio-in-the-connected-car](https://tech.ebu.ch/publications/radio-in-the-connected-car)
 
@@ -230,6 +230,7 @@ Only acknowledge incidents that you have the ability and capacity to investigate
 - NodeJS Release Schedule [github.com/nodejs/release](https://github.com/nodejs/release#release-schedule)
 - SPDX License List [spdx.org/licenses](https://spdx.org/licenses/)
 - Super Linter [github/super-linter](https://github.com/github/super-linter)
+- Awesome Broadcasting by the EBU [github.com/ebu/awesome-broadcasting](https://github.com/ebu/awesome-broadcasting)
 
 ## Public Key
 
