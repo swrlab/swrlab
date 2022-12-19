@@ -19,8 +19,10 @@
     - [DevOp Structures \& Reports](#devop-structures--reports)
     - [Inclusitivity \& Ethics](#inclusitivity--ethics)
     - [Technical Guides \& Tools](#technical-guides--tools)
+    - [Web Tools](#web-tools)
   - [Public Key](#public-key)
   - [Disclaimer](#disclaimer)
+  - [Authors](#authors)
   - [License](#license)
 
 ## Principles
@@ -59,7 +61,7 @@ Issues are our home for bugs, features, and project planning. They should have a
 
 Progress should be tracked and commented on in issues, even when already discussed in separate chat groups, to enable research and follow-ups in the future (searchability).
 
-Communication is key for all projects. We don’t rely on historical structures (*“This is how things are done around here.*”) and instead support constructive feedback, trust, new ideas, and input from others (operational over organizational communication).
+Communication is key for all projects. We don’t rely on historical structures (_“This is how things are done around here._”) and instead support constructive feedback, trust, new ideas, and input from others (operational over organizational communication).
 
 We share our tools and knowledge with others supporting our values. Technical tools that don’t contain sensitive information should be open-sourced.
 
@@ -121,6 +123,8 @@ We encourage and use multi-cloud or multi-region deployments and storage solutio
 
 Our main tool to containerize and virtualize services is Docker. We use those containers to deploy them on a wide range of computing options that boost portability between cloud providers and platforms.
 
+We test and support new networking and layer developments such as TLS 1.3, IPv6, and HTTP3/QUIC.
+
 ## Sustainability
 
 We pay attention to the ecological footprint our applications create. It is essential for us to use carbon-neutral cloud providers, cleaner regions, and use efficient shared hosting solutions like serverless to optimize our consumption.
@@ -158,6 +162,7 @@ Everyone on-call should only acknowledge incidents that they have the ability an
 - **DevEx, DX** - Developer Experience [getclockwise.com/blog/what-is-developer-experience](https://www.getclockwise.com/blog/what-is-developer-experience)
 - **DevOps** - Development and Operations [azure.microsoft.com/.../what-is-devops](https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary/what-is-devops/)
 - **Docker** - Containerized deployment platform [aws.amazon.com/docker](https://aws.amazon.com/docker/) or [ibm.com/cloud/learn/docker](https://www.ibm.com/cloud/learn/docker)
+- **DNS** - Domain Name System [cloudflare.com/.../what-is-dns](https://www.cloudflare.com/en-gb/learning/dns/what-is-dns/)
 - **DRP** - Disaster Recovery Plan [ibm.com/.../disaster-recovery-plan](https://www.ibm.com/uk-en/services/business-continuity/disaster-recovery-plan) or [kyndryl.com/.../disaster-recovery-plan](https://www.kyndryl.com/us/en/learn/disaster-recovery-plan)
 - **EBU** - European Broadcasting Union [ebu.ch](https://www.ebu.ch)
 - **ESLint** - JavaScript Linter [eslint.org](https://eslint.org)
@@ -166,8 +171,10 @@ Everyone on-call should only acknowledge incidents that they have the ability an
 - **GCP** - Google Cloud Platform [cloud.google.com](https://cloud.google.com)
 - **GitHub Actions** - [docs.github.com/en/actions](https://docs.github.com/en/actions)
 - **GPG** - GNU Privacy Guard [gnupg.org](https://gnupg.org)
+- **HTTP/3** - Hypertext Transfer Protocol v3 [cloudflare.com/.../what-is-http3](https://www.cloudflare.com/en-gb/learning/performance/what-is-http3/)
 - **IaC** - Infrastructure as Code [developer.hashicorp.com/.../infrastructure-as-code](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/infrastructure-as-code)
 - **IDP** - Internal Developer Platform [platformengineering.org/blog/what-is-platform-engineering](https://platformengineering.org/blog/what-is-platform-engineering)
+- **IPv4/6** - Internet Protocol Version 4/6 [juniper.net/.../what-is-ipv4-vs-ipv6.html](https://www.juniper.net/us/en/research-topics/what-is-ipv4-vs-ipv6.html)
 - **KPI** - Key Performance Indicators [qlik.com/us/kpi](https://www.qlik.com/us/kpi)
 - **Kubernetes, K8s** - Scaleable container orchestration [cloud.google.com/learn/what-is-kubernetes](https://cloud.google.com/learn/what-is-kubernetes)
 - **Linter** - [sourcelevel.io/blog/what-is-a-linter-and-why-your-team-should-use-it](https://sourcelevel.io/blog/what-is-a-linter-and-why-your-team-should-use-it)
@@ -179,12 +186,14 @@ Everyone on-call should only acknowledge incidents that they have the ability an
 - **PaaS** - Platform as a service (e.g. GCP App Engine)
 - **PR** - Pull Request [docs.github.com/en/pull-requests](https://docs.github.com/en/pull-requests/)
 - **Prettier** - Code Formatter [prettier.io](https://prettier.io)
+- **QUIC** - Quick UDP Internet Connections [akamai.com/.../http3-and-quic-past-present-and-future](https://www.akamai.com/blog/performance/http3-and-quic-past-present-and-future)
 - **SCM** - Source Code Management
 - **Serverless** - [cloudflare.com/.../what-is-serverless](https://www.cloudflare.com/en-gb/learning/serverless/what-is-serverless/)
 - **SemVer** - Semantic Versioning [semver.org](https://semver.org/spec/v2.0.0.html)
 - **SLO** - Service Level Objective [datadoghq.com/blog/establishing-service-level-objectives](https://www.datadoghq.com/blog/establishing-service-level-objectives/)
 - **SLSA** - Supply chain Levels for Software Artifacts [slsa.dev](https://slsa.dev)
 - **SRE** - Site Reliability Engineering [sre.google](https://sre.google)
+- **SSL** - Secure Sockets Layer [websecurity.digicert.com/.../what-is-ssl-tls-https](https://www.websecurity.digicert.com/security-topics/what-is-ssl-tls-https)
 - **Trunk-based Development** - [trunkbaseddevelopment.com](https://trunkbaseddevelopment.com)
 - **UX** - User Experience [interaction-design.org/literature/topics/ux-design](https://www.interaction-design.org/literature/topics/ux-design)
 - **VM** - Virtual Machine (a single virtualized computer unit)
@@ -218,6 +227,7 @@ Everyone on-call should only acknowledge incidents that they have the ability an
 
 - Inclusive Naming Initiative [inclusivenaming.org](https://inclusivenaming.org)
 - Inclusive Terminology from W3C [w3c.github.io/manual-of-style](https://w3c.github.io/manual-of-style/#inclusive)
+- Diversity in Language and Images from Berlin [DE] [berlin.de/.../diversity-und-sprache-bilder](https://www.berlin.de/sen/lads/schwerpunkte/diversity/diversity-landesprogramm/diversity-und-sprache-bilder/)
 - The Fight Over Offensive Terms in Computing [nytimes.com/.../racist-computer-engineering-terms-ietf](https://www.nytimes.com/2021/04/13/technology/racist-computer-engineering-terms-ietf.html)
 - Code of Ethics and Professional Conduct from W3C [w3.org/Consortium/cepc](https://www.w3.org/Consortium/cepc/)
 - Color Checker for Accessibility [whocanuse.com](https://www.whocanuse.com)
@@ -231,6 +241,11 @@ Everyone on-call should only acknowledge incidents that they have the ability an
 - SPDX License List [spdx.org/licenses](https://spdx.org/licenses/)
 - Super Linter [github/super-linter](https://github.com/github/super-linter)
 - Awesome Broadcasting by the EBU [github.com/ebu/awesome-broadcasting](https://github.com/ebu/awesome-broadcasting)
+- Coordinated Vulnerability Disclosure (CVD) by BSI in Germany [bsi.bund.de/...](https://www.bsi.bund.de/DE/IT-Sicherheitsvorfall/IT-Schwachstellen/it-schwachstellen_node.html)
+
+### Web Tools
+
+- Cloudflare Radar [radar.cloudflare.com](https://radar.cloudflare.com)
 
 ## Public Key
 
