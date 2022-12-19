@@ -9,6 +9,7 @@
   - [Code Structure \& Testing](#code-structure--testing)
   - [Versioning, Automation \& Deployments](#versioning-automation--deployments)
   - [Cloud-Native \& Portability](#cloud-native--portability)
+  - [Transparency \& Open Source](#transparency--open-source)
   - [Sustainability](#sustainability)
   - [Security \& Privacy](#security--privacy)
   - [Monitoring \& Alerting](#monitoring--alerting)
@@ -61,9 +62,7 @@ Issues are our home for bugs, features, and project planning. They should have a
 
 Progress should be tracked and commented on in issues, even when already discussed in separate chat groups, to enable research and follow-ups in the future (searchability).
 
-Communication is key for all projects. We don’t rely on historical structures (_“This is how things are done around here._”) and instead support constructive feedback, trust, new ideas, and input from others (operational over organizational communication).
-
-We share our tools and knowledge with others supporting our values. Technical tools that don’t contain sensitive information should be open-sourced.
+Communication is key for all projects. We don’t rely on historical structures (_“This is how things are done around here.”_) and instead support constructive feedback, trust, new ideas, and input from others (operational over organizational communication).
 
 ## Services
 
@@ -123,7 +122,15 @@ We encourage and use multi-cloud or multi-region deployments and storage solutio
 
 Our main tool to containerize and virtualize services is Docker. We use those containers to deploy them on a wide range of computing options that boost portability between cloud providers and platforms.
 
-We test and support new networking and layer developments such as TLS 1.3, IPv6, and HTTP3/QUIC.
+We test and support new networking and technology developments such as TLS 1.3, IPv6, and HTTP3/QUIC to improve the security and delivery of our services.
+
+## Transparency & Open Source
+
+We share our tools and knowledge with others supporting our values.
+
+Technical tools that don’t contain sensitive information should be open-sourced.
+
+Since we benefit from open source projects, we also spend some of our time contributing to them whenever we see a problem we can help solve.
 
 ## Sustainability
 
@@ -241,11 +248,15 @@ Everyone on-call should only acknowledge incidents that they have the ability an
 - SPDX License List [spdx.org/licenses](https://spdx.org/licenses/)
 - Super Linter [github/super-linter](https://github.com/github/super-linter)
 - Awesome Broadcasting by the EBU [github.com/ebu/awesome-broadcasting](https://github.com/ebu/awesome-broadcasting)
-- Coordinated Vulnerability Disclosure (CVD) by BSI in Germany [bsi.bund.de/...](https://www.bsi.bund.de/DE/IT-Sicherheitsvorfall/IT-Schwachstellen/it-schwachstellen_node.html)
+- Coordinated Vulnerability Disclosure (CVD) by BSI in Germany [DE] [bsi.bund.de/...](https://www.bsi.bund.de/DE/IT-Sicherheitsvorfall/IT-Schwachstellen/it-schwachstellen_node.html)
 
 ### Web Tools
 
-- Cloudflare Radar [radar.cloudflare.com](https://radar.cloudflare.com)
+- Cloudflare Radar - for insights into data usage [radar.cloudflare.com](https://radar.cloudflare.com)
+- Purge 1.1.1.1 - Purge entries from Cloudflare's DNS [1.1.1.1/purge-cache](https://1.1.1.1/purge-cache/)
+- Purge Google DNS - Purge entries from Google's DNS [developers.google.com/speed/public-dns/cache](https://developers.google.com/speed/public-dns/cache)
+- One Time Secret - Share a secret one time (prefer using GPG-encrypted secrets for receivers that support it) [onetimesecret.com](https://onetimesecret.com)
+- UTM Generator - Add UTM/ campaign parameters to a URL [usefathom.com/utm-builder](https://usefathom.com/utm-builder)
 
 ## Public Key
 
