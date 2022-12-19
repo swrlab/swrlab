@@ -122,7 +122,7 @@ We encourage and use multi-cloud or multi-region deployments and storage solutio
 
 Our main tool to containerize and virtualize services is Docker. We use those containers to deploy them on a wide range of computing options that boost portability between cloud providers and platforms.
 
-We test and support new networking and technology developments such as TLS 1.3, IPv6, and HTTP3/QUIC to improve the security and delivery of our services.
+We test and support new networking and technology developments such as TLS 1.3, IPv6, HTTP/3 and QUIC to improve the security and delivery of our services.
 
 ## Transparency & Open Source
 
