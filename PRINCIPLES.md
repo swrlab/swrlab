@@ -181,7 +181,7 @@ Everyone on-call should only acknowledge incidents that they have the ability an
 - **HTTP/3** - Hypertext Transfer Protocol v3 [cloudflare.com/.../what-is-http3](https://www.cloudflare.com/en-gb/learning/performance/what-is-http3/)
 - **IaC** - Infrastructure as Code [developer.hashicorp.com/.../infrastructure-as-code](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/infrastructure-as-code)
 - **IDP** - Internal Developer Platform [platformengineering.org/blog/what-is-platform-engineering](https://platformengineering.org/blog/what-is-platform-engineering)
-- **IPv4/6** - Internet Protocol Version 4/6 [juniper.net/.../what-is-ipv4-vs-ipv6.html](https://www.juniper.net/us/en/research-topics/what-is-ipv4-vs-ipv6.html)
+- **IPv4/6** - internet Protocol Version 4/6 [juniper.net/.../what-is-ipv4-vs-ipv6.html](https://www.juniper.net/us/en/research-topics/what-is-ipv4-vs-ipv6.html)
 - **KPI** - Key Performance Indicators [qlik.com/us/kpi](https://www.qlik.com/us/kpi)
 - **Kubernetes, K8s** - Scaleable container orchestration [cloud.google.com/learn/what-is-kubernetes](https://cloud.google.com/learn/what-is-kubernetes)
 - **Linter** - [sourcelevel.io/blog/what-is-a-linter-and-why-your-team-should-use-it](https://sourcelevel.io/blog/what-is-a-linter-and-why-your-team-should-use-it)
@@ -193,7 +193,7 @@ Everyone on-call should only acknowledge incidents that they have the ability an
 - **PaaS** - Platform as a service (e.g. GCP App Engine)
 - **PR** - Pull Request [docs.github.com/en/pull-requests](https://docs.github.com/en/pull-requests/)
 - **Prettier** - Code Formatter [prettier.io](https://prettier.io)
-- **QUIC** - Quick UDP Internet Connections [akamai.com/.../http3-and-quic-past-present-and-future](https://www.akamai.com/blog/performance/http3-and-quic-past-present-and-future)
+- **QUIC** - Quick UDP internet Connections [akamai.com/.../http3-and-quic-past-present-and-future](https://www.akamai.com/blog/performance/http3-and-quic-past-present-and-future)
 - **SCM** - Source Code Management
 - **Serverless** - [cloudflare.com/.../what-is-serverless](https://www.cloudflare.com/en-gb/learning/serverless/what-is-serverless/)
 - **SemVer** - Semantic Versioning [semver.org](https://semver.org/spec/v2.0.0.html)
