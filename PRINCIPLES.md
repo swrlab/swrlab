@@ -142,6 +142,8 @@ Secrets are encrypted using a GPG workflow and stored in version control.
 
 Commits should follow the Conventional Commits structure and should be GPG-signed.
 
+Service Accounts and IAM permissions should be managed using IaC. They should apply the principle of least-possible roles, scopes, and priviledges.
+
 All web services, platforms, and tools we use must be protected by MFA. We prefer using SSO through our organization with its linked MFA protection, if possible. For all other cases, we prefer physical keys (FIDO) over basic OTP.
 
 We aim to store as little data as possible, meaning that we only store what’s needed to monitor, analyze and improve our services. We always actively engage with our internal data protection officers about changes and our overall services.
@@ -249,6 +251,7 @@ Everyone on-call should only acknowledge incidents that they have the ability an
 - Super Linter [github/super-linter](https://github.com/github/super-linter)
 - Awesome Broadcasting by the EBU [github.com/ebu/awesome-broadcasting](https://github.com/ebu/awesome-broadcasting)
 - Coordinated Vulnerability Disclosure (CVD) by BSI in Germany [DE] [bsi.bund.de/...](https://www.bsi.bund.de/DE/IT-Sicherheitsvorfall/IT-Schwachstellen/it-schwachstellen_node.html)
+- Use IAM securely [cloud.google.com/iam/docs/using-iam-securely](https://cloud.google.com/iam/docs/using-iam-securely)
 
 ### Web Tools
 
@@ -257,6 +260,7 @@ Everyone on-call should only acknowledge incidents that they have the ability an
 - Purge Google DNS - Purge entries from Google's DNS [developers.google.com/speed/public-dns/cache](https://developers.google.com/speed/public-dns/cache)
 - One Time Secret - Share a secret one time (prefer using GPG-encrypted secrets for receivers that support it) [onetimesecret.com](https://onetimesecret.com)
 - UTM Generator - Add UTM/ campaign parameters to a URL [usefathom.com/utm-builder](https://usefathom.com/utm-builder)
+- Crontab.guru - Visualize cronjob execution times [crontab.guru](https://crontab.guru/)
 
 ## Public Key
 
