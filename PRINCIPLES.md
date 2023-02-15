@@ -90,17 +90,17 @@ We only use neutral and inclusive names for our services and in our code and doc
 
 ## Code Structure & Testing
 
-Code should be readable, understandable, and clean. It should include inline comments for documentation about specific steps. Overall documentation should be written in separate Markdown files.
+Code should be readable, understandable, and clean. It should include inline comments for documentation about specific steps. Overall documentation should be written in separate Markdown files. We prefer English for file names, variables, comments, and documentation to keep it universal and avoid unclear "Denglisch" (German + English) combinations.
 
 Modules and artifacts used in multiple projects should be managed in a central place to avoid redundancy and to benefit from adaptability (e.g. `@swrlab/node-utils`).
 
-Code should always be written and checked against linters and formatters such as ESLint and Prettier. Those should also be run automatically for PRs in CI (e.g. with `super-linter`).
+Code should always be written and checked against linters and formatters such as _ESLint_ and _Prettier_. Those should also be run automatically for PRs in CI (e.g. with `super-linter`).
 
 Projects should include test routines to check and ensure functionality and avoid regressions (e.g. `mocha`, `jest`).
 
 ## Versioning, Automation & Deployments
 
-All services must have a changelog document in version control using the SemVer versioning structure.
+All services must have a changelog document in version control using the _SemVer_ versioning structure.
 
 Whenever possible, tools and actions should be automated to optimize processes, save time, and reduce errors from manual interaction.
 
@@ -112,7 +112,7 @@ A developer that merges a PR also looks after its deployment or explicitly hands
 
 We use releases to pinpoint minor code versions in GitHub along with their changes.
 
-Only the main branch can be deployed to production (trunk-based development).
+Only the `main` branch can be deployed to production (trunk-based development).
 
 ## Cloud-Native & Portability
 
@@ -140,7 +140,7 @@ We pay attention to the ecological footprint our applications create. It is esse
 
 Secrets are encrypted using a GPG workflow and stored in version control.
 
-Commits should follow the Conventional Commits structure and should be GPG-signed.
+Commits should follow the Conventional Commits structure and should be GPG/SSH-signed.
 
 Service Accounts and IAM permissions should be managed using IaC. They should apply the principle of least-possible roles, scopes, and priviledges.
 
@@ -245,6 +245,7 @@ Everyone on-call should only acknowledge incidents that they have the ability an
 
 - GPG for Mac [gpgtools.org](https://gpgtools.org)
 - Setting up GPG and Commit Signatures for GitHub [docs.github.com/en/authentication](https://docs.github.com/en/authentication/managing-commit-signature-verification/telling-git-about-your-signing-key)
+- 1Password for SSH & Git (incl. signing) [developer.1password.com/docs/ssh](https://developer.1password.com/docs/ssh)
 - npm Best Practices Guide [github.com/ossf/package-manager-best-practices](https://github.com/ossf/package-manager-best-practices/blob/main/published/npm.md)
 - NodeJS Release Schedule [github.com/nodejs/release](https://github.com/nodejs/release#release-schedule)
 - SPDX License List [spdx.org/licenses](https://spdx.org/licenses/)
@@ -255,12 +256,18 @@ Everyone on-call should only acknowledge incidents that they have the ability an
 
 ### Web Tools
 
+- CIDR Range Visualizer [cidr.xyz](https://cidr.xyz)
+- Cheatsheets for common tools and applications [quickref.me](https://quickref.me)
 - Cloudflare Radar - for insights into data usage [radar.cloudflare.com](https://radar.cloudflare.com)
+- Crontab.guru - Visualize cronjob execution times [crontab.guru](https://crontab.guru/)
+- In-app browser check to test for JS injections [inappbrowser.com](https://inappbrowser.com)
+- One Time Secret - Share a secret one time (prefer using GPG-encrypted secrets for receivers that support it) [onetimesecret.com](https://onetimesecret.com)
 - Purge 1.1.1.1 - Purge entries from Cloudflare's DNS [1.1.1.1/purge-cache](https://1.1.1.1/purge-cache/)
 - Purge Google DNS - Purge entries from Google's DNS [developers.google.com/speed/public-dns/cache](https://developers.google.com/speed/public-dns/cache)
-- One Time Secret - Share a secret one time (prefer using GPG-encrypted secrets for receivers that support it) [onetimesecret.com](https://onetimesecret.com)
+- Speed Test from Cloudflare [speed.cloudflare.com](https://speed.cloudflare.com)
+- Speed Test from Netflix [fast.com](https://fast.com)
+- Speed Test from Ookla [speedtest.net](https://www.speedtest.net)
 - UTM Generator - Add UTM/ campaign parameters to a URL [usefathom.com/utm-builder](https://usefathom.com/utm-builder)
-- Crontab.guru - Visualize cronjob execution times [crontab.guru](https://crontab.guru/)
 
 ## Public Key
 
