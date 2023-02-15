@@ -142,7 +142,7 @@ Secrets are encrypted using a GPG workflow and stored in version control.
 
 Commits should follow the Conventional Commits structure and should be GPG/SSH-signed.
 
-Service Accounts and IAM permissions should be managed using IaC. They should apply the principle of least-possible roles, scopes, and priviledges.
+Service Accounts and IAM permissions should be managed using IaC. They should apply the principle of least-possible roles, scopes, and privileges.
 
 All web services, platforms, and tools we use must be protected by MFA. We prefer using SSO through our organization with its linked MFA protection, if possible. For all other cases, we prefer physical keys (FIDO) over basic OTP.
 
