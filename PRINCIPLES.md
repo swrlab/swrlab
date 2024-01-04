@@ -13,6 +13,7 @@
   - [Delivery Performance](#delivery-performance)
   - [Code Structure \& Testing](#code-structure--testing)
   - [Versioning, Automation \& Deployments](#versioning-automation--deployments)
+  - [Dependency Upgrades](#dependency-upgrades)
   - [Cloud-Native \& Portability](#cloud-native--portability)
   - [Security \& Privacy](#security--privacy)
   - [Monitoring \& Alerting](#monitoring--alerting)
@@ -124,7 +125,7 @@ We aim to avoid quick hacks that build technical debt in the future.
 
 ## Code Structure & Testing
 
-Code should be readable, understandable, and clean. It should include inline comments for documentation about specific steps. Overall documentation should be written in separate Markdown files. We prefer English for file names, variables, comments, and documentation to keep it universal and avoid unclear "_Denglisch_" (German + English) combinations.
+Code should be readable, understandable, and clean. It should include inline comments for documentation about specific steps. Overall documentation should be written in separate Markdown files. We prefer English for filenames, variables, comments, and documentation to keep it universal and avoid unclear "_Denglisch_" (German + English) combinations.
 
 Modules and artifacts used in multiple projects should be managed in a central place to avoid redundancy and to benefit from adaptability (e.g. `@swrlab/node-utils`).
 
@@ -149,6 +150,12 @@ A developer that merges a PR also looks after its deployment or explicitly hands
 We use releases to pinpoint minor code versions in GitHub along with their changes.
 
 Only the `main` branch can be deployed to production (trunk-based development).
+
+## Dependency Upgrades
+
+Regular dependency upgrades are crucial for maintaining the health and security of technical systems at SWR Audio Lab. Keeping dependencies up-to-date ensures that our systems benefit from the latest features, performance improvements, and, most importantly, security patches.
+
+However, these upgrades carry inherent risks, such as compatibility issues or unforeseen bugs introduced by newer versions. These can lead to system instability or conflicts with existing components. To mitigate these risks, we employ thorough testing and validation processes, including automated tests and staged rollouts, to ensure upgrades do not disrupt service functionality or user experience. By balancing the importance of staying current with the need for cautious implementation, we maintain robust, secure, and efficient technical systems.
 
 ## Cloud-Native & Portability
 
