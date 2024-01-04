@@ -3,24 +3,26 @@
 - [SWR Audio Lab - Engineering Principles](#swr-audio-lab---engineering-principles)
   - [Principles](#principles)
   - [Project Management \& Communication](#project-management--communication)
-    - [GitHub](#github)
-  - [Inclusivity \& Neutral Terminology](#inclusivity--neutral-terminology)
+  - [Incorporation of Holacracy Principles](#incorporation-of-holacracy-principles)
+  - [Work-Life Balance \& Well-Being](#work-life-balance--well-being)
+  - [Inclusivity, Diversity \& Neutral Terminology](#inclusivity-diversity--neutral-terminology)
   - [Sustainability](#sustainability)
+  - [Transparency \& Open Source](#transparency--open-source)
+  - [GitHub Tooling](#github-tooling)
   - [Service Architecture](#service-architecture)
   - [Delivery Performance](#delivery-performance)
   - [Code Structure \& Testing](#code-structure--testing)
   - [Versioning, Automation \& Deployments](#versioning-automation--deployments)
   - [Cloud-Native \& Portability](#cloud-native--portability)
-  - [Transparency \& Open Source](#transparency--open-source)
   - [Security \& Privacy](#security--privacy)
   - [Monitoring \& Alerting](#monitoring--alerting)
-  - [Definitions](#definitions)
+  - [Names \& Definitions](#names--definitions)
   - [Resources](#resources)
     - [More from the Audio Lab](#more-from-the-audio-lab)
     - [Standards](#standards)
     - [DevOp Structures \& Reports](#devop-structures--reports)
     - [Inclusitivity \& Ethics](#inclusitivity--ethics)
-    - [Holacracy](#holacracy)
+    - [Holacracy Ressources](#holacracy-ressources)
     - [Technical Guides \& Tools](#technical-guides--tools)
       - [Security \& GPG Tools](#security--gpg-tools)
     - [Web Tools](#web-tools)
@@ -53,7 +55,39 @@ We make use of agile and user-centered design principles but apply them carefull
 
 Communication is key for all projects. We don’t rely on historical structures (_“This is how things are done around here.”_) and instead support constructive feedback, trust, new ideas, and input from others (operational over organizational communication).
 
-### GitHub
+## Incorporation of Holacracy Principles
+
+In our pursuit of innovative and efficient organizational structures, we have integrated key principles of Holacracy into our workflow. Holacracy, a system of decentralized management and organizational governance, empowers our team members with increased autonomy and decision-making authority.
+
+This approach is integrated by dynamic roles rather than static job descriptions, enabling individuals to adapt and contribute based on their skills, interests, and the current needs of the organization. By adopting Holacracy, we aim to create a more agile, responsive, and innovative work environment where bureaucracy is minimized, and each member feels a true sense of ownership and engagement in the collective success of our projects.
+
+## Work-Life Balance & Well-Being
+
+We prioritize the well-being and work-life balance of our team members as a cornerstone of our productivity.
+
+To this end, we offer flexible working arrangements, including options for remote work and adjustable working hours, to accommodate diverse life circumstances. Regular team-building activities are organized to promote a positive work environment and encourage a sense of community. We aim to foster a culture of respect, empathy, and holistic well-being, ensuring that each team member feels valued and supported in both their professional and personal lives.
+
+## Inclusivity, Diversity & Neutral Terminology
+
+We aspire our products and services to be accessible and usable by everyone.
+
+We only use neutral and inclusive names for our services and in our code and documentation. We advocate and educate others, whenever we come across occurrences of avoidable terms.
+
+For our team we aspire to be as diverse as possible, while still being a small team.
+
+## Sustainability
+
+We pay attention to the ecological footprint our digital applications create. It is essential for us to use carbon-neutral cloud providers, cleaner regions, and use efficient shared hosting solutions like serverless to optimize our consumption.
+
+## Transparency & Open Source
+
+We share our tools and knowledge with others supporting our values.
+
+Technical tools that don’t contain sensitive information should be open-sourced.
+
+Since we benefit from open source projects, we also aim to spend some of our time contributing to them whenever we see a problem we can help solve.
+
+## GitHub Tooling
 
 GitHub is our primary tool for version control of issues, code, and documentation.
 
@@ -69,16 +103,6 @@ Issues on GitHub are our home for bugs, features, and project planning. They sho
 - Done
 
 Progress should be tracked and commented on in issues, even when already discussed in separate chat groups, to enable research and follow-ups in the future (searchability).
-
-## Inclusivity & Neutral Terminology
-
-We aspire our products and services to be accessible and usable by everyone.
-
-We only use neutral and inclusive names for our services and in our code and documentation. We advocate and educate others, whenever we come across occurrences of avoidable terms.
-
-## Sustainability
-
-We pay attention to the ecological footprint our digital applications create. It is essential for us to use carbon-neutral cloud providers, cleaner regions, and use efficient shared hosting solutions like serverless to optimize our consumption.
 
 ## Service Architecture
 
@@ -136,14 +160,6 @@ Our main tool to containerize and virtualize services is Docker. We use those co
 
 We test and support new networking and technology developments such as _TLS 1.3_, _IPv6_, _HTTP/3_ and _QUIC_ to improve the security and delivery of our services.
 
-## Transparency & Open Source
-
-We share our tools and knowledge with others supporting our values.
-
-Technical tools that don’t contain sensitive information should be open-sourced.
-
-Since we benefit from open source projects, we also aim to spend some of our time contributing to them whenever we see a problem we can help solve.
-
 ## Security & Privacy
 
 Secrets are encrypted using a _GPG_ workflow and stored in version control.
@@ -166,7 +182,7 @@ Alerting has predefined warn and error levels as well as escalation policies. Mo
 
 Everyone on-call should only acknowledge incidents that they have the ability and capacity to investigate and resolve. Otherwise, incidents should be escalated to a fellow team member. Large-scale problems must proactively be communicated to other internal and external stakeholders to keep them in the loop.
 
-## Definitions
+## Names & Definitions
 
 - **ARD** - Arbeitsgemeinschaft der öffentlich-rechtlichen Rundfunkanstalten der Bundesrepublik Deutschland [ard.de](https://www.ard.de)
 - **AWS** - Amazon Web Services [aws.amazon.com](https://aws.amazon.com)
@@ -248,7 +264,7 @@ Everyone on-call should only acknowledge incidents that they have the ability an
 - Code of Ethics and Professional Conduct from W3C [w3.org/Consortium/cepc](https://www.w3.org/Consortium/cepc/)
 - Color Checker for Accessibility [whocanuse.com](https://www.whocanuse.com)
 
-### Holacracy
+### Holacracy Ressources
 
 - Holacracy Constitution [github.com/holacracyone/Holacracy-Constitution](https://github.com/holacracyone/Holacracy-Constitution/blob/master/Holacracy-Constitution.md)
 
