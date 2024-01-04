@@ -3,14 +3,15 @@
 - [SWR Audio Lab - Engineering Principles](#swr-audio-lab---engineering-principles)
   - [Principles](#principles)
   - [Project Management \& Communication](#project-management--communication)
-  - [Services](#services)
-  - [Delivery Performance](#delivery-performance)
+    - [GitHub](#github)
   - [Inclusivity \& Neutral Terminology](#inclusivity--neutral-terminology)
+  - [Sustainability](#sustainability)
+  - [Service Architecture](#service-architecture)
+  - [Delivery Performance](#delivery-performance)
   - [Code Structure \& Testing](#code-structure--testing)
   - [Versioning, Automation \& Deployments](#versioning-automation--deployments)
   - [Cloud-Native \& Portability](#cloud-native--portability)
   - [Transparency \& Open Source](#transparency--open-source)
-  - [Sustainability](#sustainability)
   - [Security \& Privacy](#security--privacy)
   - [Monitoring \& Alerting](#monitoring--alerting)
   - [Definitions](#definitions)
@@ -19,8 +20,11 @@
     - [Standards](#standards)
     - [DevOp Structures \& Reports](#devop-structures--reports)
     - [Inclusitivity \& Ethics](#inclusitivity--ethics)
+    - [Holacracy](#holacracy)
     - [Technical Guides \& Tools](#technical-guides--tools)
+      - [Security \& GPG Tools](#security--gpg-tools)
     - [Web Tools](#web-tools)
+      - [DNS Tools](#dns-tools)
   - [Public Key](#public-key)
   - [Disclaimer](#disclaimer)
   - [Authors](#authors)
@@ -28,28 +32,32 @@
 
 ## Principles
 
-The SWR Audio Lab is here to facilitate even better public service media offerings - with a strong focus on audio.
+The SWR Audio Lab facilitates even better public service media offerings - with a strong focus on audio.
 
 We aim to serve our users from our own platforms instead of third-party aggregators or apps to improve the overall user journey and reduce data transfer to third-parties.
 
 Our goal is to create a seamless ambient media experience - meaning to be where our users are to accompany them during their day across multiple devices, applications and platforms.
 
-We’re involved in several working groups in the ARD and EBU to improve exchange, standardization and prominence of our products and services.
+We’re involved in several working groups in the ARD and EBU to improve exchange, standardization and prominence of our content, products, and services.
 
-For Connected Cars and Devices we developed a set of four principles to guide our work:
+For Smart Devices and Connected Cars we developed a set of four principles to guide our work:
 
-1. Radio must remain easy to use. It should start with the push (or touch) of a button. Audiences love radio precisely because it is so easy and because they don’t need to choose.
-2. Radio should not just be easy to find, it should be impossible to miss. Just like the physical radio button used to be, it should exist on that first level and not disappear in the jungle of apps.
-3. Radio in the car should be focused and personalized. We should make smart suggestions based on prior listening but be transparent with the data we collect.
-4. And lastly, radio comes as a package. It includes public and private stations, as well as local, national and international broadcasters. All radio stations should be found in the same place.
+1. **Radio must remain easy to use.** It should start with the push of a button or a simple voice command. Audiences love radio precisely because it is so easy and because they don’t need to choose.
+2. **Radio should not just be easy to find, it should be impossible to miss.** Just like the physical radio button used to be, it should exist on that first level and not disappear in the jungle of apps.
+3. **Radio should be focused and personalized.** We should make smart suggestions based on prior listening but be transparent with the data we collect.
+4. And lastly, **radio comes as a package.** It includes public and private stations, as well as local, national and international broadcasters. All radio stations should be found in the same place.
 
 ## Project Management & Communication
 
-We make use of agile and user-centered design principles but apply them carefully. For us it is more important to use something that works instead of solely following a paper.
+We make use of agile and user-centered design principles but apply them carefully. For us it is more important to use something that works instead of strictly following a framework.
+
+Communication is key for all projects. We don’t rely on historical structures (_“This is how things are done around here.”_) and instead support constructive feedback, trust, new ideas, and input from others (operational over organizational communication).
+
+### GitHub
 
 GitHub is our primary tool for version control of issues, code, and documentation.
 
-Issues are our home for bugs, features, and project planning. They should have a short and clear title with enough description for everyone to understand the scope and tasks involved. All issues must be added to the GitHub board, where they make their way through these steps:
+Issues on GitHub are our home for bugs, features, and project planning. They should have a short and clear title with enough description for everyone to understand the scope and tasks involved. All issues must be added to the GitHub board, where they make their way through these steps:
 
 - Backlog
 - To Do
@@ -62,15 +70,23 @@ Issues are our home for bugs, features, and project planning. They should have a
 
 Progress should be tracked and commented on in issues, even when already discussed in separate chat groups, to enable research and follow-ups in the future (searchability).
 
-Communication is key for all projects. We don’t rely on historical structures (_“This is how things are done around here.”_) and instead support constructive feedback, trust, new ideas, and input from others (operational over organizational communication).
+## Inclusivity & Neutral Terminology
 
-## Services
+We aspire our products and services to be accessible and usable by everyone.
+
+We only use neutral and inclusive names for our services and in our code and documentation. We advocate and educate others, whenever we come across occurrences of avoidable terms.
+
+## Sustainability
+
+We pay attention to the ecological footprint our digital applications create. It is essential for us to use carbon-neutral cloud providers, cleaner regions, and use efficient shared hosting solutions like serverless to optimize our consumption.
+
+## Service Architecture
 
 We carefully balance our services between monoliths and too fragmented microservices.
 
-We use Infrastructure as Code (IaC) instead of manual configurations to track changes and enable faster restorability.
+We use Infrastructure as Code (_IaC_) to track changes and enable faster restorability.
 
-We use automation to back up mission-critical data and have tested restoring it (DRP).
+We use automation to back up mission-critical data and have tested restoring it (_DRP_).
 
 We provide limited support (as our time allows) for our services to internal and external users. However, a person needing support is also the result of a misleading UX, unclear self-help guides, or an incomplete feature that should be assessed and evaluated afterward.
 
@@ -78,19 +94,13 @@ We provide limited support (as our time allows) for our services to internal and
 
 Delivery Performance is the combination of the ability and agility to make changes, deploy, and recover services. To us, security and reliability are more important than pure delivery performance.
 
-All of our projects and services are actively maintained (dependency and platform updates; security and CVE fixes) or reevaluated and eventually phased out and turned off.
+All of our projects and services must be actively maintained (dependency and platform updates; security and CVE fixes) or need to be reevaluated and eventually turned off.
 
 We aim to avoid quick hacks that build technical debt in the future.
 
-## Inclusivity & Neutral Terminology
-
-We aspire our products and services to be accessible and usable by everyone.
-
-We only use neutral and inclusive names for our services and in our code and documentation. We advocate and educate others, whenever we come across occurrences of avoidable terms.
-
 ## Code Structure & Testing
 
-Code should be readable, understandable, and clean. It should include inline comments for documentation about specific steps. Overall documentation should be written in separate Markdown files. We prefer English for file names, variables, comments, and documentation to keep it universal and avoid unclear "Denglisch" (German + English) combinations.
+Code should be readable, understandable, and clean. It should include inline comments for documentation about specific steps. Overall documentation should be written in separate Markdown files. We prefer English for file names, variables, comments, and documentation to keep it universal and avoid unclear "_Denglisch_" (German + English) combinations.
 
 Modules and artifacts used in multiple projects should be managed in a central place to avoid redundancy and to benefit from adaptability (e.g. `@swrlab/node-utils`).
 
@@ -102,11 +112,13 @@ Projects should include test routines to check and ensure functionality and avoi
 
 All services must have a changelog document in version control using the _SemVer_ versioning structure.
 
+Commits should follow the Conventional Commits structure and must be GPG/SSH-signed.
+
 Whenever possible, tools and actions should be automated to optimize processes, save time, and reduce errors from manual interaction.
 
-All build processes (CI) are automated using GitHub Actions.
+All build processes (_CI_) are automated using GitHub Actions.
 
-We deploy (CD) on demand when needed (ad-hoc) and don’t require fixed schedules or exemptions (feature or rollout freezes). Shorter release cycles with gradual changes reduce the possible negative effect on service stability in alignment with SRE principles. Services should sustain rollouts and rollbacks during peak load.
+We deploy (_CD_) on demand when needed and don’t require fixed schedules or exemptions (feature or rollout freezes). Shorter release cycles with gradual changes reduce the possible negative effect on service stability in alignment with _SRE_ principles. Services should sustain rollouts and rollbacks during peak load.
 
 A developer that merges a PR also looks after its deployment or explicitly hands it over to someone else. A task or update is done once it runs stable in production, not once a PR was merged.
 
@@ -122,7 +134,7 @@ We encourage and use multi-cloud or multi-region deployments and storage solutio
 
 Our main tool to containerize and virtualize services is Docker. We use those containers to deploy them on a wide range of computing options that boost portability between cloud providers and platforms.
 
-We test and support new networking and technology developments such as TLS 1.3, IPv6, HTTP/3 and QUIC to improve the security and delivery of our services.
+We test and support new networking and technology developments such as _TLS 1.3_, _IPv6_, _HTTP/3_ and _QUIC_ to improve the security and delivery of our services.
 
 ## Transparency & Open Source
 
@@ -130,21 +142,15 @@ We share our tools and knowledge with others supporting our values.
 
 Technical tools that don’t contain sensitive information should be open-sourced.
 
-Since we benefit from open source projects, we also spend some of our time contributing to them whenever we see a problem we can help solve.
-
-## Sustainability
-
-We pay attention to the ecological footprint our applications create. It is essential for us to use carbon-neutral cloud providers, cleaner regions, and use efficient shared hosting solutions like serverless to optimize our consumption.
+Since we benefit from open source projects, we also aim to spend some of our time contributing to them whenever we see a problem we can help solve.
 
 ## Security & Privacy
 
-Secrets are encrypted using a GPG workflow and stored in version control.
+Secrets are encrypted using a _GPG_ workflow and stored in version control.
 
-Commits should follow the Conventional Commits structure and should be GPG/SSH-signed.
+Service Accounts and _IAM_ permissions should be managed using _IaC_. They should apply the principle of least-possible roles, scopes, and privileges.
 
-Service Accounts and IAM permissions should be managed using IaC. They should apply the principle of least-possible roles, scopes, and privileges.
-
-All web services, platforms, and tools we use must be protected by MFA. We prefer using SSO through our organization with its linked MFA protection, if possible. For all other cases, we prefer physical keys (FIDO) over basic OTP.
+All web services, platforms, and tools we use must be protected by _MFA_. We prefer using _SSO_ through our organization with its linked _MFA_ protection, if possible. For all other cases, we prefer physical keys (_FIDO_) over basic _OTP_.
 
 We aim to store as little data as possible, meaning that we only store what’s needed to monitor, analyze and improve our services. We always actively engage with our internal data protection officers about changes and our overall services.
 
@@ -156,7 +162,7 @@ Automated monitors and alerts help detect issues and support our manual observat
 
 We schedule our on-call calendar around our small teams' availability. Personal life and commitments always have priority.
 
-Alerting has predefined warn and error levels as well as escalation policies. Most of which are managed by IaC.
+Alerting has predefined warn and error levels as well as escalation policies. Most of which are managed by _IaC_.
 
 Everyone on-call should only acknowledge incidents that they have the ability and capacity to investigate and resolve. Otherwise, incidents should be escalated to a fellow team member. Large-scale problems must proactively be communicated to other internal and external stakeholders to keep them in the loop.
 
@@ -218,6 +224,7 @@ Everyone on-call should only acknowledge incidents that they have the ability an
 
 ### Standards
 
+- Guidelines from SWR about the usage of AI [DE] [swr.de/unternehmen/ki-guidelines-100.pdf](https://www.swr.de/unternehmen/ki-guidelines-100.pdf)
 - Public Service Standards from gov.uk [gov.uk/service-manual/service-standard](https://www.gov.uk/service-manual/service-standard)
 - Technical and Data Standards from gov.uk [gov.uk/guidance/gds-api-technical-and-data-standards](https://www.gov.uk/guidance/gds-api-technical-and-data-standards)
 - Conway’s Law about organizational structures and their output [thoughtworks.com/.../demystifying-conways-law](https://www.thoughtworks.com/insights/articles/demystifying-conways-law)
@@ -241,33 +248,46 @@ Everyone on-call should only acknowledge incidents that they have the ability an
 - Code of Ethics and Professional Conduct from W3C [w3.org/Consortium/cepc](https://www.w3.org/Consortium/cepc/)
 - Color Checker for Accessibility [whocanuse.com](https://www.whocanuse.com)
 
+### Holacracy
+
+- Holacracy Constitution [github.com/holacracyone/Holacracy-Constitution](https://github.com/holacracyone/Holacracy-Constitution/blob/master/Holacracy-Constitution.md)
+
 ### Technical Guides & Tools
 
-- GPG for Mac [gpgtools.org](https://gpgtools.org)
-- Setting up GPG and Commit Signatures for GitHub [docs.github.com/en/authentication](https://docs.github.com/en/authentication/managing-commit-signature-verification/telling-git-about-your-signing-key)
-- 1Password for SSH & Git (incl. signing) [developer.1password.com/docs/ssh](https://developer.1password.com/docs/ssh)
 - npm Best Practices Guide [github.com/ossf/package-manager-best-practices](https://github.com/ossf/package-manager-best-practices/blob/main/published/npm.md)
 - NodeJS Release Schedule [github.com/nodejs/release](https://github.com/nodejs/release#release-schedule)
+- Roadmap learning examples for DevOps [roadmap.sh/devops](https://roadmap.sh/devops) & backend [roadmap.sh/backend](https://roadmap.sh/backend)
 - SPDX License List [spdx.org/licenses](https://spdx.org/licenses/)
 - Super Linter [github/super-linter](https://github.com/github/super-linter)
 - Awesome Broadcasting by the EBU [github.com/ebu/awesome-broadcasting](https://github.com/ebu/awesome-broadcasting)
 - Coordinated Vulnerability Disclosure (CVD) by BSI in Germany [DE] [bsi.bund.de/...](https://www.bsi.bund.de/DE/IT-Sicherheitsvorfall/IT-Schwachstellen/it-schwachstellen_node.html)
 - Use IAM securely [cloud.google.com/iam/docs/using-iam-securely](https://cloud.google.com/iam/docs/using-iam-securely)
 
+#### Security & GPG Tools
+
+- GPG for Mac [gpgtools.org](https://gpgtools.org)
+- Setting up GPG and Commit Signatures for GitHub [docs.github.com/en/authentication](https://docs.github.com/en/authentication/managing-commit-signature-verification/telling-git-about-your-signing-key)
+- 1Password for SSH & Git (incl. signing) [developer.1password.com/docs/ssh](https://developer.1password.com/docs/ssh)
+
 ### Web Tools
 
-- CIDR Range Visualizer [cidr.xyz](https://cidr.xyz)
 - Cheatsheets for common tools and applications [quickref.me](https://quickref.me)
 - Cloudflare Radar - for insights into data usage [radar.cloudflare.com](https://radar.cloudflare.com)
 - Crontab.guru - Visualize cronjob execution times [crontab.guru](https://crontab.guru/)
 - In-app browser check to test for JS injections [inappbrowser.com](https://inappbrowser.com)
 - One Time Secret - Share a secret one time (prefer using GPG-encrypted secrets for receivers that support it) [onetimesecret.com](https://onetimesecret.com)
-- Purge 1.1.1.1 - Purge entries from Cloudflare's DNS [1.1.1.1/purge-cache](https://1.1.1.1/purge-cache/)
-- Purge Google DNS - Purge entries from Google's DNS [developers.google.com/speed/public-dns/cache](https://developers.google.com/speed/public-dns/cache)
 - Speed Test from Cloudflare [speed.cloudflare.com](https://speed.cloudflare.com)
 - Speed Test from Netflix [fast.com](https://fast.com)
 - Speed Test from Ookla [speedtest.net](https://www.speedtest.net)
+- Timezone converter [timezones.digital](https://www.timezones.digital/)
+- Uptime/ SLA converter [uptime.is](https://uptime.is/)
 - UTM Generator - Add UTM/ campaign parameters to a URL [usefathom.com/utm-builder](https://usefathom.com/utm-builder)
+
+#### DNS Tools
+
+- CIDR Range Visualizer [cidr.xyz](https://cidr.xyz)
+- Purge 1.1.1.1 - Purge entries from Cloudflare's DNS [1.1.1.1/purge-cache](https://1.1.1.1/purge-cache/)
+- Purge Google DNS - Purge entries from Google's DNS [developers.google.com/speed/public-dns/cache](https://developers.google.com/speed/public-dns/cache)
 
 ## Public Key
 
