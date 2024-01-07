@@ -12,7 +12,7 @@
 	"license": "UNLICENSED",
 	"private": true,
 	"dependencies": {
-		"swagger-ui-express": "4.6.0",
+		"swagger-ui-express": "5.0.0",
 		"express": "4.18.2"
 	},
 	"devDependencies": {
