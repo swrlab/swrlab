@@ -25,7 +25,7 @@
     - [Inclusitivity \& Ethics](#inclusitivity--ethics)
     - [Holacracy Ressources](#holacracy-ressources)
     - [Technical Guides \& Tools](#technical-guides--tools)
-      - [Security \& GPG Tools](#security--gpg-tools)
+      - [Git Signing \& Encryption](#git-signing--encryption)
     - [Web Tools](#web-tools)
       - [DNS Tools](#dns-tools)
   - [Public Key](#public-key)
@@ -137,7 +137,7 @@ Projects should include test routines to check and ensure functionality and avoi
 
 All services must have a changelog document in version control using the _SemVer_ versioning structure.
 
-Commits should follow the Conventional Commits structure and must be GPG/SSH-signed.
+Commits should follow the Conventional Commits structure and must be signed. We prefer SSH-based signing, but GPG works as well.
 
 Whenever possible, tools and actions should be automated to optimize processes, save time, and reduce errors from manual interaction.
 
@@ -286,11 +286,12 @@ Everyone on-call should only acknowledge incidents that they have the ability an
 - Coordinated Vulnerability Disclosure (CVD) by BSI in Germany [DE] [bsi.bund.de/...](https://www.bsi.bund.de/DE/IT-Sicherheitsvorfall/IT-Schwachstellen/it-schwachstellen_node.html)
 - Use IAM securely [cloud.google.com/iam/docs/using-iam-securely](https://cloud.google.com/iam/docs/using-iam-securely)
 
-#### Security & GPG Tools
+#### Git Signing & Encryption
 
-- GPG for Mac [gpgtools.org](https://gpgtools.org)
-- Setting up GPG and Commit Signatures for GitHub [docs.github.com/en/authentication](https://docs.github.com/en/authentication/managing-commit-signature-verification/telling-git-about-your-signing-key)
+- GitHub: Signing commits [docs.github.com/en/.../signing-commits](https://docs.github.com/en/authentication/managing-commit-signature-verification/signing-commits)
+- GitHub: Setting up GPG and Commit Signatures for GitHub [docs.github.com/en/authentication](https://docs.github.com/en/authentication/managing-commit-signature-verification/telling-git-about-your-signing-key)
 - 1Password for SSH & Git (incl. signing) [developer.1password.com/docs/ssh](https://developer.1password.com/docs/ssh)
+- GPG for Mac [gpgtools.org](https://gpgtools.org)
 
 ### Web Tools
 
