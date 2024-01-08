@@ -20,6 +20,7 @@
     - [DevOp Structures \& Reports](#devop-structures--reports)
     - [Inclusitivity \& Ethics](#inclusitivity--ethics)
     - [Technical Guides \& Tools](#technical-guides--tools)
+      - [Git Signing \& Encryption](#git-signing--encryption)
     - [Web Tools](#web-tools)
   - [Public Key](#public-key)
   - [Disclaimer](#disclaimer)
@@ -140,7 +141,7 @@ We pay attention to the ecological footprint our applications create. It is esse
 
 Secrets are encrypted using a GPG workflow and stored in version control.
 
-Commits should follow the Conventional Commits structure and should be GPG/SSH-signed.
+Commits should follow the Conventional Commits structure and must be signed. We prefer SSH-based signing, but GPG works as well.
 
 Service Accounts and IAM permissions should be managed using IaC. They should apply the principle of least-possible roles, scopes, and privileges.
 
@@ -243,9 +244,6 @@ Everyone on-call should only acknowledge incidents that they have the ability an
 
 ### Technical Guides & Tools
 
-- GPG for Mac [gpgtools.org](https://gpgtools.org)
-- Setting up GPG and Commit Signatures for GitHub [docs.github.com/en/authentication](https://docs.github.com/en/authentication/managing-commit-signature-verification/telling-git-about-your-signing-key)
-- 1Password for SSH & Git (incl. signing) [developer.1password.com/docs/ssh](https://developer.1password.com/docs/ssh)
 - npm Best Practices Guide [github.com/ossf/package-manager-best-practices](https://github.com/ossf/package-manager-best-practices/blob/main/published/npm.md)
 - NodeJS Release Schedule [github.com/nodejs/release](https://github.com/nodejs/release#release-schedule)
 - SPDX License List [spdx.org/licenses](https://spdx.org/licenses/)
@@ -253,6 +251,13 @@ Everyone on-call should only acknowledge incidents that they have the ability an
 - Awesome Broadcasting by the EBU [github.com/ebu/awesome-broadcasting](https://github.com/ebu/awesome-broadcasting)
 - Coordinated Vulnerability Disclosure (CVD) by BSI in Germany [DE] [bsi.bund.de/...](https://www.bsi.bund.de/DE/IT-Sicherheitsvorfall/IT-Schwachstellen/it-schwachstellen_node.html)
 - Use IAM securely [cloud.google.com/iam/docs/using-iam-securely](https://cloud.google.com/iam/docs/using-iam-securely)
+
+#### Git Signing & Encryption
+
+- GitHub: Signing commits [docs.github.com/en/.../signing-commits](https://docs.github.com/en/authentication/managing-commit-signature-verification/signing-commits)
+- GitHub: Setting up GPG and Commit Signatures for GitHub [docs.github.com/en/authentication](https://docs.github.com/en/authentication/managing-commit-signature-verification/telling-git-about-your-signing-key)
+- 1Password for SSH & Git (incl. signing) [developer.1password.com/docs/ssh](https://developer.1password.com/docs/ssh)
+- GPG for Mac [gpgtools.org](https://gpgtools.org)
 
 ### Web Tools
 
