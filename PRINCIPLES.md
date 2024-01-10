@@ -23,7 +23,7 @@
     - [Standards](#standards)
     - [DevOp Structures \& Reports](#devop-structures--reports)
     - [Inclusitivity \& Ethics](#inclusitivity--ethics)
-    - [Holacracy Ressources](#holacracy-ressources)
+    - [Holacracy Resources](#holacracy-resources)
     - [Technical Guides \& Tools](#technical-guides--tools)
       - [Git Signing \& Encryption](#git-signing--encryption)
     - [Web Tools](#web-tools)
@@ -271,7 +271,7 @@ Everyone on-call should only acknowledge incidents that they have the ability an
 - Code of Ethics and Professional Conduct from W3C [w3.org/Consortium/cepc](https://www.w3.org/Consortium/cepc/)
 - Color Checker for Accessibility [whocanuse.com](https://www.whocanuse.com)
 
-### Holacracy Ressources
+### Holacracy Resources
 
 - Holacracy Constitution [github.com/holacracyone/Holacracy-Constitution](https://github.com/holacracyone/Holacracy-Constitution/blob/master/Holacracy-Constitution.md)
 
