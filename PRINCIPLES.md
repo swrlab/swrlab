@@ -1,41 +1,8 @@
 # SWR Audio Lab - Engineering Principles
 
-- [SWR Audio Lab - Engineering Principles](#swr-audio-lab---engineering-principles)
-  - [Principles](#principles)
-  - [Project Management \& Communication](#project-management--communication)
-  - [Incorporation of Holacracy Principles](#incorporation-of-holacracy-principles)
-  - [Work-Life Balance \& Well-Being](#work-life-balance--well-being)
-  - [Inclusivity, Diversity \& Neutral Terminology](#inclusivity-diversity--neutral-terminology)
-  - [Sustainability](#sustainability)
-  - [Transparency \& Open Source](#transparency--open-source)
-  - [GitHub Tooling](#github-tooling)
-  - [Service Architecture](#service-architecture)
-  - [Delivery Performance](#delivery-performance)
-  - [Code Structure \& Testing](#code-structure--testing)
-  - [Versioning, Automation \& Deployments](#versioning-automation--deployments)
-  - [Dependency Upgrades](#dependency-upgrades)
-  - [Cloud-Native \& Portability](#cloud-native--portability)
-  - [Security \& Privacy](#security--privacy)
-  - [Monitoring \& Alerting](#monitoring--alerting)
-  - [Names \& Definitions](#names--definitions)
-  - [Resources](#resources)
-    - [More from the Audio Lab](#more-from-the-audio-lab)
-    - [Standards](#standards)
-    - [DevOp Structures \& Reports](#devop-structures--reports)
-    - [Inclusitivity \& Ethics](#inclusitivity--ethics)
-    - [Holacracy Resources](#holacracy-resources)
-    - [Technical Guides \& Tools](#technical-guides--tools)
-      - [Git Signing \& Encryption](#git-signing--encryption)
-    - [Web Tools](#web-tools)
-      - [DNS Tools](#dns-tools)
-  - [Public Key](#public-key)
-  - [Disclaimer](#disclaimer)
-  - [Authors](#authors)
-  - [License](#license)
-
 ## Principles
 
-The SWR Audio Lab facilitates even better public service media offerings - with a strong focus on audio.
+SWR Audio Lab facilitates even better public service media offerings - with a strong focus on audio.
 
 We aim to serve our users from our own platforms instead of third-party aggregators or apps to improve the overall user journey and reduce data transfer to third-parties.
 
