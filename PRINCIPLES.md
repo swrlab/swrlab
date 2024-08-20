@@ -33,7 +33,7 @@ This approach includes dynamic roles rather than static job descriptions, enabli
 
 ### Holacracy Resources
 
-- Holacracy Constitution [github.com/holacracyone/Holacracy-Constitution](https://github.com/holacracyone/Holacracy-Constitution/blob/master/Holacracy-Constitution.md)
+- [Holacracy Constitution](https://github.com/holacracyone/Holacracy-Constitution/blob/master/Holacracy-Constitution.md)
 
 ## Work-Life Balance & Well-Being
 
@@ -122,33 +122,33 @@ Code should always be written and checked against linters and formatters such as
 
 Projects should include test routines to check and ensure functionality and avoid regressions (e.g. `mocha`, `jest` or `bun test`).
 
+### Learn about Linters & Formatters
+
+- [Biome](https://biomejs.dev/guides/getting-started/)
+- [ESLint](https://eslint.org/docs/latest/use/getting-started)
+- [Super Linter](https://github.com/github/super-linter)
+- [Prettier](https://prettier.io)
+
 ## Versioning, Automation & Deployments
 
-All of our projects and services must be actively maintained (dependency and platform updates; security and CVE fixes) or need to be reevaluated and eventually turned off.
+- All services must have a **changelog** document written in Markdown in version control using the _SemVer_ ([Semantic Versioning](https://semver.org/spec/v2.0.0.html)) versioning structure.
+- Commits should follow the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) structure and **must be signed**. We prefer SSH-based signing, but GPG works as well.
+- Whenever possible, tools and actions should be automated to optimize processes, save time, and reduce errors from manual interaction.
+- All build processes (_CI_) are automated using GitHub Actions. Deployment processes (_CD_) are also mostly automated and handled according to the _SRE_ principles.
+- A developer who merges a pull request also looks after its deployment or explicitly hands it over to someone else. A task or update is done once it runs stably in production, not once a PR was merged.
+- Only the `main` branch can be deployed to production ([trunk-based development](https://trunkbaseddevelopment.com)).
+  - All other branches should be named `dev/*` or `feature/*` and can be deployed to dev environments.
 
-We aim to avoid quick hacks that build technical debt in the future.
+### Learn GitHub Actions
 
-All services must have a changelog document in version control using the _SemVer_ versioning structure.
+- [GitHub Actions Docs](https://docs.github.com/en/actions)
+- [Workflow syntax for GitHub Actions](https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions)
 
-Commits should follow the Conventional Commits structure and must be signed. We prefer SSH-based signing, but GPG works as well.
+### Learn and Set up Git Signing & Encryption
 
-Whenever possible, tools and actions should be automated to optimize processes, save time, and reduce errors from manual interaction.
-
-All build processes (_CI_) are automated using GitHub Actions.
-
-We deploy (_CD_) on demand when needed and don’t require fixed schedules or exemptions (feature or rollout freezes). Shorter release cycles with gradual changes reduce the possible negative effect on service stability in alignment with _SRE_ principles. Services should sustain rollouts and rollbacks during peak load.
-
-A developer who merges a PR also looks after its deployment or explicitly hands it over to someone else. A task or update is done once it runs stably in production, not once a PR was merged.
-
-We use releases to pinpoint minor code versions in GitHub along with their changes.
-
-Only the `main` branch can be deployed to production (trunk-based development).
-
-### Git Signing & Encryption
-
-- GitHub: Signing commits [docs.github.com/en/.../signing-commits](https://docs.github.com/en/authentication/managing-commit-signature-verification/signing-commits)
-- GitHub: Setting up GPG and Commit Signatures for GitHub [docs.github.com/en/authentication](https://docs.github.com/en/authentication/managing-commit-signature-verification/telling-git-about-your-signing-key)
-- 1Password for SSH & Git (incl. signing) [developer.1password.com/docs/ssh](https://developer.1password.com/docs/ssh)
+- GitHub: [Signing commits](https://docs.github.com/en/authentication/managing-commit-signature-verification/signing-commits)
+- GitHub: [Setting up GPG and Commit Signatures for GitHub](https://docs.github.com/en/authentication/managing-commit-signature-verification/telling-git-about-your-signing-key)
+- [1Password for SSH & Git (incl. signing)](https://developer.1password.com/docs/ssh)
 - GPG for Mac [gpgtools.org](https://gpgtools.org)
 
 ## Dependency Upgrades
@@ -156,6 +156,12 @@ Only the `main` branch can be deployed to production (trunk-based development).
 Regular dependency upgrades are crucial for maintaining the health and security of technical systems at SWR Audio Lab. Keeping dependencies up-to-date ensures that our systems benefit from the latest features, performance improvements, and, most importantly, security patches.
 
 However, these upgrades carry inherent risks, such as compatibility issues or unforeseen bugs introduced by newer versions. These can lead to system instability or conflicts with existing components. To mitigate these risks, we employ testing and validation processes, including automated tests and staged rollouts, to ensure upgrades do not disrupt service functionality or user experience. By balancing the importance of staying current with the need for cautious implementation, we maintain robust, secure, and efficient technical systems.
+
+## Service Lifecycle
+
+All of our projects and services must be actively maintained (dependency and platform updates as well as security and CVE fixes) or need to be reevaluated and eventually turned off.
+
+We aim to avoid quick hacks that build technical debt in the future.
 
 ## Service Architecture
 
@@ -206,7 +212,6 @@ Everyone on-call should only acknowledge incidents that they have the ability an
 - **CD** - Continuous Delivery [atlassian.com/continuous-delivery](https://www.atlassian.com/continuous-delivery/principles/pipeline)
 - **CDN** - Content Delivery Network [cloudflare.com/.../what-is-a-cdn](https://www.cloudflare.com/en-gb/learning/cdn/what-is-a-cdn/)
 - **CI** - Continuous Integration [atlassian.com/.../continuous-integration](https://www.atlassian.com/continuous-delivery/continuous-integration)
-- **Conventional Commits** - [conventionalcommits.org](https://www.conventionalcommits.org/en/v1.0.0/)
 - **DevEx, DX** - Developer Experience [getclockwise.com/blog/what-is-developer-experience](https://www.getclockwise.com/blog/what-is-developer-experience)
 - **DevOps** - Development and Operations [azure.microsoft.com/.../what-is-devops](https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary/what-is-devops/)
 - **Docker** - Containerized deployment platform [aws.amazon.com/docker](https://aws.amazon.com/docker/) or [ibm.com/cloud/learn/docker](https://www.ibm.com/cloud/learn/docker)
@@ -217,7 +222,6 @@ Everyone on-call should only acknowledge incidents that they have the ability an
 - **FaaS** - Function as a service (e.g. GCP Cloud Functions, AWS Lambda) [redhat.com/.../what-is-faas](https://www.redhat.com/en/topics/cloud-native-apps/what-is-faas)
 - **FIDO** - Fast IDentity Online [yubico.com/.../fido-2](https://www.yubico.com/resources/glossary/fido-2/)
 - **GCP** - Google Cloud Platform [cloud.google.com](https://cloud.google.com)
-- **GitHub Actions** - [docs.github.com/en/actions](https://docs.github.com/en/actions)
 - **GPG** - GNU Privacy Guard [gnupg.org](https://gnupg.org)
 - **HTTP/3** - Hypertext Transfer Protocol v3 [cloudflare.com/.../what-is-http3](https://www.cloudflare.com/en-gb/learning/performance/what-is-http3/)
 - **IaC** - Infrastructure as Code [developer.hashicorp.com/.../infrastructure-as-code](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/infrastructure-as-code)
@@ -237,12 +241,10 @@ Everyone on-call should only acknowledge incidents that they have the ability an
 - **QUIC** - Quick UDP internet Connections [akamai.com/.../http3-and-quic-past-present-and-future](https://www.akamai.com/blog/performance/http3-and-quic-past-present-and-future)
 - **SCM** - Source Code Management (e.g. in GitHub, Gitlab, etc.)
 - **Serverless** - [cloudflare.com/.../what-is-serverless](https://www.cloudflare.com/en-gb/learning/serverless/what-is-serverless/)
-- **SemVer** - Semantic Versioning [semver.org](https://semver.org/spec/v2.0.0.html)
 - **SLO** - Service Level Objective [datadoghq.com/blog/establishing-service-level-objectives](https://www.datadoghq.com/blog/establishing-service-level-objectives/)
 - **SLSA** - Supply chain Levels for Software Artifacts [slsa.dev](https://slsa.dev)
 - **SRE** - Site Reliability Engineering [sre.google](https://sre.google)
 - **SSL** - Secure Sockets Layer [websecurity.digicert.com/.../what-is-ssl-tls-https](https://www.websecurity.digicert.com/security-topics/what-is-ssl-tls-https)
-- **Trunk-based Development** - [trunkbaseddevelopment.com](https://trunkbaseddevelopment.com)
 - **UX** - User Experience [interaction-design.org/literature/topics/ux-design](https://www.interaction-design.org/literature/topics/ux-design)
 - **VM** - Virtual Machine (a single virtualized computer unit)
 
@@ -261,11 +263,7 @@ Everyone on-call should only acknowledge incidents that they have the ability an
 
 ### Technical Guides & Tools
 
-- npm Best Practices Guide [github.com/ossf/package-manager-best-practices](https://github.com/ossf/package-manager-best-practices/blob/main/published/npm.md)
-- NodeJS Release Schedule [github.com/nodejs/release](https://github.com/nodejs/release#release-schedule)
-- Roadmap learning examples for DevOps [roadmap.sh/devops](https://roadmap.sh/devops) & backend [roadmap.sh/backend](https://roadmap.sh/backend)
 - SPDX License List [spdx.org/licenses](https://spdx.org/licenses/)
-- Super Linter [github/super-linter](https://github.com/github/super-linter)
 - Awesome Broadcasting by the EBU [github.com/ebu/awesome-broadcasting](https://github.com/ebu/awesome-broadcasting)
 - Coordinated Vulnerability Disclosure (CVD) by BSI in Germany [DE] [bsi.bund.de/...](https://www.bsi.bund.de/DE/IT-Sicherheitsvorfall/IT-Schwachstellen/it-schwachstellen_node.html)
 - Use IAM securely [cloud.google.com/iam/docs/using-iam-securely](https://cloud.google.com/iam/docs/using-iam-securely)
