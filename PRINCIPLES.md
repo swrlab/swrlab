@@ -10,9 +10,9 @@ We aim to serve our users from our own platforms instead of third-party aggregat
 
 Our goal is to create a seamless ambient media experience - meaning to be where our users are to accompany them during their day across multiple devices, applications and platforms.
 
-We’re involved in several working groups in the ARD and EBU to improve exchange, standardization and prominence of our content, products, and services.
+We’re involved in several working groups in the ARD and EBU to improve exchange, standardization, and prominence of our content, products, and services.
 
-For Smart Devices and Connected Cars we developed a set of four principles to guide our work:
+For Smart Devices and Connected Cars, we developed a set of four principles to guide our work:
 
 1. **Radio must remain easy to use.** It should start with the push of a button or a simple voice command. Audiences love radio precisely because it is so easy and because they don’t need to choose.
 2. **Radio should not just be easy to find, it should be impossible to miss.** Just like the physical radio button used to be, it should exist on that first level and not disappear in the jungle of apps.
@@ -21,7 +21,7 @@ For Smart Devices and Connected Cars we developed a set of four principles to gu
 
 ## Project Management & Communication
 
-We make use of agile and user-centered design principles but apply them carefully. For us it is more important to use something that works instead of strictly following a framework. "_Responding to change over following a plan_" from the [Agile Manifesto](http://agilemanifesto.org) is our guiding principle.
+We make use of agile and user-centered design principles but apply them carefully. For us, it is more important to use something that works instead of strictly following a framework. "_Responding to change over following a plan_" from the [Agile Manifesto](http://agilemanifesto.org) is our guiding principle.
 
 Communication is key for all projects. We don’t rely on historical structures (_“This is how things are done around here.”_) and instead support constructive feedback, trust, new ideas, and input from others (operational over organizational communication).
 
@@ -43,7 +43,7 @@ To this end, we offer flexible working arrangements, including options for remot
 
 ## Inclusivity, Diversity & Neutral Terminology
 
-We aspire our products and services to be accessible and usable by everyone.
+We aspire for our products and services to be accessible and usable by everyone.
 
 We only use neutral and inclusive names for our services and in our code and documentation. We advocate and educate others, whenever we come across occurrences of avoidable terms.
 
@@ -67,9 +67,9 @@ We share our tools and knowledge with others supporting our values.
 
 Technical tools that don’t contain sensitive information should be open-sourced.
 
-Since we benefit from open source projects, we also aim to spend some of our time contributing to them whenever we see a problem we can help solve.
+Since we benefit from open-source projects, we also aim to spend some of our time contributing to them whenever we see a problem we can help solve.
 
-### More from the Audio Lab
+### More from Audio Lab
 
 - About us: [lab.swr.de](https://lab.swr.de)
 - Our NodeJS tools: [`@swrlab/node-utils`](https://github.com/swrlab/node-utils)
@@ -78,18 +78,20 @@ Since we benefit from open source projects, we also aim to spend some of our tim
 
 ## DevOps & SRE
 
-These two principles are the foundation of our engineering efforts. Mostly running the services we develop, we also need the skills and knowledge to run them.
+These two principles are the foundation of our engineering efforts. As we primarily run the services we develop, we also need the skills and knowledge to operate them.
 
 _Background_: **DevOps** is a set of practices that combines software development (_Dev_) and IT operations (_Ops_). It aims to shorten the development life cycle and provide continuous delivery with high software quality. **Site Reliability Engineering** (_SRE_) is a discipline that incorporates aspects of software engineering and applies them to infrastructure and operations problems. The main goals are to create scalable and highly reliable software systems.
 
-How it works for us: We deploy quickly, often, and whenever we need. Small incremental changes have a lower risk of breaking things. We monitor our services and have a clear understanding of their performance and reliability. We aim to automate as much as possible to reduce human error and to save time.
+_How it works for us_: We deploy quickly, often, and whenever we need. Small incremental changes have a lower risk of breaking things. We monitor our services and have a clear understanding of their performance and reliability. We aim to automate as much as possible to reduce human error and to save time.
+
+Delivery Performance is the combined ability and agility to make changes, deploy, and recover services. To us, security and reliability are more important than pure delivery performance.
 
 - [DevOps Roadmap](https://roadmap.sh/devops) provides a good overview into tools and processes to become familiar with in the DevOps field.
 - [Four steps to jumpstarting your SRE practice](https://cloud.google.com/blog/products/devops-sre/four-steps-to-jumpstarting-your-sre-practice) on the Google Cloud blog is a good starting point for SRE practices.
 
 ### DevOps Structures & Reports
 
-- [DORA](https://dora.dev) is also a frequent name in this context and stand for _DevOps Research & Assessment_. They provide a yearly report on the state of DevOps.
+- [DORA](https://dora.dev) is also a frequent name in this context and stands for _DevOps Research & Assessment_. This program run by Google Cloud provides a yearly report on the state of DevOps.
   - [State of DevOps report](https://cloud.google.com/devops/state-of-devops/) from Google Cloud & DORA
 - DevOps Anti-Types [web.devopstopologies.com](https://web.devopstopologies.com/#anti-types)
 
@@ -110,35 +112,21 @@ Issues on GitHub are our home for bugs, features, and project planning. They sho
 
 Progress should be tracked and commented on in issues, even when already discussed in separate chat groups, to enable research and follow-ups in the future (searchability).
 
-## Service Architecture
-
-We carefully balance our services between monoliths and too fragmented microservices.
-
-We use Infrastructure as Code (_IaC_) to track changes and enable faster restorability.
-
-We use automation to back up mission-critical data and have tested restoring it (_DRP_).
-
-We provide limited support (as our time allows) for our services to internal and external users. However, a person needing support is also the result of a misleading UX, unclear self-help guides, or an incomplete feature that should be assessed and evaluated afterward.
-
-## Delivery Performance
-
-Delivery Performance is the combination of the ability and agility to make changes, deploy, and recover services. To us, security and reliability are more important than pure delivery performance.
-
-All of our projects and services must be actively maintained (dependency and platform updates; security and CVE fixes) or need to be reevaluated and eventually turned off.
-
-We aim to avoid quick hacks that build technical debt in the future.
-
 ## Code Structure & Testing
 
 Code should be readable, understandable, and clean. It should include inline comments for documentation about specific steps. Overall documentation should be written in separate Markdown files. We prefer English for filenames, variables, comments, and documentation to keep it universal and avoid unclear "_Denglisch_" (German + English) combinations.
 
 Modules and artifacts used in multiple projects should be managed in a central place to avoid redundancy and to benefit from adaptability (e.g. `@swrlab/node-utils`).
 
-Code should always be written and checked against linters and formatters such as _ESLint_ and _Prettier_. Those should also be run automatically for PRs in CI (e.g. with `super-linter`).
+Code should always be written and checked against linters and formatters such as _ESLint_ and _Prettier_. These should also be run automatically for PRs in CI (e.g. with `super-linter`).
 
-Projects should include test routines to check and ensure functionality and avoid regressions (e.g. `mocha`, `jest`).
+Projects should include test routines to check and ensure functionality and avoid regressions (e.g. `mocha`, `jest` or `bun test`).
 
 ## Versioning, Automation & Deployments
+
+All of our projects and services must be actively maintained (dependency and platform updates; security and CVE fixes) or need to be reevaluated and eventually turned off.
+
+We aim to avoid quick hacks that build technical debt in the future.
 
 All services must have a changelog document in version control using the _SemVer_ versioning structure.
 
@@ -150,17 +138,34 @@ All build processes (_CI_) are automated using GitHub Actions.
 
 We deploy (_CD_) on demand when needed and don’t require fixed schedules or exemptions (feature or rollout freezes). Shorter release cycles with gradual changes reduce the possible negative effect on service stability in alignment with _SRE_ principles. Services should sustain rollouts and rollbacks during peak load.
 
-A developer that merges a PR also looks after its deployment or explicitly hands it over to someone else. A task or update is done once it runs stable in production, not once a PR was merged.
+A developer who merges a PR also looks after its deployment or explicitly hands it over to someone else. A task or update is done once it runs stably in production, not once a PR was merged.
 
 We use releases to pinpoint minor code versions in GitHub along with their changes.
 
 Only the `main` branch can be deployed to production (trunk-based development).
 
+### Git Signing & Encryption
+
+- GitHub: Signing commits [docs.github.com/en/.../signing-commits](https://docs.github.com/en/authentication/managing-commit-signature-verification/signing-commits)
+- GitHub: Setting up GPG and Commit Signatures for GitHub [docs.github.com/en/authentication](https://docs.github.com/en/authentication/managing-commit-signature-verification/telling-git-about-your-signing-key)
+- 1Password for SSH & Git (incl. signing) [developer.1password.com/docs/ssh](https://developer.1password.com/docs/ssh)
+- GPG for Mac [gpgtools.org](https://gpgtools.org)
+
 ## Dependency Upgrades
 
 Regular dependency upgrades are crucial for maintaining the health and security of technical systems at SWR Audio Lab. Keeping dependencies up-to-date ensures that our systems benefit from the latest features, performance improvements, and, most importantly, security patches.
 
-However, these upgrades carry inherent risks, such as compatibility issues or unforeseen bugs introduced by newer versions. These can lead to system instability or conflicts with existing components. To mitigate these risks, we employ thorough testing and validation processes, including automated tests and staged rollouts, to ensure upgrades do not disrupt service functionality or user experience. By balancing the importance of staying current with the need for cautious implementation, we maintain robust, secure, and efficient technical systems.
+However, these upgrades carry inherent risks, such as compatibility issues or unforeseen bugs introduced by newer versions. These can lead to system instability or conflicts with existing components. To mitigate these risks, we employ testing and validation processes, including automated tests and staged rollouts, to ensure upgrades do not disrupt service functionality or user experience. By balancing the importance of staying current with the need for cautious implementation, we maintain robust, secure, and efficient technical systems.
+
+## Service Architecture
+
+We carefully balance our services between monoliths and too fragmented microservices.
+
+We use Infrastructure as Code (_IaC_) to track changes and enable faster restorability.
+
+We use automation to back up mission-critical data and have tested restoring it (_DRP_).
+
+We provide limited support (as our time allows) for our services to internal and external users. However, a person needing support is also the result of a misleading UX, unclear self-help guides, or an incomplete feature that should be assessed and evaluated afterward.
 
 ## Cloud-Native & Portability
 
@@ -230,7 +235,7 @@ Everyone on-call should only acknowledge incidents that they have the ability an
 - **PR** - Pull Request [docs.github.com/en/pull-requests](https://docs.github.com/en/pull-requests/)
 - **Prettier** - Code Formatter [prettier.io](https://prettier.io)
 - **QUIC** - Quick UDP internet Connections [akamai.com/.../http3-and-quic-past-present-and-future](https://www.akamai.com/blog/performance/http3-and-quic-past-present-and-future)
-- **SCM** - Source Code Management
+- **SCM** - Source Code Management (e.g. in GitHub, Gitlab, etc.)
 - **Serverless** - [cloudflare.com/.../what-is-serverless](https://www.cloudflare.com/en-gb/learning/serverless/what-is-serverless/)
 - **SemVer** - Semantic Versioning [semver.org](https://semver.org/spec/v2.0.0.html)
 - **SLO** - Service Level Objective [datadoghq.com/blog/establishing-service-level-objectives](https://www.datadoghq.com/blog/establishing-service-level-objectives/)
@@ -241,7 +246,7 @@ Everyone on-call should only acknowledge incidents that they have the ability an
 - **UX** - User Experience [interaction-design.org/literature/topics/ux-design](https://www.interaction-design.org/literature/topics/ux-design)
 - **VM** - Virtual Machine (a single virtualized computer unit)
 
-## Resources
+## More Resources
 
 ### Standards
 
@@ -264,13 +269,6 @@ Everyone on-call should only acknowledge incidents that they have the ability an
 - Awesome Broadcasting by the EBU [github.com/ebu/awesome-broadcasting](https://github.com/ebu/awesome-broadcasting)
 - Coordinated Vulnerability Disclosure (CVD) by BSI in Germany [DE] [bsi.bund.de/...](https://www.bsi.bund.de/DE/IT-Sicherheitsvorfall/IT-Schwachstellen/it-schwachstellen_node.html)
 - Use IAM securely [cloud.google.com/iam/docs/using-iam-securely](https://cloud.google.com/iam/docs/using-iam-securely)
-
-#### Git Signing & Encryption
-
-- GitHub: Signing commits [docs.github.com/en/.../signing-commits](https://docs.github.com/en/authentication/managing-commit-signature-verification/signing-commits)
-- GitHub: Setting up GPG and Commit Signatures for GitHub [docs.github.com/en/authentication](https://docs.github.com/en/authentication/managing-commit-signature-verification/telling-git-about-your-signing-key)
-- 1Password for SSH & Git (incl. signing) [developer.1password.com/docs/ssh](https://developer.1password.com/docs/ssh)
-- GPG for Mac [gpgtools.org](https://gpgtools.org)
 
 ### Web Tools
 
