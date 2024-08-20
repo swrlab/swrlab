@@ -1,5 +1,7 @@
 # SWR Audio Lab - Engineering Principles
 
+_(Last updated: 2024-08-20)_
+
 ## Principles
 
 SWR Audio Lab facilitates even better public service media offerings - with a strong focus on audio.
@@ -19,15 +21,19 @@ For Smart Devices and Connected Cars we developed a set of four principles to gu
 
 ## Project Management & Communication
 
-We make use of agile and user-centered design principles but apply them carefully. For us it is more important to use something that works instead of strictly following a framework.
+We make use of agile and user-centered design principles but apply them carefully. For us it is more important to use something that works instead of strictly following a framework. "_Responding to change over following a plan_" from the [Agile Manifesto](http://agilemanifesto.org) is our guiding principle.
 
 Communication is key for all projects. We don’t rely on historical structures (_“This is how things are done around here.”_) and instead support constructive feedback, trust, new ideas, and input from others (operational over organizational communication).
 
-## Incorporation of Holacracy Principles
+## Holacratic Principles
 
-In our pursuit of innovative and efficient organizational structures, we have integrated key principles of Holacracy into our workflow. Holacracy, a system of decentralized management and organizational governance, empowers our team members with increased autonomy and decision-making authority.
+We have integrated key principles of Holacracy into our workflow, as a system of democratic team management and for organizational governance. It empowers our team members with increased autonomy and decision-making authority.
 
-This approach is integrated by dynamic roles rather than static job descriptions, enabling individuals to adapt and contribute based on their skills, interests, and the current needs of the organization. By adopting Holacracy, we aim to create a more agile, responsive, and innovative work environment where bureaucracy is minimized, and each member feels a true sense of ownership and engagement in the collective success of our projects.
+This approach includes dynamic roles rather than static job descriptions, enabling individuals to adapt and contribute based on their skills, interests, and the current needs of the organization. By adopting Holacracy, we aim to create a more agile, responsive, and innovative work environment where bureaucracy is minimized, and each member feels a true sense of ownership and engagement in the collective success of our projects.
+
+### Holacracy Resources
+
+- Holacracy Constitution [github.com/holacracyone/Holacracy-Constitution](https://github.com/holacracyone/Holacracy-Constitution/blob/master/Holacracy-Constitution.md)
 
 ## Work-Life Balance & Well-Being
 
@@ -43,6 +49,14 @@ We only use neutral and inclusive names for our services and in our code and doc
 
 For our team we aspire to be as diverse as possible, while still being a small team.
 
+### Inclusitivity & Ethics Resources
+
+- [Inclusive Naming Initiative](https://inclusivenaming.org) has a good [word list](https://inclusivenaming.org/word-lists/) to avoid.
+- Diversity in Language and Images from Berlin [DE] [berlin.de/.../diversity-und-sprache-bilder](https://www.berlin.de/sen/lads/schwerpunkte/diversity/diversity-landesprogramm/diversity-und-sprache-bilder/)
+- The Fight Over Offensive Terms in Computing [nytimes.com/.../racist-computer-engineering-terms-ietf](https://www.nytimes.com/2021/04/13/technology/racist-computer-engineering-terms-ietf.html)
+- Code of Ethics and Professional Conduct from W3C [w3.org/Consortium/cepc](https://www.w3.org/Consortium/cepc/)
+- Color Checker for Accessibility [whocanuse.com](https://www.whocanuse.com)
+
 ## Sustainability
 
 We pay attention to the ecological footprint our digital applications create. It is essential for us to use carbon-neutral cloud providers, cleaner regions, and use efficient shared hosting solutions like serverless to optimize our consumption.
@@ -54,6 +68,30 @@ We share our tools and knowledge with others supporting our values.
 Technical tools that don’t contain sensitive information should be open-sourced.
 
 Since we benefit from open source projects, we also aim to spend some of our time contributing to them whenever we see a problem we can help solve.
+
+### More from the Audio Lab
+
+- About us: [lab.swr.de](https://lab.swr.de)
+- Our NodeJS tools: [`@swrlab/node-utils`](https://github.com/swrlab/node-utils)
+- Public repositories on GitHub: [`@swrlab/repositories`](https://github.com/orgs/swrlab/repositories?q=&type=public&language=&sort=name)
+- Public packages on npm: [npmjs.com/org/swrlab](https://www.npmjs.com/org/swrlab)
+
+## DevOps & SRE
+
+These two principles are the foundation of our engineering efforts. Mostly running the services we develop, we also need the skills and knowledge to run them.
+
+_Background_: **DevOps** is a set of practices that combines software development (_Dev_) and IT operations (_Ops_). It aims to shorten the development life cycle and provide continuous delivery with high software quality. **Site Reliability Engineering** (_SRE_) is a discipline that incorporates aspects of software engineering and applies them to infrastructure and operations problems. The main goals are to create scalable and highly reliable software systems.
+
+How it works for us: We deploy quickly, often, and whenever we need. Small incremental changes have a lower risk of breaking things. We monitor our services and have a clear understanding of their performance and reliability. We aim to automate as much as possible to reduce human error and to save time.
+
+- [DevOps Roadmap](https://roadmap.sh/devops) provides a good overview into tools and processes to become familiar with in the DevOps field.
+- [Four steps to jumpstarting your SRE practice](https://cloud.google.com/blog/products/devops-sre/four-steps-to-jumpstarting-your-sre-practice) on the Google Cloud blog is a good starting point for SRE practices.
+
+### DevOps Structures & Reports
+
+- [DORA](https://dora.dev) is also a frequent name in this context and stand for _DevOps Research & Assessment_. They provide a yearly report on the state of DevOps.
+  - [State of DevOps report](https://cloud.google.com/devops/state-of-devops/) from Google Cloud & DORA
+- DevOps Anti-Types [web.devopstopologies.com](https://web.devopstopologies.com/#anti-types)
 
 ## GitHub Tooling
 
@@ -205,13 +243,6 @@ Everyone on-call should only acknowledge incidents that they have the ability an
 
 ## Resources
 
-### More from the Audio Lab
-
-- About us: [lab.swr.de](https://lab.swr.de)
-- Our NodeJS tools: [`@swrlab/node-utils`](https://github.com/swrlab/node-utils)
-- Public repositories on GitHub: [`@swrlab/repositories`](https://github.com/orgs/swrlab/repositories?q=&type=public&language=&sort=name)
-- Public packages on npm: [npmjs.com/org/swrlab](https://www.npmjs.com/org/swrlab)
-
 ### Standards
 
 - Guidelines from SWR about the usage of AI [DE] [swr.de/unternehmen/ki-guidelines-100.pdf](https://www.swr.de/unternehmen/ki-guidelines-100.pdf)
@@ -222,25 +253,6 @@ Everyone on-call should only acknowledge incidents that they have the ability an
 - Gartner Hype Cycle [gartner.com/.../methodologies/gartner-hype-cycle](https://www.gartner.com/en/research/methodologies/gartner-hype-cycle) or [robertvaneekhout.nl/.../gartner-hype-cycle-...](https://robertvaneekhout.nl/2018/04/gartner-hype-cycle-welke-technologie-blijft-plakken-en-welke-gaat-nodeloos)
 - User-Centered Development Process [medien.ifi.lmu.de/lehre/ws0607/mmi1/mmi4](https://www.medien.ifi.lmu.de/lehre/ws0607/mmi1/mmi4.pdf)
 - Radio in the Connected Car [tech.ebu.ch/publications/radio-in-the-connected-car](https://tech.ebu.ch/publications/radio-in-the-connected-car)
-
-### DevOp Structures & Reports
-
-- State of DevOps report from Google Cloud [cloud.google.com/devops/state-of-devops](https://cloud.google.com/devops/state-of-devops/)
-- DevOps Anti-Types [web.devopstopologies.com](https://web.devopstopologies.com/#anti-types)
-- Tech Radar by Zalando [opensource.zalando.com/tech-radar](https://opensource.zalando.com/tech-radar/)
-
-### Inclusitivity & Ethics
-
-- Inclusive Naming Initiative [inclusivenaming.org](https://inclusivenaming.org)
-- Inclusive Terminology from W3C [w3c.github.io/manual-of-style](https://w3c.github.io/manual-of-style/#inclusive)
-- Diversity in Language and Images from Berlin [DE] [berlin.de/.../diversity-und-sprache-bilder](https://www.berlin.de/sen/lads/schwerpunkte/diversity/diversity-landesprogramm/diversity-und-sprache-bilder/)
-- The Fight Over Offensive Terms in Computing [nytimes.com/.../racist-computer-engineering-terms-ietf](https://www.nytimes.com/2021/04/13/technology/racist-computer-engineering-terms-ietf.html)
-- Code of Ethics and Professional Conduct from W3C [w3.org/Consortium/cepc](https://www.w3.org/Consortium/cepc/)
-- Color Checker for Accessibility [whocanuse.com](https://www.whocanuse.com)
-
-### Holacracy Resources
-
-- Holacracy Constitution [github.com/holacracyone/Holacracy-Constitution](https://github.com/holacracyone/Holacracy-Constitution/blob/master/Holacracy-Constitution.md)
 
 ### Technical Guides & Tools
 
@@ -273,6 +285,7 @@ Everyone on-call should only acknowledge incidents that they have the ability an
 - Timezone converter [timezones.digital](https://www.timezones.digital/)
 - Uptime/ SLA converter [uptime.is](https://uptime.is/)
 - UTM Generator - Add UTM/ campaign parameters to a URL [usefathom.com/utm-builder](https://usefathom.com/utm-builder)
+- Tech Radar by Zalando [opensource.zalando.com/tech-radar](https://opensource.zalando.com/tech-radar/)
 
 #### DNS Tools
 
