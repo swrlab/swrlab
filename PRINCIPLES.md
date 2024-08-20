@@ -86,11 +86,10 @@ _How it works for us_: We deploy quickly, often, and whenever we need. Small inc
 
 Delivery Performance is the combined ability and agility to make changes, deploy, and recover services. To us, security and reliability are more important than pure delivery performance.
 
+### Get Started with DevOps & SRE
+
 - [DevOps Roadmap](https://roadmap.sh/devops) provides a good overview into tools and processes to become familiar with in the DevOps field.
 - [Four steps to jumpstarting your SRE practice](https://cloud.google.com/blog/products/devops-sre/four-steps-to-jumpstarting-your-sre-practice) on the Google Cloud blog is a good starting point for SRE practices.
-
-### DevOps Structures & Reports
-
 - [DORA](https://dora.dev) is also a frequent name in this context and stands for _DevOps Research & Assessment_. This program run by Google Cloud provides a yearly report on the state of DevOps.
   - [State of DevOps report](https://cloud.google.com/devops/state-of-devops/) from Google Cloud & DORA
 - DevOps Anti-Types [web.devopstopologies.com](https://web.devopstopologies.com/#anti-types)
@@ -116,7 +115,7 @@ Progress should be tracked and commented on in issues, even when already discuss
 
 Code should be readable, understandable, and clean. It should include inline comments for documentation about specific steps. Overall documentation should be written in separate Markdown files. We prefer English for filenames, variables, comments, and documentation to keep it universal and avoid unclear "_Denglisch_" (German + English) combinations.
 
-Modules and artifacts used in multiple projects should be managed in a central place to avoid redundancy and to benefit from adaptability (e.g. `@swrlab/node-utils`).
+Modules and artifacts used in multiple projects should be managed in a central place to avoid redundancy and to benefit from adaptability (e.g. [`@swrlab/node-utils`](https://github.com/swrlab/node-utils)).
 
 Code should always be written and checked against linters and formatters such as _ESLint_ and _Prettier_. These should also be run automatically for PRs in CI (e.g. with `super-linter`).
 
@@ -128,6 +127,11 @@ Projects should include test routines to check and ensure functionality and avoi
 - [ESLint](https://eslint.org/docs/latest/use/getting-started)
 - [Super Linter](https://github.com/github/super-linter)
 - [Prettier](https://prettier.io)
+
+### Learn Markdown
+
+- [Basic writing and formatting syntax](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax)
+- [Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
 
 ## Versioning, Automation & Deployments
 
@@ -230,7 +234,6 @@ Everyone on-call should only acknowledge incidents that they have the ability an
 - **KPI** - Key Performance Indicators [qlik.com/us/kpi](https://www.qlik.com/us/kpi)
 - **Kubernetes, K8s** - Scaleable container orchestration [cloud.google.com/learn/what-is-kubernetes](https://cloud.google.com/learn/what-is-kubernetes)
 - **Linter** - [sourcelevel.io/blog/what-is-a-linter-and-why-your-team-should-use-it](https://sourcelevel.io/blog/what-is-a-linter-and-why-your-team-should-use-it)
-- **Markdown** - [docs.github.com/.../writing-on-github](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax) or [github.com/.../Markdown-Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
 - **MFA** - Multi Factor Authentication [yubico.com/.../what-is-multi-factor-authentication](https://www.yubico.com/resources/what-is-multi-factor-authentication/)
 - **MTTR** - Mean time to repair [atlassian.com/incident-management/kpis/common-metrics](https://www.atlassian.com/incident-management/kpis/common-metrics)
 - **On-Call** - [response.pagerduty.com/oncall](https://response.pagerduty.com/oncall/being_oncall/)
