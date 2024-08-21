@@ -138,10 +138,18 @@ Projects should include test routines to check and ensure functionality and avoi
 - All services must have a **changelog** document written in Markdown in version control using the _SemVer_ ([Semantic Versioning](https://semver.org/spec/v2.0.0.html)) versioning structure.
 - Commits should follow the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) structure and **must be signed**. We prefer SSH-based signing, but GPG works as well.
 - Whenever possible, tools and actions should be automated to optimize processes, save time, and reduce errors from manual interaction.
-- All build processes (_CI_) are automated using GitHub Actions. Deployment processes (_CD_) are also mostly automated and handled according to the _SRE_ principles.
+- All build processes (_CI_) are automated using GitHub Actions. Deployment processes (_CD_) are also mostly automated and handled according to _SRE_ principles.
 - A developer who merges a pull request also looks after its deployment or explicitly hands it over to someone else. A task or update is done once it runs stably in production, not once a PR was merged.
 - Only the `main` branch can be deployed to production ([trunk-based development](https://trunkbaseddevelopment.com)).
   - All other branches should be named `dev/*` or `feature/*` and can be deployed to dev environments.
+
+### Learn about Changelogs
+
+- [Keep a changelog](https://keepachangelog.com/en/1.0.0/) project
+- [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) (`feat: something`)
+- [Semantic Versioning](https://semver.org/spec/v2.0.0.html) (`1.0.0`)
+- Approved [SPDX License List](https://spdx.org/licenses/)
+  - [European Union Public License 1.2](https://spdx.org/licenses/EUPL-1.2.html)
 
 ### Learn GitHub Actions
 
@@ -177,6 +185,13 @@ We use automation to back up mission-critical data and have tested restoring it 
 
 We provide limited support (as our time allows) for our services to internal and external users. However, a person needing support is also the result of a misleading UX, unclear self-help guides, or an incomplete feature that should be assessed and evaluated afterward.
 
+### Introduction to Infrastructure as Code
+
+- [Roadmap for Terraform](https://roadmap.sh/terraform)
+- [Terraform Language Docs](https://www.terraform.io/docs/language/index.html) (HCL)
+  - [Terraform CLI](https://developer.hashicorp.com/terraform/cli/commands) for local usage
+  - [Terraform HCP](https://developer.hashicorp.com/terraform/cloud-docs) as a Cloud managed service
+
 ## Cloud-Native & Portability
 
 Cloud-native developments often bring along vendor lock-in to certain features and services. We pay close attention to those effects and use open-source tools wherever possible and applicable. However, being a small team, managed services often reduce the operational overhead for us and allow us to iterate faster.
@@ -196,6 +211,17 @@ Service Accounts and _IAM_ permissions should be managed using _IaC_. They shoul
 All web services, platforms, and tools we use must be protected by _MFA_. We prefer using _SSO_ through our organization with its linked _MFA_ protection, if possible. For all other cases, we prefer physical keys (_FIDO_) over basic _OTP_.
 
 We aim to store as little data as possible, meaning that we only store what’s needed to monitor, analyze and improve our services. We always actively engage with our internal data protection officers about changes and our overall services.
+
+### Sharing Secrets
+
+- _Preferred_: GPG-encrypted secrets using the receiver's public key.
+- _Alternative_: Signed sharing links from a password manager.
+- _Fallback_: Share a secret one time using [onetimesecret.com](https://onetimesecret.com)
+
+### Learning IAM
+
+- AWS: [IAM Introduction](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html)
+- GCP: [Using IAM securely](https://cloud.google.com/iam/docs/using-iam-securely)
 
 ## Monitoring & Alerting
 
@@ -266,10 +292,8 @@ Everyone on-call should only acknowledge incidents that they have the ability an
 
 ### Technical Guides & Tools
 
-- SPDX License List [spdx.org/licenses](https://spdx.org/licenses/)
 - Awesome Broadcasting by the EBU [github.com/ebu/awesome-broadcasting](https://github.com/ebu/awesome-broadcasting)
 - Coordinated Vulnerability Disclosure (CVD) by BSI in Germany [DE] [bsi.bund.de/...](https://www.bsi.bund.de/DE/IT-Sicherheitsvorfall/IT-Schwachstellen/it-schwachstellen_node.html)
-- Use IAM securely [cloud.google.com/iam/docs/using-iam-securely](https://cloud.google.com/iam/docs/using-iam-securely)
 
 ### Web Tools
 
@@ -277,14 +301,17 @@ Everyone on-call should only acknowledge incidents that they have the ability an
 - Cloudflare Radar - for insights into data usage [radar.cloudflare.com](https://radar.cloudflare.com)
 - Crontab.guru - Visualize cronjob execution times [crontab.guru](https://crontab.guru/)
 - In-app browser check to test for JS injections [inappbrowser.com](https://inappbrowser.com)
-- One Time Secret - Share a secret one time (prefer using GPG-encrypted secrets for receivers that support it) [onetimesecret.com](https://onetimesecret.com)
-- Speed Test from Cloudflare [speed.cloudflare.com](https://speed.cloudflare.com)
-- Speed Test from Netflix [fast.com](https://fast.com)
-- Speed Test from Ookla [speedtest.net](https://www.speedtest.net)
 - Timezone converter [timezones.digital](https://www.timezones.digital/)
 - Uptime/ SLA converter [uptime.is](https://uptime.is/)
 - UTM Generator - Add UTM/ campaign parameters to a URL [usefathom.com/utm-builder](https://usefathom.com/utm-builder)
 - Tech Radar by Zalando [opensource.zalando.com/tech-radar](https://opensource.zalando.com/tech-radar/)
+
+#### Speedtests
+
+- Speed Test from Cloudflare [speed.cloudflare.com](https://speed.cloudflare.com)
+- Speed Test from Netflix [fast.com](https://fast.com)
+- Speed Test from Ookla [speedtest.net](https://www.speedtest.net)
+- Unoffical [latency ping to all GCP regions](https://gcping.com)
 
 #### DNS Tools
 
