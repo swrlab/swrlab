@@ -236,6 +236,9 @@ Alerting has predefined warn and error levels as well as escalation policies. Mo
 
 Everyone on-call should only acknowledge incidents that they have the ability and capacity to investigate and resolve. Otherwise, incidents should be escalated to a fellow team member. Large-scale problems must proactively be communicated to other internal and external stakeholders to keep them in the loop.
 
+- [Incident Management Handbook from Atlassian](https://pages.eml.atlassian.com/rs/594-ATC-127/images/Atlassian-incident-management-handbook-.pdf)
+- [About uptime monitoring from Better Stack](https://betterstack.com/community/guides/monitoring/)
+
 ## Names & Definitions
 
 - **ARD** - Arbeitsgemeinschaft der öffentlich-rechtlichen Rundfunkanstalten der Bundesrepublik Deutschland [ard.de](https://www.ard.de)
@@ -282,14 +285,13 @@ Everyone on-call should only acknowledge incidents that they have the ability an
 
 ### Standards
 
-- Guidelines from SWR about the usage of AI [DE] [swr.de/unternehmen/ki-guidelines-100.pdf](https://www.swr.de/unternehmen/ki-guidelines-100.pdf)
-- Public Service Standards from gov.uk [gov.uk/service-manual/service-standard](https://www.gov.uk/service-manual/service-standard)
-- Technical and Data Standards from gov.uk [gov.uk/guidance/gds-api-technical-and-data-standards](https://www.gov.uk/guidance/gds-api-technical-and-data-standards)
-- Conway’s Law about organizational structures and their output [thoughtworks.com/.../demystifying-conways-law](https://www.thoughtworks.com/insights/articles/demystifying-conways-law)
-- Incident Management Handbook from Atlassian [atlassian.com/incident-management](https://www.atlassian.com/incident-management/get-the-handbook)
-- Gartner Hype Cycle [gartner.com/.../methodologies/gartner-hype-cycle](https://www.gartner.com/en/research/methodologies/gartner-hype-cycle) or [robertvaneekhout.nl/.../gartner-hype-cycle-...](https://robertvaneekhout.nl/2018/04/gartner-hype-cycle-welke-technologie-blijft-plakken-en-welke-gaat-nodeloos)
-- User-Centered Development Process [medien.ifi.lmu.de/lehre/ws0607/mmi1/mmi4](https://www.medien.ifi.lmu.de/lehre/ws0607/mmi1/mmi4.pdf)
-- Radio in the Connected Car [tech.ebu.ch/publications/radio-in-the-connected-car](https://tech.ebu.ch/publications/radio-in-the-connected-car)
+- [Guidelines from SWR about the usage of AI [DE]](https://www.swr.de/unternehmen/ki-guidelines-100.pdf)
+- [Public Service Standards from gov.uk](https://www.gov.uk/service-manual/service-standard)
+- [Technical and Data Standards from gov.uk](https://www.gov.uk/guidance/gds-api-technical-and-data-standards)
+- [Conway’s Law about organizational structures and their output](https://www.thoughtworks.com/insights/articles/demystifying-conways-law)
+- [Gartner Hype Cycle](https://www.gartner.com/en/research/methodologies/gartner-hype-cycle) or [robertvaneekhout.nl/.../gartner-hype-cycle-...](https://robertvaneekhout.nl/2018/04/gartner-hype-cycle-welke-technologie-blijft-plakken-en-welke-gaat-nodeloos)
+- [User-Centered Development Process](https://www.medien.ifi.lmu.de/lehre/ws0607/mmi1/mmi4.pdf)
+- EBU: [Radio in the Connected Car](https://tech.ebu.ch/publications/radio-in-the-connected-car)
 
 ### Technical Guides & Tools
 
