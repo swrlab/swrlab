@@ -1,6 +1,6 @@
 # SWR Audio Lab - Engineering Principles
 
-_(Last updated: 2024-08-20)_
+_(Last updated: 2024-08-21)_
 
 ## Principles
 
@@ -188,6 +188,7 @@ We provide limited support (as our time allows) for our services to internal and
 ### Introduction to Infrastructure as Code
 
 - [Roadmap for Terraform](https://roadmap.sh/terraform)
+- [What is Infrastructure as Code with Terraform?](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/infrastructure-as-code)
 - [Terraform Language Docs](https://www.terraform.io/docs/language/index.html) (HCL)
   - [Terraform CLI](https://developer.hashicorp.com/terraform/cli/commands) for local usage
   - [Terraform HCP](https://developer.hashicorp.com/terraform/cloud-docs) as a Cloud managed service
@@ -216,7 +217,7 @@ We aim to store as little data as possible, meaning that we only store what’s 
 
 - _Preferred_: GPG-encrypted secrets using the receiver's public key.
 - _Alternative_: Signed sharing links from a password manager.
-- _Fallback_: Share a secret one time using [onetimesecret.com](https://onetimesecret.com)
+- _Fallback_: Share a secret one time using [onetimesecret.com](https://onetimesecret.com).
 
 ### Learning IAM
 
@@ -254,7 +255,7 @@ Everyone on-call should only acknowledge incidents that they have the ability an
 - **GCP** - Google Cloud Platform [cloud.google.com](https://cloud.google.com)
 - **GPG** - GNU Privacy Guard [gnupg.org](https://gnupg.org)
 - **HTTP/3** - Hypertext Transfer Protocol v3 [cloudflare.com/.../what-is-http3](https://www.cloudflare.com/en-gb/learning/performance/what-is-http3/)
-- **IaC** - Infrastructure as Code [developer.hashicorp.com/.../infrastructure-as-code](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/infrastructure-as-code)
+- **IaC** - Infrastructure as Code
 - **IDP** - Internal Developer Platform [platformengineering.org/blog/what-is-platform-engineering](https://platformengineering.org/blog/what-is-platform-engineering)
 - **IPv4/6** - internet Protocol Version 4/6 [juniper.net/.../what-is-ipv4-vs-ipv6.html](https://www.juniper.net/us/en/research-topics/what-is-ipv4-vs-ipv6.html)
 - **KPI** - Key Performance Indicators [qlik.com/us/kpi](https://www.qlik.com/us/kpi)
